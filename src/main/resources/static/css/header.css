@@ -33,6 +33,7 @@ body {
 
 .aside-menu {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
@@ -62,6 +63,8 @@ body {
 .header a {
     margin-right: 40px;
 
+    font-size: 30px;
+    color: black;
     text-decoration: none;
 }
 
@@ -86,6 +89,8 @@ main {
 .bottom-container button {
     border: 1px solid rgb(198, 198, 198);
     border-radius: 30px;
+
+    height: 70px;
 
     padding: 10px;
 }
