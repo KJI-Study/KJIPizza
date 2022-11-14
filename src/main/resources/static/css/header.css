@@ -1,7 +1,7 @@
 * {
     box-sizing: border-box;
     
-    font-size: 30px;
+    font-size: 25px;
 }
 
 body {
@@ -16,7 +16,6 @@ body {
     display: flex;
     flex-direction: column;
 
-    width: 200px;
     height: 100%;
 }
 
@@ -25,7 +24,8 @@ body {
     justify-content: center;
     align-items: center;
 
-    height: 200px;
+    width: 160px;
+    height: 160px;
 
     color: white;
     background-color: black;
@@ -36,7 +36,7 @@ body {
     justify-content: center;
     align-items: center;
 
-    height: 500px;
+    height: 608px;
 
     color: white;
     background: linear-gradient(135deg, blue 30%, rgb(83, 202, 83));
@@ -60,13 +60,13 @@ body {
 }
 
 .header a {
-    margin-left: 100px;
+    margin-right: 40px;
 
     text-decoration: none;
 }
 
 main {
-    height: 500px;
+    height: 568px;
 
     background-color: rgb(200, 200, 200);
 }
