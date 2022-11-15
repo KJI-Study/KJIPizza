@@ -1,0 +1,33 @@
+*{
+    box-sizing: border-box;
+}
+
+ul{
+    list-style: none;
+}
+
+li{
+    float: left;
+    margin: 60px 80px 0px 30px;
+}
+.title{
+    font-size: 50px;
+}
+.name{
+    margin-top: 20px;
+}
+
+.number{
+    padding: 50px;
+    font-size: 30px;
+}
+.numberone{
+    width: 117px;
+    height: 138px;
+    font-size: 30px;
+}
+button{
+    color: white;
+    background-color:  rgb(243, 61, 61);
+    border: none;
+}
