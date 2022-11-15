@@ -1,17 +1,17 @@
-
-
 .main-container{
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 864px;
 
     padding-top: 59px;
     padding-bottom: 59px;
     padding-right: 0px;
     padding-left: 40px;
 
-    margin-bottom: 20px;
+    margin-top: 10px;
 
+    overflow-x: scroll;
 
 }
 
@@ -21,7 +21,7 @@
 
     border: none;
     background-color: white;
-    border-radius: 10px;
+    border-radius: 20px;
 
     margin-right: 20px;
     
@@ -32,12 +32,10 @@
     align-items: center;
     justify-content: center;
  
-    height: 250px;
+    height: 300px;
     width: 220px;
 
-
     overflow: hidden;
-
 
 }
 
@@ -56,13 +54,11 @@
     justify-content: center;
     align-items: center;
 
-
-
 }
 
 .product-name, .product-price{
     font-size: 20px;
-    font-weight: 30;
+    font-weight: 50;
     text-align: center;
 
     margin-top: 20px;
