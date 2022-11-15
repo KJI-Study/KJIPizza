@@ -37,3 +37,4 @@ document.querySelector(".category5").onclick = () => {
     document.querySelectorAll(".main-container")[3].classList.add("invisible");
     document.querySelectorAll(".main-container")[4].classList.remove("invisible");
 }
+
