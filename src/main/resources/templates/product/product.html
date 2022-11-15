@@ -82,31 +82,55 @@
                             </div>
                         </div>
                         <div class="right-modal">
-                            <div class="size-select">1.사이즈 선택
-                                <input type="radio" name="size-select">S
-                                <input type="radio" name="size-select">L (+4000)
+                            <div class="size-select"><b>1.사이즈 선택</b>
+                                <div class="size-select-container">
+                                    <label for="s">
+                                        <input type="radio" id="s" name="size-select" value="s"> S
+                                    </label>
+                                    <label for="l">
+                                        <input type="radio" id="l" name="size-select" value="l"> L (+4000)
+                                    </label>
+                                </div>
                             </div>
-                            <div class="crust-select">2. 크러스트 선택
-                                <input type="radio" name="crust-select">기본
-                                <input type="radio" name="crust-select">전부 치즈 크러스트
-                                <input type="radio" name="crust-select">전부 햄크러스트
-                                <input type="radio" name="crust-select">치즈반/햄반 크러스트
+                            <div class="crust-select"><b>2. 크러스트 선택</b>
+                                <div class="curst-select-container">
+                                    <label for="normal">
+                                        <input type="radio" id="normal" name="crust-select" value="normal"> 기본
+                                    </label>
+                                    <label for="cc">
+                                        <input type="radio" id="cc" name="crust-select" value="cc"> 전부 치즈 크러스트
+                                    </label>
+                                    <label for="hc">
+                                        <input type="radio" id="hc" name="crust-select" value="hc"> 전부 햄크러스트
+                                    </label>
+                                    <label for="ch">
+                                        <input type="radio" id="ch" name="crust-select" value="ch"> 치즈반/햄반 크러스트
+                                    </label>
+                                </div>
                             </div>
-                            <div class="topping-select">3. 토핑 추가
-                                <input type="radio" name="topping-select">파인애플 토핑
-                                <input type="radio" name="topping-select">양파 토핑
+                            <div class="topping-select"><b>3. 토핑 추가</b>
+                                <div class="topping-select-container">
+                                    <label for="pat">
+                                        <input type="radio" id="pat" name="topping-select" value="pat"> 파인애플 토핑
+                                    </label>
+                                    <label for="ot">
+                                        <input type="radio" id="ot" name="topping-select" value="ot"> 양파 토핑
+                                    </label>
+                                </div>
                             </div>
-                            <button type="button" class="modal-close-btn">취소</button>
-                            <button type="button">장바구니담기</button>
+                            <div class="pdt-modal-btn">
+                                <button type="button" class="modal-close-btn btn"><i class="fa-solid fa-xmark"></i> 취소</button>
+                                <button type="button" class="modal-cart-btn btn"><i class="fa-solid fa-cart-shopping"></i> 장바구니담기</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </main>
             <div class="bottom-container">
-                <button type="button" class="lnag-btn">KOR <i class="fa-solid fa-caret-up"></i></button>
-                <button type="button" class="order-detail-btn"><i class="fa-solid fa-bars"></i> 주문내역</button>
-                <button type="button" class="call-btn"><i class="fa-solid fa-user"></i> 직원호출</button>
-                <button type="button" class="bag-btn"><i class="fa-solid fa-check"></i> 장바구니 0</button>
+                <button type="button" class="lnag-btn btn">KOR <i class="fa-solid fa-caret-up"></i></button>
+                <button type="button" class="order-detail-btn btn"><i class="fa-solid fa-bars"></i> 주문내역</button>
+                <button type="button" class="call-btn btn"><i class="fa-solid fa-user"></i> 직원호출</button>
+                <button type="button" class="bag-btn btn"><i class="fa-solid fa-check"></i> 장바구니 0</button>
             </div>
         </div>
     </div>

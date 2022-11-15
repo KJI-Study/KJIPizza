@@ -21,7 +21,7 @@
     background-color: #fff;
     width: 800px;
     height: 600px;
-    padding: 30px;
+    padding: 30px 30px 15px 30px;
 
     border-radius: 20px;
 }
@@ -29,18 +29,91 @@
 .left-modal {
     width: 350px;
     height: 100%;
+    margin-right: 30px;
 }
 
 .modal-img-container {
+    display: flex;
+    justify-content: center;
+
     width: 300px;
+    height: 300px;
+
+    border-radius: 30%;
+
+    overflow: hidden;
 }
 
 .modal-img-container img {
-    width: 100%;
+    height: 100%;
+}
+
+.modal-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 20px;
 }
 
 .right-modal {
+    display: flex;
+    flex-direction: column;
     width: 460px;
+}
+
+.right-modal label {
+    font-size: 20px;
+    width: 180px;
+    margin-top: 25px;
+}
+
+.size-select {
+    margin-bottom: 30px;
+}
+
+.size-select-container {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+}
+
+.crust-select {
+    margin-bottom: 30px;
+}
+
+.curst-select-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-left: 20px;
+}
+
+.topping-select-container {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+}
+
+
+.pdt-modal-btn {
+    display: flex;
+    justify-content: end;
+    margin-top: auto;
+}
+
+.pdt-modal-btn button {
+    margin-left: 20px;
+}
+
+.modal-close-btn {
+    color: white;
+    background-color: rgb(182, 182, 182);
+}
+
+.modal-cart-btn {
+    color: white;
+    background-color: blue;
 }
 
 .hidden {
