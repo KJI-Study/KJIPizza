@@ -53,39 +53,61 @@ section {
     height: 100%;
 }
 .table-left {
+    display: flex;
+    flex-direction: column;
     text-align : center;
     padding-top: 20%;
 }
-.number{
-    padding: 50px;
-    font-size: 30px;
+hr {
+    width : 100%;
+    height : 3px;
+    background-color : white;
+  }
+.table-left #title{
+    font-size: 35px;
 }
+.table-left #table-number{
+    margin-top: 30px;
+    font-size: 150px;
+}
+#result-adult .number{
+    margin-left: 50px;   
+}
+
+#result-children .number{
+    margin-left: 20px;   
+}
+
 .table-right {
-    text-align : center;
+    display: flex;
+    flex-direction: column;
     padding-top: 20%;
 
 }
-#title{
+.table-right #title{
     font-size: 35px;
     float: left;
 }
 #result-adult{
-    margin-top: 100px;
+    margin-top: 50px;
     font-size: 30px;
     font-weight: bold;
+    text-align: center;
 }
 #result-children{
     font-size: 30px;
     font-weight: bold;
     margin-top: 10px;
+    text-align: center;
 }
 .next{
-    background-color: blueviolet;
+    background-color:wheat; 
     height: 45px;
     width: 500px;
     font-size: 22px;
     font-weight: bold;
     color: white;
+    border: none;
 }
 .number-select{
     margin-top: 50px;
