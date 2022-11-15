@@ -1,29 +1,25 @@
-.main-container{
+.main-container {
     display: flex;
-    justify-content: center;
     align-items: center;
     width: 864px;
 
-    padding-top: 59px;
-    padding-bottom: 59px;
-    padding-right: 0px;
-    padding-left: 40px;
+    padding: 49px 0 49px 30px;
 
-    margin-top: 10px;
-
-    overflow-x: scroll;
-
+    overflow: scroll;
 }
 
-.product-select{
+.product-select {
     display: flex;
     flex-direction: column;
+
+    margin-right: 20px;
+
+    height: 470px;
 
     border: none;
     background-color: white;
     border-radius: 20px;
 
-    margin-right: 20px;
     
 }
 
@@ -31,6 +27,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    border-radius: 20px 20px 0px 0px;
  
     height: 300px;
     width: 220px;
@@ -40,9 +38,12 @@
 }
 
 .product-images img{
-    height: 100%;
     align-items: center;
     justify-content: center;
+
+    height: 100%;
+
+    
     
     
 }
