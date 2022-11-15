@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/static/css/header.css">
     <link rel="stylesheet" href="/static/css/product.css">
+    <link rel="stylesheet" href="/static/css/product-modal.css">
     <title>Document</title>
 </head>
 <body>
@@ -68,6 +69,38 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal-container hidden">
+                    <div class="bg"></div>
+                    <div class="product-modal">
+                        <div class="left-modal">
+                            <div class="modal-img-container">
+                                <img src="/static/images/cheeze.png">
+                            </div>
+                            <div class="modal-detail">
+                                <div class="modal-name">치즈 크러스트 피자</div>
+                                <div class="modal-price">24,000원</div>
+                            </div>
+                        </div>
+                        <div class="right-modal">
+                            <div class="size-select">1.사이즈 선택
+                                <input type="radio" name="size-select">S
+                                <input type="radio" name="size-select">L (+4000)
+                            </div>
+                            <div class="crust-select">2. 크러스트 선택
+                                <input type="radio" name="crust-select">기본
+                                <input type="radio" name="crust-select">전부 치즈 크러스트
+                                <input type="radio" name="crust-select">전부 햄크러스트
+                                <input type="radio" name="crust-select">치즈반/햄반 크러스트
+                            </div>
+                            <div class="topping-select">3. 토핑 추가
+                                <input type="radio" name="topping-select">파인애플 토핑
+                                <input type="radio" name="topping-select">양파 토핑
+                            </div>
+                            <button type="button" class="modal-close-btn">취소</button>
+                            <button type="button">장바구니담기</button>
+                        </div>
+                    </div>
+                </div>
             </main>
             <div class="bottom-container">
                 <button type="button" class="lnag-btn">KOR <i class="fa-solid fa-caret-up"></i></button>
@@ -77,5 +110,6 @@
             </div>
         </div>
     </div>
+    <script src="/static/js/pdt-modal.js"></script>
 </body>
 </html>
