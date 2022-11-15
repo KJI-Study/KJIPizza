@@ -13,32 +13,21 @@
         <main>
             <div class="tablering">
                 <section class="table-left">
-                    <span id="title">테이블을 선택해주세요</span>
-                    <ul class="number-select">
-                        <li> <button class="number">1</button> </li>
-                        <li> <button class="number">2</button> </li>
-                        <li> <button class="number">3</button> </li>
-                    </ul>
-                    <ul class="number-select">
-                        <li> <button class="number">4</button> </li>
-                        <li> <button class="number">5</button> </li>
-                        <li> <button class="number">6</button> </li>
-                    </ul>
-                    <ul class="number-select">
-                        <li> <button class="number">7</button> </li>
-                        <li> <button class="number">8</button> </li>
-                        <li> <button class="number">9</button> </li>
-                    </ul>
+                    <span id="title">테이블 번호</span>
+                    <span id="table-number">1번.</span>
                 </section>
                 <section class="table-right">
-                    <span id="title">총 인원을 선택해주세요</span>
-                    <div id="result-adult">어른 0명
-                    <button class="btn people">+</button>
-                    <button class="btn people">-</button>
+                    <span id="title">총 인원을 선택해주세요
+                    <hr />
+                    </span>
+                    <div id="result-adult">
+                    어른<span class="number">0</span>명
+                    <button class="btn people" id="increase">+</button>
+                    <button class="btn people" id="decrease">-</button>
                 </div>
-                    <div id="result-children">어린이 0명
-                    <button class="btn people">+</button>
-                    <button class="btn people">-</button>   
+                    <div id="result-children">어린이<span class="number">0</span>명
+                    <button class="btn people" id="increase">+</button>
+                    <button class="btn people" id="decrease">-</button>   
                 </div>
                 <button class="btn next">다음</button>
                 </section>
@@ -46,5 +35,6 @@
             </div>
         </main>
     </div>
+    <script src="/static/js/main.js"></script>
 </body>
 </html>
