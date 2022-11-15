@@ -1,0 +1,154 @@
+* {
+    box-sizing: border-box;
+    
+}
+
+body {
+    margin: 0; 
+    background-color: rgb(238, 196, 202);
+}
+
+#container{
+    display: flex;
+
+}
+
+.left-side{
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+}
+
+.table-button{
+    display: flex;
+    justify-content: center;
+
+    margin-left: 20px;
+    margin-top: 20px;
+    padding: 20px;
+
+    font-size: 30px;
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: black;
+    color: white;
+
+
+}
+
+.text{
+    margin-top: 20px;
+    margin-left: 25px;
+    font-size: 25px;
+}
+
+.center-box{
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.mini-box{
+    display: flex;
+    flex-direction: column;
+
+    border: none;
+    background-color: white;
+    border-radius: 20px;
+
+    margin-top: 20px;
+    margin-left: 20px;
+   
+    
+}
+.product-images {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 20px;
+ 
+    height: 300px;
+    width: 200px;
+
+    overflow: hidden;
+
+}
+
+.product-images img{
+    height: 20%;
+    width: 25%;
+    
+
+    margin-left: 20px;
+    
+}
+
+.product-datail{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.product-name {
+    font-size: 20px;
+    font-weight: 20;
+
+    margin-top: 15px;
+    margin-left: 20px;
+
+
+}
+
+.product-size{
+    font-size: 15px;
+
+    margin-left: 20px;
+
+}
+
+.product-write{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    margin-top: 30px;
+    margin-left: 20px;
+    width: 160px;
+    height: 40px;
+
+    color: white;
+    background-color: brown;
+    border: none;
+    border-radius: 5px;
+
+    font-size: 18px;
+
+    
+}
+.cooking{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    margin-top: 10px;
+    margin-left: 20px;
+    width: 160px;
+    height: 40px;
+
+    color: brown;
+    background-color: whitesmoke;
+    border: none;
+    border-radius: 5px;
+
+    font-size: 18px;
+
+    
+}
