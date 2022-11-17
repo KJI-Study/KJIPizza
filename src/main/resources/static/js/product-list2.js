@@ -19,6 +19,7 @@ function clear() {
 class TableSelectApi {
   static #instance = null;
 
+  
   static getInstance() {
     if (this.#instance == null) {
       this.#instance = new TableSelectApi();
@@ -30,15 +31,16 @@ class TableSelectApi {
     let responseData = null;
 
     const url = location.href;
-    const category = url.substring(url.lastIndexOf("/") + 1);
+    let category = url.substring(url.lastIndexOf("/") + 1);
 
     $.ajax({
       async: false,
       type: "get",
       url: "/api/products/" + category,
-      dataType: "json",
+      contentType : "json",
       success: (response) => {
         responseData = response.data;
+        console.log(page);
       },
       error: (error) => {
         console.log(error);
@@ -58,39 +60,43 @@ class TableService {
     return this.#instatnce;
   }
 
-  pdtIdList = new Array();
+  collectionsEntity = {
+    page: 1,
+    totalCount: 0
+  }
 
-  constructor() {
+  constructor(){
     this.pdtIdList = new Array();
   }
 
-  loadCollections() {
-    const responseData = TableSelectApi.getInstance().getCollections();
-    if (responseData.length > 0) {
-      console.log(this.pdtIdList);
-    } else {
-      alert("해당 카테고리에 등록된 상품 정보가 없습니다.");
+  loadCollections(){
+    if(this.collectionsEntity.page == 1){
+      const responseData = TableSelectApi.getInstance().getCollections(this.collectionsEntity.page);
+      console.log(responseData);
+
+      if(responseData.length > 0){
+        this.getCollections(responseData);
+      }
     }
   }
 
+
   getCollections(responseData) {
     const collectionProducts = document.querySelector(".main-container");
-    collectionProducts.innerHTML = ``;
-    this.pdtIdList.length = 0;
-    responseData.forEach((product) => {
+    responseData.forEach(product =>{
       this.pdtIdList.push(product.productId);
       collectionProducts.innerHTML += `
-        <div class="product-select">
-            <div class="product-images">
-                <img src="/static/upload/product/${product.mainImg}">
-            </div>
-            <div class="product-detail">
-                <div class="product-name">${product.productName}</div>
-                <div class="product-price"><strong>${product.productPrice}</strong></div>
-            </div>
-        </div>
-        `;
-    });
+      <div class="product-select">
+          <div class="product-images">
+              <img src="/static/upload/product/${product.mainImg}">
+          </div>
+          <div class="product-detail">
+              <div class="product-name">${product.productName}</div>
+              <div class="product-price"><strong>${product.productPrice}</strong></div>
+          </div>
+      </div>
+      `;
+  });
     this.addProductListEvent();
   }
 
