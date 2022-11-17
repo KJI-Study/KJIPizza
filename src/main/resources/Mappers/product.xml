@@ -3,20 +3,19 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.demo.repository.ProductRepository">
+<mapper namespace="com.study.mvckjipizza.repository.ProductRepository">
 
-    <select id="getProductList" parameterType="hashmap" resultType="com.example.demo.domain.CollectionsProduct">
+    <select id="getProductList" parameterType="hashmap" resultType="com.study.mvckjipizza.domain.CollectionsProduct">
         pm.id,
-        pm.pdt_name,
-        pm.pdt_price,
-        pm.category_id, (카테고리마다 다른게떠야하니까)
-        pm.origin_name,
-
+            pm.pdt_name,
+            pm.pdt_price,
+            pm.category_id,
+            pm.origin_name,
         from
         pdt_mst pm
 
         where
-        pm.category_id = {index}
+            pm.category_id = {index}
     </select>
 
 <!--    <select id="getProduct" resultMap="getProductMst">-->
