@@ -19,8 +19,8 @@ public class TableSelect {
 
 
     @GetMapping("/table/{number}")
-    public String people()
+    public String productmain(@PathVariable int number)
     {
-        return "main";
+        return "product/product";
     }
 }
