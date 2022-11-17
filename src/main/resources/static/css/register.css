@@ -68,7 +68,7 @@
     height: 50px;
 
     border-radius: 8px;
-    border-color: rgb(198, 198, 198);
+    border: 2px solid grey;
 }
 
 input[type="number"] {
