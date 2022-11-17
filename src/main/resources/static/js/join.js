@@ -13,6 +13,7 @@ joinButton.onclick = () => {
         async: false,
         type: "post",
         url: "/api/join",
+        contentType: "application/json",
         data: JSON.stringify(admin),
         dataType: "json",
         success: (response) => {
@@ -20,8 +21,19 @@ joinButton.onclick = () => {
             alert("회원가입 요청 성공");
         },
         error: (error) => {
-            console.log(error);
-            alert("회원가입 요청 실패");
+            loadErrorMessage(error.responseJSON);
         }
     });
+
+    function loadErrorMessage(errors){
+        var errorflag = true;
+          const errorArray = Object.values(errors);
+          errorArray.forEach(error => {
+          if(errorflag){
+            alert(error);
+                errorflag = false;
+                return false;
+            }
+          });
+        }
 }
