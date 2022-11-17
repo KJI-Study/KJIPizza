@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.repository.ProductRepository">
+
+    <select id="getProductList" parameterType="hashmap" resultType="com.example.demo.domain.CollectionsProduct">
+        pm.id,
+        pm.pdt_name,
+        pm.pdt_price,
+        pm.category_id, (카테고리마다 다른게떠야하니까)
+        pm.origin_name,
+
+        from
+        pdt_mst pm
+
+        where
+        pm.category_id = {index}
+    </select>
+
+<!--    <select id="getProduct" resultMap="getProductMst">-->
+<!--        SELECT-->
+<!--        pm.id AS pdt_id,-->
+<!--        pm.pdt_name,-->
+<!--        pm.pdt_price,-->
+<!--        pd.id AS pdt_dtl_id,-->
+<!--        pd.size_id,-->
+<!--        psm.size_name,-->
+<!--        pd.pdt_stock,-->
+<!--        pim.save_name-->
+<!--        FROM-->
+<!--        pdt_mst pm-->
+<!--        LEFT OUTER JOIN pdt_dtl pd ON(pd.pdt_id = pm.id)-->
+<!--        LEFT OUTER JOIN pdt_size_dtl psd ON(psd.id = pd.size_id)-->
+<!--        LEFT OUTER JOIN pdt_size_mst psm ON(psm.id = psd.size_id)-->
+<!--        LEFT OUTER JOIN pdt_image_mst pim ON(pim.pdt_id = pm.id)-->
+<!--        WHERE-->
+<!--        pm.id = #{pdtId}-->
+<!--    </select>-->
+</mapper>
