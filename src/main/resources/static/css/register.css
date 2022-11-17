@@ -43,6 +43,10 @@
     overflow: hidden;
 }
 
+.file-input {
+    display: none;
+}
+
 .pdt-regist {
     display: flex;
     flex-direction: column;
