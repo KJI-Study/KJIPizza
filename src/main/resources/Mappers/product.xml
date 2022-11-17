@@ -6,16 +6,17 @@
 <mapper namespace="com.study.mvckjipizza.repository.ProductRepository">
 
     <select id="getProductList" parameterType="hashmap" resultType="com.study.mvckjipizza.domain.CollectionsProduct">
-        pm.id,
+        SELECT
+            pm.id,
             pm.pdt_name,
             pm.pdt_price,
             pm.category_id,
-            pm.origin_name,
-        from
-        pdt_mst pm
+            pm.origin_name
+        FROM
+            pdt_mst pm
+        WHERE
+            pm.category_id = (select id from pdt_category_mst where category_name = #{category})
 
-        where
-            pm.category_id = {index}
     </select>
 
 <!--    <select id="getProduct" resultMap="getProductMst">-->
