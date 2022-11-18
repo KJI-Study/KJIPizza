@@ -10,6 +10,11 @@ spring:
     username: admin
     password: 1q2w3e4r
 
+  security:
+    user:
+      name: test@naver.com
+      password: 1q2w3e4r1!
+
 mybatis:
   mapper-locations:
     - /mappers/*.xml

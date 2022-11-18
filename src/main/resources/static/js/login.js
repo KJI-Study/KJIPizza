@@ -1,3 +1,3 @@
 document.querySelector(".join-btn").onclick = () => {
-    location.href = "/join";
+    location.href = "/admin/join";
 }

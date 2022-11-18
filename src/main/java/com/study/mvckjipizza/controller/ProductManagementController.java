@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/admin")
 public class ProductManagementController {
 
-    @GetMapping("/product/register")
+    @GetMapping("/register")
     public String loadProductRegister(){
-        return "/admin/product_registration";
+        return "/admin/register";
     }
 }

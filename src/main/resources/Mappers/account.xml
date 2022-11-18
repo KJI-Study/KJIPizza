@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.study.mvckjipizza.repository.admin.AccountRepository">
+
+    <resultMap id="admin" type="com.study.mvckjipizza.domain.Admin">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <result property="password" column="password"/>
+        <result property="create_date" column="create_date"/>
+        <result property="update_date" column="update_date"/>
+    </resultMap>
+
+    <select id="findUserEmail" parameterType="string" resultMap="admin">
+        SELECT
+            ad.id,
+            ad.name,
+            ad.email,
+            ad.password,
+            ad.create_date,
+            ad.update_date
+        FROM
+            admin ad
+        WHERE
+            ad.email = #{email}
+    </select>
+
+    <insert id="saveAdmin" parameterType="com.study.mvckjipizza.domain.Admin">
+        INSERT INTO
+            admin
+        VALUES(
+            0,
+            #{name},
+            #{email},
+            #{password},
+            now(),
+            now()
+        )
+    </insert>
+</mapper>

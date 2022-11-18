@@ -21,6 +21,11 @@ joinButton.onclick = () => {
             alert("회원가입 요청 성공");
         },
         error: (error) => {
+            console.log(error);
+            console.log(error.response);
+            console.log(error.responseJSON);
+            console.log(error.responseJSON.data);
+
             loadErrorMessage(error.responseJSON);
         }
     });
