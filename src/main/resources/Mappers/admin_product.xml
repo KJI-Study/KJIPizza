@@ -5,18 +5,7 @@
 
 <mapper namespace="com.study.mvckjipizza.repository.ProductRepository">
 
-    <select id="getProductList" parameterType="hashmap" resultType="com.study.mvckjipizza.domain.CollectionsProduct">
-        pm.id,
-            pm.pdt_name,
-            pm.pdt_price,
-            pm.category_id,
-            pm.origin_name,
-        from
-        pdt_mst pm
 
-        where
-            pm.category_id = {index}
-    </select>
 
 
 </mapper>
