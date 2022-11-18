@@ -15,7 +15,7 @@
         FROM
             pdt_mst pm
         WHERE
-            pm.category_id = (select id from pdt_category_mst where category_name = #{category})
+            pm.category_id = (select id from pdt_category_mst where id = #{category})
 
     </select>
 
