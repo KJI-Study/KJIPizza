@@ -3,8 +3,21 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.study.mvckjipizza.repository.ProductRepository">
+<mapper namespace="com.study.mvckjipizza.repository.admin.ProductManagementRepository">
+    <resultMap id="product_category" type="com.study.mvckjipizza.domain.ProductCategory">
+        <result property="category_id" column="id"></result>
+        <result property="category_name" column="category_name"></result>
 
+    </resultMap>
+    <select id="getCategoryList" resultMap="product_category" >
+        select
+        id,
+        category_name
+
+        from
+
+        pdt_category_mst
+    </select>
 
 
 
