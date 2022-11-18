@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.study.mvckjipizza.repository.ProductRepository">
+
+    <select id="getProductList" parameterType="hashmap" resultType="com.study.mvckjipizza.domain.CollectionsProduct">
+        pm.id,
+            pm.pdt_name,
+            pm.pdt_price,
+            pm.category_id,
+            pm.origin_name,
+        from
+        pdt_mst pm
+
+        where
+            pm.category_id = {index}
+    </select>
+
+
+</mapper>

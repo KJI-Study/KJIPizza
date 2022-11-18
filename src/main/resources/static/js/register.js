@@ -49,6 +49,18 @@ class RegisterService{
         const productCategory = document.querySelector(".pdt-regist");
         productCategory.innerHTML = '<option value="none">상품 종류</option>';
 
+        productCategoryList.forEach(categroy => {
+            productCategory.innerHTML += `
+            <option value="${categroy.id}">${category.name}></option>
+            
+            `;
+            
+        })
             
     }
+
+}
+
+window.onload =() => {
+    RegisterService.getInstance.getCategoryList();
 }
