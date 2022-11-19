@@ -1,5 +1,7 @@
 package com.study.mvckjipizza.api.admin;
 
+import com.study.mvckjipizza.dto.CMRespDto;
+import com.study.mvckjipizza.service.admin.ProductManagementService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class ProductAdminApi {
 
-    @GetMapping
+    private final ProductManagementService productManagementService;
+
+
+    @GetMapping("/product/category")
     public ResponseEntity<?> getCategoryList() throws Exception {
-        return null;
+
+        return ResponseEntity.ok().
+                body(new CMRespDto<> ("Get Successfully", productManagementService.getCategoryList()));
     }
 }

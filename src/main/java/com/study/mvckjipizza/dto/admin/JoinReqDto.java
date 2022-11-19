@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 public class JoinReqDto {
     @NotBlank(message = "이름을 입력하세요", groups = ValidationGroups.NotBlankGroup.class)
     @Size(min = 1, max = 4, message = "이름은 4글자까지 입력 가능합니다", groups = ValidationGroups.SizeGroup.class)
-    @Pattern(regexp = "^[가-힇]*$", message = "한글만 입력하세요", groups = ValidationGroups.PatternCheckGroup.class)
+    @Pattern(regexp = "^[가-힇]{2,5}$", message = "한글만 입력하세요", groups = ValidationGroups.PatternCheckGroup.class)
     private String name;
     @NotBlank(message = "이메일을 입력하세요", groups = ValidationGroups.NotBlankGroup.class)
     @Email
