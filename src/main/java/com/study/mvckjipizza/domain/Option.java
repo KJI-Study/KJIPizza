@@ -13,7 +13,6 @@ public class Option {
     private int id;
     private String option_name;
     private int option_price;
-
     public OptionListRespDto toDto() {
         return OptionListRespDto.builder()
                 .optionId(id)

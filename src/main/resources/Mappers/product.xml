@@ -21,7 +21,6 @@
 
 
     <select id="getOptionList" resultType="com.study.mvckjipizza.domain.Option">
-
         select
             om.id,
             om.option_name,
