@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface ProductService {
 
-    public List<ProductListRespDto> getProductList(int category) throws Exception;
+    public List<ProductListRespDto> getProductList(String category) throws Exception;
     public List<OptionListRespDto> getOptionList() throws Exception;
 }

@@ -18,7 +18,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
-    public List<ProductListRespDto> getProductList(int category) throws Exception {
+    public List<ProductListRespDto> getProductList(String category) throws Exception {
         List<ProductListRespDto> productList = new ArrayList<ProductListRespDto>();
         Map<String, Object> map = new HashMap<String, Object>();
 
