@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface AccountRepository {
-    public Admin findUserEmail(String email) throws Exception;
+    public Admin findUserByEmail(String email) throws Exception;
 
     public int saveAdmin(Admin admin) throws Exception;
 

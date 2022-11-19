@@ -12,7 +12,7 @@ joinButton.onclick = () => {
     $.ajax({
         async: false,
         type: "post",
-        url: "/api/join",
+        url: "/api/admin/join",
         contentType: "application/json",
         data: JSON.stringify(admin),
         dataType: "json",
@@ -21,12 +21,12 @@ joinButton.onclick = () => {
             alert("회원가입 요청 성공");
         },
         error: (error) => {
-            console.log(error);
-            console.log(error.response);
-            console.log(error.responseJSON);
-            console.log(error.responseJSON.data);
+            console.log(error)
+            console.log(error.responseJSON)
+            console.log(error.responseJSON.data)
+            console.log(error.responseJSON.message)
 
-            loadErrorMessage(error.responseJSON);
+            loadErrorMessage(error.responseJSON.data);
         }
     });
 

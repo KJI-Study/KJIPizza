@@ -14,7 +14,7 @@
         <result property="update_date" column="update_date"/>
     </resultMap>
 
-    <select id="findUserEmail" parameterType="string" resultMap="admin">
+    <select id="findUserByEmail" parameterType="string" resultMap="admin">
         SELECT
             ad.id,
             ad.name,

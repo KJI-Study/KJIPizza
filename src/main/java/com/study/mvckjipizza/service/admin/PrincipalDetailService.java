@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PrincipalDetailService implements UserDetailsService {
 
-    private AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -25,7 +25,7 @@ public class PrincipalDetailService implements UserDetailsService {
         Admin admin = null;
 
         try {
-            admin = accountRepository.findUserEmail(email);
+            admin = accountRepository.findUserByEmail(email);
 
         } catch (Exception e) {
             throw new CustomInternalServerErrorException("회원정보 조회오류");

@@ -3,6 +3,7 @@ package com.study.mvckjipizza.api;
 import com.study.mvckjipizza.dto.CMRespDto;
 import com.study.mvckjipizza.dto.admin.JoinReqDto;
 import com.study.mvckjipizza.dto.validation.ValidationSequence;
+import com.study.mvckjipizza.excetpion.CustomValidationException;
 import com.study.mvckjipizza.service.admin.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 public class JoinApi {
 
     private final AccountService accountService;
@@ -30,7 +31,7 @@ public class JoinApi {
     public ResponseEntity<?> join(@Validated(ValidationSequence.class) @RequestBody JoinReqDto joinReqDto, BindingResult bindingResult) throws Exception {
 
         accountService.duplicateEmail(joinReqDto);
-        accountService.login(joinReqDto);
+
 
         if(bindingResult.hasErrors()) {
             Map<String, String> errorMap = new HashMap<String, String>();
@@ -39,8 +40,9 @@ public class JoinApi {
             for(FieldError fieldError : fieldErrors) {
                 errorMap.put(fieldError.getField(), fieldError.getDefaultMessage());
             }
-            return ResponseEntity.badRequest().body(errorMap);
+            return ResponseEntity.badRequest().body(new CustomValidationException("Validation Error", errorMap));
         }
+        accountService.join(joinReqDto);
 
         return ResponseEntity.created(URI.create("/admin/login")).body(new CMRespDto<>("회원가입 성공", joinReqDto.getEmail()));
     }

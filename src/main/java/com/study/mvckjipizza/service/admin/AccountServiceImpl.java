@@ -6,11 +6,13 @@ import com.study.mvckjipizza.domain.Admin;
 import com.study.mvckjipizza.dto.admin.JoinReqDto;
 import com.study.mvckjipizza.repository.admin.AccountRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
@@ -20,7 +22,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void duplicateEmail(JoinReqDto joinReqDto) throws Exception {
 
-        Admin admin = accountRepository.findUserEmail(joinReqDto.getEmail());
+        Admin admin = accountRepository.findUserByEmail(joinReqDto.getEmail());
 
         if(admin != null) {
             Map<String, String> errorMap = new HashMap<String, String>();
@@ -30,14 +32,13 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void login(JoinReqDto joinReqDto) throws Exception {
+    public void join(JoinReqDto joinReqDto) throws Exception {
 
         Admin admin = joinReqDto.toEntity();
         int result = accountRepository.saveAdmin(admin);
         if(result == 0) {
             throw new CustomInternalServerErrorException("회원가입중 문제 발생");
         }
-
     }
 
 }

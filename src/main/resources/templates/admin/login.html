@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,8 +12,8 @@
         <div class="content">
                 <form action="#" method="post">
                 <h2>관리자 로그인</h2>
-                <input type="email" placeholder="이메일 " required>
-                <input type="password" placeholder="비밀번호 " required>
+                <input type="email" th:value="${username}" placeholder="이메일" required>
+                <input type="password" placeholder="비밀번호" required>
                 <button class="login-btn btn" type="submit">로그인</button>
                 <button class="join-btn btn" type="button">회원가입</button>
             </form>
