@@ -24,21 +24,19 @@ joinButton.onclick = () => {
             location.replace(successURI + "?email=" + response.data);
         },
         error: (error) => {
-            console.log(error)
-            console.log(error.responseJSON)
-            console.log(error.responseJSON.data)
-            console.log(error.responseJSON.message)
-
-            loadErrorMessage();
+            if(error.responseJSON.message == '이미 사용중인 이메일입니다') {
+                alert(error.responseJSON.message);
+            }
+            loadErrorMessage(error);
         }
     });
 
-    function loadErrorMessage(errors){
+    function loadErrorMessage(error){
         var errorflag = true;
-          const errorArray = Object.values(errors);
-          errorArray.forEach(error => {
+          const errorArray = Object.values(error.responseJSON.errorMap);
+          errorArray.forEach(msg => {
           if(errorflag){
-            alert(error);
+            alert(msg);
                 errorflag = false;
                 return false;
             }

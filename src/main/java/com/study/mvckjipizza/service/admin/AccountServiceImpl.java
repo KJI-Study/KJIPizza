@@ -27,7 +27,7 @@ public class AccountServiceImpl implements AccountService {
         if(admin != null) {
             Map<String, String> errorMap = new HashMap<String, String>();
             errorMap.put("email", "이미 사용중인 이메일입니다");
-            throw new CustomValidationException("Duplicate email", errorMap);
+            throw new CustomValidationException("이미 사용중인 이메일입니다", errorMap);
         }
     }
 
