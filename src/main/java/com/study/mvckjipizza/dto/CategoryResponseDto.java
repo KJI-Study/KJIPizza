@@ -8,5 +8,4 @@ import lombok.Data;
 public class CategoryResponseDto {
     private int id;
     private String name;
-
 }

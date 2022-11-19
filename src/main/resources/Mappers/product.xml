@@ -19,6 +19,17 @@
 
     </select>
 
+
+    <select id="getOptionList" resultType="com.study.mvckjipizza.domain.Option">
+
+        select
+            om.id,
+            om.option_name,
+            om.option_price
+        from
+            option_mst om
+    </select>
+
 <!--    <select id="getProduct" resultMap="getProductMst">-->
 <!--        SELECT-->
 <!--        pm.id AS pdt_id,-->

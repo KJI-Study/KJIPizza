@@ -98,25 +98,41 @@ class TableService {
 
 
      collectionProducts.forEach((product, index) => {
-    product.onclick = () => {
-        modalProduct.classList.remove("hidden");
+
+      let responseData = null;
+
+     product.onclick = () => {
+      $.ajax({
+        async: false,
+        type: "get",
+        url: "/api/products/option",
+        dataType: "json",
+        success: (response) => {
+          responseData = response.data;
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      });
+      
+         modalProduct.classList.remove("hidden");
          modalProduct.innerHTML = `
          <div class="bg"></div>
                     <div class="product-modal">
                         <div class="left-modal">
                             <div class="modal-img-container">
-                                <img src="/static/images/cheeze.png">
+                                <img src="/static/upload/product/${product.Img}">
                             </div>
                             <div class="modal-detail">
-                                <div class="modal-name">치즈 크러스트 피자</div>
-                                <div class="modal-price">24,000원</div>
+                                <div class="modal-name">${product.productName}</div>
+                                <div class="modal-price">${product.productPrice}</div>
                             </div>
                         </div>
                         <div class="right-modal">
                             <div class="size-select"><b>1.사이즈 선택</b>
                                 <div class="size-select-container">
                                     <label for="s">
-                                        <input type="radio" id="s" name="size-select" value="s"> S
+                                        <input type="radio" id="s" name="size-select" value="${responseData.optionName[0]}>
                                     </label>
                                     <label for="l">
                                         <input type="radio" id="l" name="size-select" value="l"> L (+4000)

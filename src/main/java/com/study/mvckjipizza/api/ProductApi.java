@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class ProductApi {
-
     private final ProductService productService;
 
     @GetMapping("/products/{category}")
     public ResponseEntity<?> getProduct(@PathVariable int category) throws Exception {
         return ResponseEntity.ok(new CMRespDto<>("Successfully",productService.getProductList(category)));
+    }
 
+    @GetMapping("/products/option")
+    public ResponseEntity<?> getProductOption() throws Exception {
+        return ResponseEntity.ok(new CMRespDto<>("Successfully",productService.getOptionList()));
     }
 }
