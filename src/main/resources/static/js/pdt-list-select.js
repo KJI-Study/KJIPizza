@@ -16,7 +16,6 @@ pdtCategoryListSelect.onchange = () => {
             url: "/api/admin/productlist/" + category.value,
             dataType: "json",
             success: (response) => {
-                console.log(response.data);
                 responseData = response.data;
             },
             error: (error) => {
