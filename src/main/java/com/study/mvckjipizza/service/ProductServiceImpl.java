@@ -1,5 +1,6 @@
 package com.study.mvckjipizza.service;
 
+import com.study.mvckjipizza.dto.OptionListRespDto;
 import com.study.mvckjipizza.dto.ProductListRespDto;
 import com.study.mvckjipizza.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
-    public List<ProductListRespDto> getProductList(int category) throws Exception {
+    public List<ProductListRespDto> getProductList(String category) throws Exception {
         List<ProductListRespDto> productList = new ArrayList<ProductListRespDto>();
         Map<String, Object> map = new HashMap<String, Object>();
 
@@ -28,5 +29,15 @@ public class ProductServiceImpl implements ProductService {
         });
 
         return productList;
+    }
+
+    @Override
+    public List<OptionListRespDto> getOptionList() throws Exception {
+        List<OptionListRespDto> optionList = new ArrayList<OptionListRespDto>();
+
+        productRepository.getOptionList().forEach(optionProduct -> {
+            optionList.add(optionProduct.toDto());
+        });
+        return optionList;
     }
 }

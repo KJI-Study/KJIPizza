@@ -15,8 +15,18 @@
         FROM
             pdt_mst pm
         WHERE
-            pm.category_id = (select id from pdt_category_mst where id = #{category})
+            pm.category_id = (select id from pdt_category_mst where category_name = #{category})
 
+    </select>
+
+
+    <select id="getOptionList" resultType="com.study.mvckjipizza.domain.Option">
+        select
+            om.id,
+            om.option_name,
+            om.option_price
+        from
+            option_mst om
     </select>
 
 <!--    <select id="getProduct" resultMap="getProductMst">-->
