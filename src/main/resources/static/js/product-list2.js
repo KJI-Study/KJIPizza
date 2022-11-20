@@ -2,7 +2,8 @@ const categoryButtons = document.querySelectorAll(".category");
 const mainContainer = document.querySelectorAll(".main-container");
 
 var entity = {
-  btnvalue: "salad"
+  btnvalue: "salad",
+  page : 1
 }
 
 
@@ -42,6 +43,7 @@ categoryButtons.forEach((button, index) => {
     mainContainer[index].classList.remove("invisible");
     categoryButtons[index].style.color = "blue";
     this.entity['btnvalue'] = button.value;
+    this.entity['page'] = index;
     TableSelectApi.getInstance().getCollections(entity.btnvalue);
     TableService.getInstance().loadCollections();
     };
@@ -51,6 +53,7 @@ categoryButtons.forEach((button, index) => {
 function clear() {
   for (var i = 0; i < 5; i++) {
     mainContainer[i].classList.add("invisible");
+    mainContainer[i].innerHTML = ``;
     categoryButtons[i].style.color = "black";
   }
 }
@@ -65,12 +68,7 @@ class TableService {
     return this.#instatnce;
   }
 
-  PdtList = new Array();
-
-  constructor() {
-    this.PdtList = new Array();
-  }
-
+  pdtList = new Array();
 
   getOptionMst() {
   $.ajax({
@@ -92,10 +90,10 @@ class TableService {
 
     const responseData = TableSelectApi.getInstance().getCollections(entity.btnvalue);
 
-    categoryButtons.forEach((button,index) => {
-      mainContainer[index].innerHTML = ``;
+      mainContainer[entity.page].innerHTML = ``;
+
       responseData.forEach((product,number) => {
-         mainContainer[index].innerHTML += `
+         mainContainer[entity.page].innerHTML += `
         <div class="product-select">
           <div class="product-images">
               <img src="/static/upload/product/${product.Img}">
@@ -108,20 +106,18 @@ class TableService {
       `;
       });
       TableService.getInstance().getOptionMst();
-    })
   }
 
 
-   addProductListEvent(response) {
-     const collectionProducts = document.querySelectorAll(".product-select");
-     const modalProduct = document.querySelector(".modal-container");
+     addProductListEvent(response) {
+      const collectionProducts = document.querySelectorAll(".product-select");
+      
+      const modalProduct = document.querySelector(".modal-container");
 
-     const responseData = TableSelectApi.getInstance().getCollections(entity.btnvalue);
-
+      const responseData = TableSelectApi.getInstance().getCollections(entity.btnvalue);
+      
       collectionProducts.forEach((button,index) => {
-      console.log(responseData);
       button.onclick = () => {
-      console.log(index);
       modalProduct.classList.remove("hidden");
       modalProduct.innerHTML = `
       <div class="bg"></div>
@@ -181,9 +177,10 @@ class TableService {
       `;
          document.querySelector(".modal-close-btn").onclick = () => {
          document.querySelector(".modal-container").classList.add("hidden");
-     };
-  }
+        };
+      }
     });
+
   }
 }
 
