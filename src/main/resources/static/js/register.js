@@ -39,7 +39,9 @@ class ProductMst{ //앞에 #을 붙이는건 private이라는뜻
 }
 
 class CommonApi {
+
     getCategoryList(){
+        
         let responseResult = null;
 
         $.ajax({
@@ -53,7 +55,7 @@ class CommonApi {
             },
             error : (error) => {
                 console.log(error);
-j            }
+            }
 
         })
 
@@ -103,8 +105,8 @@ class RegisterEventService{
 
         //event 
         this.addCategorySelectEvent();
-        this.addNameInputEvent();
-        this.addPriceInputEvent();
+        // this.addNameInputEvent();
+        // this.addPriceInputEvent();
         this.addRegistButtonEvent();
 
     }

@@ -1,11 +1,10 @@
 package com.study.mvckjipizza.security;
 
-import com.study.mvckjipizza.domain.Admin;
+import com.study.mvckjipizza.domain.amdin.Admin;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 @Getter

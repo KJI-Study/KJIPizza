@@ -1,4 +1,4 @@
-package com.study.mvckjipizza.domain;
+package com.study.mvckjipizza.domain.amdin;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

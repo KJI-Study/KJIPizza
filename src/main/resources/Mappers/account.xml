@@ -5,7 +5,7 @@
 
 <mapper namespace="com.study.mvckjipizza.repository.admin.AccountRepository">
 
-    <resultMap id="admin" type="com.study.mvckjipizza.domain.Admin">
+    <resultMap id="admin" type="com.study.mvckjipizza.domain.amdin.Admin">
         <result property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="email" column="email"/>
@@ -28,7 +28,7 @@
             ad.email = #{email}
     </select>
 
-    <insert id="saveAdmin" parameterType="com.study.mvckjipizza.domain.Admin">
+    <insert id="saveAdmin" parameterType="com.study.mvckjipizza.domain.amdin.Admin">
         INSERT INTO
             admin
         VALUES(

@@ -1,6 +1,6 @@
 package com.study.mvckjipizza.repository.admin;
 
-import com.study.mvckjipizza.domain.Admin;
+import com.study.mvckjipizza.domain.amdin.Admin;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

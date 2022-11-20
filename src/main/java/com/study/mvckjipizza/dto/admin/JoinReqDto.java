@@ -1,6 +1,6 @@
 package com.study.mvckjipizza.dto.admin;
 
-import com.study.mvckjipizza.domain.Admin;
+import com.study.mvckjipizza.domain.amdin.Admin;
 import com.study.mvckjipizza.dto.validation.ValidationGroups;
 import lombok.Data;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

@@ -1,6 +1,6 @@
 package com.study.mvckjipizza.service.admin;
 
-import com.study.mvckjipizza.domain.Admin;
+import com.study.mvckjipizza.domain.amdin.Admin;
 import com.study.mvckjipizza.excetpion.CustomInternalServerErrorException;
 import com.study.mvckjipizza.repository.admin.AccountRepository;
 import com.study.mvckjipizza.security.PrincipalDetails;

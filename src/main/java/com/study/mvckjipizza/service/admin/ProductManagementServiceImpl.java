@@ -2,6 +2,7 @@ package com.study.mvckjipizza.service.admin;
 
 import com.study.mvckjipizza.dto.CategoryResponseDto;
 import com.study.mvckjipizza.dto.ProductListRespDto;
+import com.study.mvckjipizza.dto.admin.ProductListSelectRespDto;
 import com.study.mvckjipizza.dto.admin.ProductRegisterReqDto;
 import com.study.mvckjipizza.repository.admin.ProductManagementRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,5 +28,14 @@ public class ProductManagementServiceImpl implements ProductManagementService {
         return categoryResponseDtos;
     }
 
+    //재률이가한거
+    @Override
+    public List<ProductListSelectRespDto> getProductListSelect(String categoryName) throws Exception {
+        List<ProductListSelectRespDto> list = new ArrayList<ProductListSelectRespDto>();
+        productManagementRepository.getProductListSelect(categoryName).forEach(pdtMst -> {
+            list.add(pdtMst.toDto());
+        });
 
+        return list;
+    }
 }

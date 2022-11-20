@@ -2,7 +2,7 @@ package com.study.mvckjipizza.service.admin;
 
 import com.study.mvckjipizza.excetpion.CustomInternalServerErrorException;
 import com.study.mvckjipizza.excetpion.CustomValidationException;
-import com.study.mvckjipizza.domain.Admin;
+import com.study.mvckjipizza.domain.amdin.Admin;
 import com.study.mvckjipizza.dto.admin.JoinReqDto;
 import com.study.mvckjipizza.repository.admin.AccountRepository;
 import lombok.RequiredArgsConstructor;

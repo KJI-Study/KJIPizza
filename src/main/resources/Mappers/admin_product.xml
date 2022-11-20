@@ -19,6 +19,19 @@
         pdt_category_mst
     </select>
 
+    <select id="getProductListSelect" resultType="com.study.mvckjipizza.domain.amdin.SelectProduct">
+        SELECT
+            pm.id AS pdt_id,
+            pcm.category_name,
+            pm.pdt_name,
+            pm.pdt_price
+        FROM
+            pdt_mst pm
+            LEFT OUTER JOIN pdt_category_mst pcm ON(pcm.id = pm.category_id)
+        WHERE
+            pcm.category_name = #{categoryName}
+    </select>
+
 
 
 </mapper>

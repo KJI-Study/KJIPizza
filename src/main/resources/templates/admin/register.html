@@ -35,12 +35,12 @@
             </div>
         </div>
         <div class="pdt-list-container">
-            <select name="" id="">
-                <option value="">샐러드</option>
-                <option value="">피자</option>
-                <option value="">스파게티</option>
-                <option value="">파스타/라이스</option>
-                <option value="">음료</option>
+            <select name="" id="" class="pdt-category-list-select">
+                <option class="pdt-category-list" value="salad">샐러드</option>
+                <option class="pdt-category-list" value="pizza">피자</option>
+                <option class="pdt-category-list" value="spaghetti">스파게티</option>
+                <option class="pdt-category-list" value="pastarice">파스타/라이스</option>
+                <option class="pdt-category-list" value="drink">음료</option>
             </select>
             <div class="pdt-list">
                     <table class="pdt-dtl-list">
@@ -54,20 +54,23 @@
                                 <th>삭제</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
+                        <tbody class="product-mst-list">
+                            <!-- <tr>
                                 <td>1</td>
                                 <td>샐러드</td>
                                 <td>고기듬뿍샐러드</td>
                                 <td>8000</td>
                                 <td><button type="button" class="btn">수정</button></td>
                                 <td><button type="button" class="btn">삭제</button></td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
             </div>
         </div>
     </div>
+    <!-- <script src="/static/js/register.js"></script> -->
     <script src="/static/js/register.js"></script>
+    <script src="/static/js/pdt-list-select.js"></script>
+
 </body>
 </html>
