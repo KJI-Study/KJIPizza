@@ -19,7 +19,6 @@ class TableSelectApi {
     getCollections() {
 
     let responseData = null;
-
     $.ajax({
       async: false,
       type: "get",
@@ -27,7 +26,6 @@ class TableSelectApi {
       contentType : "json",
       success: (response) => {
         responseData = response.data
-        TableService.getInstance().loadCollections(response);
       },
       error: (error) => {
         console.log(error);
@@ -35,6 +33,7 @@ class TableSelectApi {
     });
     return responseData;
   }
+  
 }
 
 categoryButtons.forEach((button, index) => {
@@ -44,6 +43,7 @@ categoryButtons.forEach((button, index) => {
     categoryButtons[index].style.color = "blue";
     this.entity['btnvalue'] = button.value;
     TableSelectApi.getInstance().getCollections(entity.btnvalue);
+    TableService.getInstance().loadCollections();
     };
   });
 
@@ -65,6 +65,13 @@ class TableService {
     return this.#instatnce;
   }
 
+  PdtList = new Array();
+
+  constructor() {
+    this.PdtList = new Array();
+  }
+
+
   getOptionMst() {
   $.ajax({
     async: false,
@@ -81,11 +88,13 @@ class TableService {
   }
 
 
-  loadCollections(response){
-    console.log(response);
+  loadCollections(){
+
+    const responseData = TableSelectApi.getInstance().getCollections(entity.btnvalue);
+
     categoryButtons.forEach((button,index) => {
       mainContainer[index].innerHTML = ``;
-      response.data.forEach((product,number) => {
+      responseData.forEach((product,number) => {
          mainContainer[index].innerHTML += `
         <div class="product-select">
           <div class="product-images">
@@ -106,11 +115,13 @@ class TableService {
    addProductListEvent(response) {
      const collectionProducts = document.querySelectorAll(".product-select");
      const modalProduct = document.querySelector(".modal-container");
+
      const responseData = TableSelectApi.getInstance().getCollections(entity.btnvalue);
 
-    console.log(responseData);     
-     collectionProducts.forEach((product,index) => {
-     product.onclick = () => {
+      collectionProducts.forEach((button,index) => {
+      console.log(responseData);
+      button.onclick = () => {
+      console.log(index);
       modalProduct.classList.remove("hidden");
       modalProduct.innerHTML = `
       <div class="bg"></div>
@@ -120,8 +131,8 @@ class TableService {
                              <img src="/static/upload/product/">
                          </div>
                          <div class="modal-detail">
-                             <div class="modal-name"></div>
-                             <div class="modal-price"></div>
+                             <div class="modal-name">${responseData[index].productName}</div>
+                             <div class="modal-price">${responseData[index].productPrice}</div>
                          </div>
                      </div>
                      <div class="right-modal">
@@ -171,13 +182,13 @@ class TableService {
          document.querySelector(".modal-close-btn").onclick = () => {
          document.querySelector(".modal-container").classList.add("hidden");
      };
-      }
+  }
     });
   }
 }
 
 window.onload = () => {
-  TableSelectApi.getInstance().getCollections(entity.btnvalue);
+  //TableSelectApi.getInstance().getCollections(entity.btnvalue);
  };
 
 
