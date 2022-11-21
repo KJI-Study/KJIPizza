@@ -178,6 +178,13 @@ class TableService {
          document.querySelector(".modal-close-btn").onclick = () => {
          document.querySelector(".modal-container").classList.add("hidden");
         };
+         //재률
+         document.querySelector(".modal-cart-btn").onclick = () => {
+          document.querySelector(".modal-container").classList.add("hidden");
+          document.querySelectorAll(".product-select")[index].classList.add("goCart");
+          setTimeout(document.querySelectorAll(".product-select")[index].classList.remove("goCart"), 3000);
+
+         }
       }
     });
 

@@ -29,8 +29,3 @@ modalCart.addEventListener("click", e => {
         modalCart.style.display = "none";
     }
 })
-
-
-
-
-

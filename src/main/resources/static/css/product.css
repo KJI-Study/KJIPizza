@@ -15,6 +15,7 @@
 .main-container:nth-child(n) {
     position: absolute;
     top: 100px;
+
 }
 
 .invisible {
@@ -75,3 +76,18 @@
     margin-bottom: 20px;
 }
 
+@keyframes goCart {
+    from {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translate(300px, 300px);
+    }
+}
+
+.goCart {
+    animation: goCart 500ms linear backwards;
+}
