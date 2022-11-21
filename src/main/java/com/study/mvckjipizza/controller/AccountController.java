@@ -11,7 +11,6 @@ public class AccountController {
     @GetMapping("/admin/login")
     public String login(Model model, @RequestParam @Nullable String email) {
         model.addAttribute("email", email);
-//        model.addAttribute("email", email);
         return "admin/login";
     }
 
