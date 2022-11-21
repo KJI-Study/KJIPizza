@@ -20,6 +20,4 @@ public class Admin {
     private LocalDateTime create_date;
     private LocalDateTime update_date;
 
-
-
 }

@@ -35,7 +35,9 @@ public class AccountServiceImpl implements AccountService {
     public void join(JoinReqDto joinReqDto) throws Exception {
 
         Admin admin = joinReqDto.toEntity();
+
         int result = accountRepository.saveAdmin(admin);
+
         if(result == 0) {
             throw new CustomInternalServerErrorException("회원가입중 문제 발생");
         }

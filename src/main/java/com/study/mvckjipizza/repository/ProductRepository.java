@@ -1,7 +1,9 @@
 package com.study.mvckjipizza.repository;
 
+import com.study.mvckjipizza.domain.Cart;
 import com.study.mvckjipizza.domain.CollectionsProduct;
 import com.study.mvckjipizza.domain.Option;
+import com.study.mvckjipizza.dto.CartRespDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -13,4 +15,5 @@ public interface ProductRepository {
 
     public List<Option> getOptionList() throws Exception;
 
+    public int addCartList(Cart cart) throws Exception;
 }

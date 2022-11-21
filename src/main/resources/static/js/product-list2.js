@@ -1,10 +1,20 @@
 const categoryButtons = document.querySelectorAll(".category");
 const mainContainer = document.querySelectorAll(".main-container");
 
+const url = location.href;
+const tableNumber = url.substring(url.lastIndexOf("/") + 1 ); 
+
+
+
 var entity = {
   btnvalue: "salad",
   page : 1
-}
+};
+
+var cart = {
+  pdtId : 0,
+  tableId : tableNumber
+};
 
 
 class TableSelectApi {
@@ -27,6 +37,7 @@ class TableSelectApi {
       contentType : "json",
       success: (response) => {
         responseData = response.data
+
       },
       error: (error) => {
         console.log(error);
@@ -110,14 +121,22 @@ class TableService {
 
 
      addProductListEvent(response) {
+
+
+      
       const collectionProducts = document.querySelectorAll(".product-select");
       
       const modalProduct = document.querySelector(".modal-container");
 
       const responseData = TableSelectApi.getInstance().getCollections(entity.btnvalue);
       
+      console.log(responseData);
+      
       collectionProducts.forEach((button,index) => {
       button.onclick = () => {
+      cart['pdtId'] = responseData[index].productId;
+      cart['tableId'] = tableNumber;
+      collectionProducts[index].classList.remove("goCart");
       modalProduct.classList.remove("hidden");
       modalProduct.innerHTML = `
       <div class="bg"></div>
@@ -178,35 +197,64 @@ class TableService {
          document.querySelector(".modal-close-btn").onclick = () => {
          document.querySelector(".modal-container").classList.add("hidden");
         };
+         //재률
+         document.querySelector(".modal-cart-btn").onclick = () => {
+         document.querySelector(".modal-container").classList.add("hidden");
+         document.querySelectorAll(".product-select")[index].classList.add("goCart");
+         CartApi.getInstance().getCartId();
+         }
       }
     });
 
   }
 }
+ 
+//장바구니 부분
+
+class CartApi {
+
+  static #instance = null;
+  
+  static getInstance() {
+    if (this.#instance == null) {
+      this.#instance = new CartApi();
+    }
+    return this.#instance;
+  }
+
+
+  getCartId(){
+
+    $.ajax({
+      async:false,
+      type: "post",
+      url: "/api/products/cart",
+      data: JSON.stringify(cart),
+      contentType: "application/json",
+      dataType: "json",
+      success:(response) => {
+        console.log(response);
+      },
+      error:(error) => {
+        console.log(error);
+      }
+    })
+  }
+}
+
+
+
+
 
 window.onload = () => {
-  //TableSelectApi.getInstance().getCollections(entity.btnvalue);
+
+    clear();
+    mainContainer[0].classList.remove("invisible");
+    categoryButtons[0].style.color = "blue";
+    this.entity['btnvalue'] = categoryButtons[0].value;
+    this.entity['page'] = 0;
+    TableSelectApi.getInstance().getCollections(entity.btnvalue);
+    TableService.getInstance().loadCollections();
+
  };
 
-
-
-// class Option {
-//   static #instance = null;
-
-//   static getInstance() {
-//     if (this.#instance == null) {
-//       this.#instance = new Option();
-//     }
-//     return this.#instance;
-//   }
-
-//   optionCollectionEvent(response) {
-   
-//     // const responseData = TableSelectApi.getInstance().getCollections(index);
-
-//     // console.log("엔티티번호 : " + index);
-
-//     // console.log(responseData);
-
-//   }
-// }
