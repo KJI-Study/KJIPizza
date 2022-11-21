@@ -1,8 +1,6 @@
 package com.study.mvckjipizza.api;
 
 
-import com.study.mvckjipizza.domain.Cart;
-import com.study.mvckjipizza.domain.Product;
 import com.study.mvckjipizza.dto.CMRespDto;
 import com.study.mvckjipizza.dto.CartRespDto;
 import com.study.mvckjipizza.service.CartService;

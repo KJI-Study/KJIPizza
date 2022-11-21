@@ -2,7 +2,7 @@ document.querySelector(".img-container").onclick = () => {
     document.querySelector(".file-input").click();
 }
 
-class ProductMst{ //앞에 #을 붙이는건 private이라는뜻
+class PdtRegisterMst{ //앞에 #을 붙이는건 private이라는뜻
     #category;
     #name;
     #price; 
@@ -64,16 +64,16 @@ class CommonApi {
     }
 }
 
-class ProductApi{
-    createProductRequest(productMst){
+class PdtRegisterApi{
+    createProductRequest(pdtRegisterMst){
         let responseData = null;
 
         $.ajax({
             async : false,
             type: "post",
-            url: "/api/admin/product",
+            url: "/api/admin/product/register",
             contentType : "application/json",
-            data : JSON.stringify(productMst),
+            data : JSON.stringify(pdtRegisterMst),
             dataType: "json",
             success: (response) => {
                 responseData = response.data;
@@ -146,13 +146,13 @@ class RegisterEventService{
             const name = this.#nameInputObj.value;
             const price = this.#priceInputObj.value;
 
-            const productMst = new ProductMst(
+            const pdtRegisterMst = new PdtRegisterMst(
                 category, name, price);
             
-            console.log(productMst.getObject);
+            console.log(pdtRegisterMst.getObject);
 
-            const productApi = new ProductApi();
-            if(productApi.createProductRequest(productMst.getObject())){
+            const pdtRegisterApi = new PdtRegisterApi();
+            if(pdtRegisterApi.createProductRequest(pdtRegisterMst.getObject())){
                 alert("상품 등록 완료");
                 location.reload();
             }

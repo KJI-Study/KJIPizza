@@ -1,4 +1,4 @@
-package com.study.mvckjipizza.domain;
+package com.study.mvckjipizza.domain.amdin;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class Product {
     private int id;
-    private String pdt_name;
     private int category_id;
+    private String pdt_name;
     private int pdt_price;
 
 }

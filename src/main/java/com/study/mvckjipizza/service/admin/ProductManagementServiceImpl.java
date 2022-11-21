@@ -1,9 +1,10 @@
 package com.study.mvckjipizza.service.admin;
 
 import com.study.mvckjipizza.dto.CategoryResponseDto;
-import com.study.mvckjipizza.dto.ProductListRespDto;
 import com.study.mvckjipizza.dto.admin.ProductListSelectRespDto;
-import com.study.mvckjipizza.dto.admin.ProductRegisterReqDto;
+import com.study.mvckjipizza.dto.admin.ProductRegisterRespDto;
+import com.study.mvckjipizza.excetpion.CustomInternalServerErrorException;
+import com.study.mvckjipizza.excetpion.CustomValidationException;
 import com.study.mvckjipizza.repository.admin.ProductManagementRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,15 @@ public class ProductManagementServiceImpl implements ProductManagementService {
         return categoryResponseDtos;
     }
 
+    @Override
+    public void registerProduct(ProductRegisterRespDto productRegisterRespDto )throws Exception {
+        if (productManagementRepository.pdtRegisterMst(productRegisterRespDto.toEntity()) ==0){
+            throw new CustomInternalServerErrorException("제품 등록 실패");
+
+        }
+
+
+    }
     //재률이가한거
     @Override
     public List<ProductListSelectRespDto> getProductListSelect(String categoryName) throws Exception {
@@ -37,5 +47,8 @@ public class ProductManagementServiceImpl implements ProductManagementService {
         });
 
         return list;
+
+
+
     }
 }

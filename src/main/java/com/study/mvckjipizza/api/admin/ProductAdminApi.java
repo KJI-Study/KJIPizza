@@ -1,13 +1,11 @@
 package com.study.mvckjipizza.api.admin;
 
 import com.study.mvckjipizza.dto.CMRespDto;
+import com.study.mvckjipizza.dto.admin.ProductRegisterRespDto;
 import com.study.mvckjipizza.service.admin.ProductManagementService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -16,9 +14,10 @@ public class ProductAdminApi {
 
     private final ProductManagementService productManagementService;
 
-    public ResponseEntity<?> registerProductMst(){
-        return ResponseEntity.created(null)
-                .body(new CMRespDto<>("Register Succe"))
+    @PostMapping("/product/register")
+    public ResponseEntity<?> pdtRegisterMst(@RequestBody ProductRegisterRespDto productRegisterRespDto ) throws Exception {
+        return ResponseEntity.ok()
+                .body(new CMRespDto<>("Register Successfully", true));
     }
 
     @GetMapping("/product/category")
