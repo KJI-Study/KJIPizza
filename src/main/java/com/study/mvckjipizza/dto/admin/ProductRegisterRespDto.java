@@ -11,12 +11,14 @@ public class ProductRegisterRespDto {
     private int category;
     private String name;
     private int price;
+    private String img;
 
     public Product toEntity() {
         return Product.builder()
                 .category_id(category)
                 .pdt_name(name)
                 .pdt_price(price)
+                .origin_name(img)
                 .build();
 
     }

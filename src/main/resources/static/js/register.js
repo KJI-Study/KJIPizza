@@ -30,9 +30,7 @@ class PdtRegisterMst{ //앞에 #을 붙이는건 private이라는뜻
         const obj ={
             category  : this.#category, 
             name : this.#name,
-            price  : this.#price,
-         
-            
+            price  : this.#price
         }
         return obj;
     }
@@ -65,7 +63,9 @@ class CommonApi {
 }
 
 class PdtRegisterApi{
+
     createProductRequest(pdtRegisterMst){
+
         let responseData = null;
 
         $.ajax({
@@ -76,7 +76,9 @@ class PdtRegisterApi{
             data : JSON.stringify(pdtRegisterMst),
             dataType: "json",
             success: (response) => {
+                console.log(response.data);
                 responseData = response.data;
+                alert("상품 등록 완료");
             },
 
             error : (error) => {
@@ -87,6 +89,7 @@ class PdtRegisterApi{
         return responseData;
     }
 }
+
 
 class RegisterEventService{
 
@@ -99,7 +102,7 @@ class RegisterEventService{
         this.#categorySelectObj = document.querySelectorAll(".product-inputs")[0];
         this.#nameInputObj = document.querySelectorAll(".product-inputs")[1];
         this.#priceInputObj = document.querySelectorAll(".product-inputs")[2];
-        this.#registButtonObj = document.querySelectorAll(".pdt-regist-btn");
+        this.#registButtonObj = document.querySelector(".pdt-regist-btn");
 
         this.init();
 
@@ -131,44 +134,40 @@ class RegisterEventService{
         this.#nameInputObj.onkeyup = () => {
             if(this.#nameInputObj.value.length != 0) {
                 this.#priceInputObj.disabled = false;
-
             }else{
                 this.#priceInputObj.disabled = true;
             }
         }
 
     }
-
+    
     addPriceInputEvent() {
         this.#priceInputObj.onkeyup =() => {
             if(this.#priceInputObj.value.length != 0 ){
                 this.#registButtonObj.disabled = false;
-               
             }else{
                 this.#registButtonObj.disabled = true;
-            
             }
-         
          }
     
       }
-    
 
     addRegistButtonEvent() {
         this.#registButtonObj.onclick = () => {
+
             const category = this.#categorySelectObj.value;
             const name = this.#nameInputObj.value;
             const price = this.#priceInputObj.value;
 
-            const pdtRegisterMst = new PdtRegisterMst(
-                category, name, price);
+            const pdtRegisterMst = new PdtRegisterMst(category, name, price);
             
-            console.log(pdtRegisterMst.getObject);
+            console.log(pdtRegisterMst); //getObject 안쓰는이유
 
             const pdtRegisterApi = new PdtRegisterApi();
+
             if(pdtRegisterApi.createProductRequest(pdtRegisterMst.getObject())){
-                alert("상품 등록 완료");
-                location.reload();
+
+               // location.reload();
             }
 
         }
@@ -196,9 +195,8 @@ class RegisterService{
         new RegisterEventService();
     }
 
-    setRegisterHeaderEvent(){ /*what means*/
+    setRegisterHeaderEvent(){ /*무슨의미*/
         new RegisterEventService();
-
     }
 
 

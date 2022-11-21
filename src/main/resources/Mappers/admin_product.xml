@@ -29,6 +29,7 @@
         #{category_id},
         #{pdt_name},
         #{pdt_price},
+        #{origin_name},
         now(),
         now()
         )
