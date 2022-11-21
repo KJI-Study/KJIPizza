@@ -16,6 +16,10 @@ public class ProductAdminApi {
 
     private final ProductManagementService productManagementService;
 
+    public ResponseEntity<?> registerProductMst(){
+        return ResponseEntity.created(null)
+                .body(new CMRespDto<>("Register Succe"))
+    }
 
     @GetMapping("/product/category")
     public ResponseEntity<?> getCategoryList() throws Exception {

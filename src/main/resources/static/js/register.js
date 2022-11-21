@@ -64,18 +64,19 @@ class CommonApi {
     }
 }
 
-class RegisterApi{
-    createProductRequest(ProductMst){
-        let responseResult = null;
+class ProductApi{
+    createProductRequest(productMst){
+        let responseData = null;
 
         $.ajax({
             async : false,
             type: "post",
             url: "/api/admin/product",
             contentType : "application/json",
+            data : JSON.stringify(productMst),
             dataType: "json",
             success: (response) => {
-                responseResult = response.data;
+                responseData = response.data;
             },
 
             error : (error) => {
@@ -83,7 +84,7 @@ class RegisterApi{
             }
         })
 
-        return responseResult;
+        return responseData;
     }
 }
 
@@ -103,10 +104,9 @@ class RegisterEventService{
         this.init();
 
 
-        //event 
         this.addCategorySelectEvent();
-        // this.addNameInputEvent();
-        // this.addPriceInputEvent();
+        this.addNameInputEvent();
+        this.addPriceInputEvent();
         this.addRegistButtonEvent();
 
     }
@@ -126,6 +126,18 @@ class RegisterEventService{
             }
         }
     }    
+
+    addNameInputEvent(){
+        this.#nameInputObj.onkeyup = () => {
+            if(this.#nameInputObj.value.length != 0) {
+                this.#priceInputObj.disabled = false;
+
+            }else{
+                this.#priceInputObj.disabled = true;
+            }
+        }
+
+    }
     
 
     addRegistButtonEvent() {
@@ -133,6 +145,17 @@ class RegisterEventService{
             const category = this.#categorySelectObj.value;
             const name = this.#nameInputObj.value;
             const price = this.#priceInputObj.value;
+
+            const productMst = new ProductMst(
+                category, name, price);
+            
+            console.log(productMst.getObject);
+
+            const productApi = new ProductApi();
+            if(productApi.createProductRequest(productMst.getObject())){
+                alert("상품 등록 완료");
+                location.reload();
+            }
 
         }
     }
@@ -186,4 +209,5 @@ class RegisterService{
 
 window.onload = () => {
     RegisterService.getInstance().getCategoryList();
+    RegisterService.getInstance().setRegisterHeaderEvent();
 }
