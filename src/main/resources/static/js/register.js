@@ -138,6 +138,20 @@ class RegisterEventService{
         }
 
     }
+
+    addPriceInputEvent() {
+        this.#priceInputObj.onkeyup =() => {
+            if(this.#priceInputObj.value.length != 0 ){
+                this.#registButtonObj.disabled = false;
+               
+            }else{
+                this.#registButtonObj.disabled = true;
+            
+            }
+         
+         }
+    
+      }
     
 
     addRegistButtonEvent() {
