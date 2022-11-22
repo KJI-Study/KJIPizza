@@ -20,7 +20,23 @@
     </select>
 
 
-    <insert id="pdtRegisterMst" parameterType="com.study.mvckjipizza.domain.amdin.Product">
+<!--    <insert id="pdtRegisterMst" parameterType="com.study.mvckjipizza.domain.amdin.Product">-->
+<!--        Insert into-->
+<!--        pdt_mst-->
+
+<!--        values(-->
+<!--        0,-->
+<!--        #{category_id},-->
+<!--        #{pdt_name},-->
+<!--        #{pdt_price},-->
+<!--        #{origin_name},-->
+<!--        now(),-->
+<!--        now()-->
+<!--        )-->
+
+<!--    </insert>-->
+
+    <insert id="registerImgFiles" parameterType="com.study.mvckjipizza.domain.amdin.Product">
         Insert into
         pdt_mst
 

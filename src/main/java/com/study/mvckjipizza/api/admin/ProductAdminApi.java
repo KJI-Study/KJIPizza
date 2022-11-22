@@ -29,6 +29,14 @@ public class ProductAdminApi {
                 body(new CMRespDto<> ("Get Successfully", productManagementService.getCategoryList()));
     }
 
+//    @PostMapping("/product/register")
+//    public ResponseEntity<?> registerImgFiles(@RequestBody ProductRegisterRespDto productRegisterRespDto) throws Exception {
+//
+//        //productManagementService.registerImg(productRegisterRespDto);
+//
+//        return ResponseEntity.ok().body(new CMRespDto<> ("Get Successfully", true));
+//    }
+
     //재률이가 만든거
     @GetMapping("/productlist/{categoryName}")
     public ResponseEntity<?> getProductList(@PathVariable String categoryName) throws Exception {

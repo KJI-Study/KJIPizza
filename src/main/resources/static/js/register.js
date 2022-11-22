@@ -78,7 +78,7 @@ class PdtRegisterApi{
             success: (response) => {
                 console.log(response.data);
                 responseData = response.data;
-                alert("상품 등록 완료");
+                alert("제품 등록 완료");
             },
 
             error : (error) => {
@@ -88,6 +88,30 @@ class PdtRegisterApi{
 
         return responseData;
     }
+
+    registerImgFiles(formData){
+        $.ajax({
+            async: false,
+            type: "post",
+            url: "/api/admin/product/register",
+            enctype: "multipart/form-data",
+            contentType: false, //img form-data 쓸때, contentType, processType : false 설정해줘야함
+            processType: false,
+            data: formData,
+            dataType: "json",
+            success: (response) => {
+                alert("이미지 등록 완료");
+                location.reload();
+            },
+            error: (error) => {
+
+                console.log(error);
+            }
+        })
+    }
+
+
+    
 }
 
 
@@ -97,12 +121,16 @@ class RegisterEventService{
     #nameInputObj;
     #priceInputObj;
     #registButtonObj;
+    #updateButtonObj;
+    #deleteButtonObj;
 
     constructor() {
         this.#categorySelectObj = document.querySelectorAll(".product-inputs")[0];
         this.#nameInputObj = document.querySelectorAll(".product-inputs")[1];
         this.#priceInputObj = document.querySelectorAll(".product-inputs")[2];
         this.#registButtonObj = document.querySelector(".pdt-regist-btn");
+        this.#updateButtonObj = document.querySelectorAll(".btn")[0];
+        this.#deleteButtonObj = document.querySelectorAll(".btn")[1];
 
         this.init();
 
@@ -111,6 +139,10 @@ class RegisterEventService{
         this.addNameInputEvent();
         this.addPriceInputEvent();
         this.addRegistButtonEvent();
+        this.addUpdateButtonEvent();
+        this.addDeleteButtonEvent();
+        
+        
 
     }
 
@@ -118,6 +150,7 @@ class RegisterEventService{
         this.#nameInputObj.disabled = true;
         this.#priceInputObj.disabled = true;
         this.#registButtonObj.disabled = true;
+
     }
 
     addCategorySelectEvent(){
@@ -160,6 +193,9 @@ class RegisterEventService{
             const price = this.#priceInputObj.value;
 
             const pdtRegisterMst = new PdtRegisterMst(category, name, price);
+
+            const formData = new FormData();
+            PdtRegisterApi.getInstance().registerImgFiles(formData);
             
             console.log(pdtRegisterMst); //getObject 안쓰는이유
 
@@ -167,13 +203,55 @@ class RegisterEventService{
 
             if(pdtRegisterApi.createProductRequest(pdtRegisterMst.getObject())){
 
-               // location.reload();
+            location.reload();
             }
 
         }
     }
 
-} 
+    addUpdateButtonEvent(){
+        this.#updateButtonObj.onclick = () => {
+            
+            const productinputs = document.querySelector(".pdt-regist");
+
+                let PdtRegisterMst ={
+                    categoryId : productinputs[0].value,
+                    pdtName : productinputs[1].value,
+                    pdtPrice : productinputs[2].value
+                }
+                    
+
+                $.ajax({
+                    async: false,
+                    type: "PUT",
+                    url: "/api/admin/product/update",
+                    contentType : "/application/json",
+                    data : JSON.stringify(PdtRegisterMst),
+                    dataType: "json",
+                    success: (response) => {
+                        alert("상품 수정 완료");
+                    },
+        
+                    error: (error) => {
+                        console.log(error);
+                    }
+                })
+        
+            }
+
+
+        }
+
+        addDeleteButtonEvent(){
+            this.#deleteButtonObj.onclick = () => {
+
+
+            }
+
+        }
+    }
+
+
 class RegisterService{
     static #instance=null;
 
@@ -195,7 +273,7 @@ class RegisterService{
         new RegisterEventService();
     }
 
-    setRegisterHeaderEvent(){ /*무슨의미*/
+    setRegisterHeaderEvent(){ 
         new RegisterEventService();
     }
 

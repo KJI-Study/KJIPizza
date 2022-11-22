@@ -38,6 +38,14 @@ public class ProductManagementServiceImpl implements ProductManagementService {
 
 
     }
+
+//    @Override
+//    public void registerImg(ProductRegisterRespDto productRegisterRespDto) throws Exception {
+//
+//
+//        }
+
+
     //재률이가한거
     @Override
     public List<ProductListSelectRespDto> getProductListSelect(String categoryName) throws Exception {
