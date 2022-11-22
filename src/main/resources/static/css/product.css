@@ -84,10 +84,11 @@
 
     to {
         opacity: 0;
-        transform: translate(300px, 300px);
+        transform: translate(calc(50vw - 50px), calc(50vh + 75px)) scale(0.2, 0.2) rotate(180deg);
     }
 }
 
 .goCart {
     animation: goCart 500ms linear backwards;
+    transition-property: all;
 }
