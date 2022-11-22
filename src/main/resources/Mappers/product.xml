@@ -11,7 +11,7 @@
             pm.pdt_name,
             pm.pdt_price,
             pm.category_id,
-            pm.origin_name
+            pm.save_name
         FROM
             pdt_mst pm
         WHERE

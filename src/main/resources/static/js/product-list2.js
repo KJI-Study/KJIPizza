@@ -111,7 +111,7 @@ class TableService {
          mainContainer[entity.page].innerHTML += `
         <div class="product-select">
           <div class="product-images">
-              <img src="/static/upload/product/${product.Img}">
+              <img src="/static/upload/product/${product.img}">
           </div>
           <div class="product-detail">
               <div class="product-name">${product.productName}</div>
@@ -147,7 +147,7 @@ class TableService {
                  <div class="product-modal">
                      <div class="left-modal">
                          <div class="modal-img-container">
-                             <img src="/static/upload/product/">
+                             <img src="/static/upload/product/${responseData[index].img}">
                          </div>
                          <div class="modal-detail">
                              <div class="modal-name">${responseData[index].productName}</div>

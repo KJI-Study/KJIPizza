@@ -41,6 +41,8 @@ public class ProductManagementServiceImpl implements ProductManagementService {
     @Override
     public void registerProduct(ProductRegisterRespDto productRegisterRespDto )throws Exception {
 
+        System.out.println("에러");
+
         if(productRegisterRespDto.getFiles() == null) {
             Map<String, String> errorMap = new HashMap<String, String>();
             errorMap.put("error", "이미지를 선택하지 않았습니다.");
@@ -55,6 +57,7 @@ public class ProductManagementServiceImpl implements ProductManagementService {
             String srcFilePath = null;
 
             System.out.println(productRegisterRespDto.getFiles());
+
             try{
                 //해당경로에 이폴더가 존재하냐
                 if(!resource.exists()) {
@@ -97,7 +100,9 @@ public class ProductManagementServiceImpl implements ProductManagementService {
             products.add(Product.builder()
                     .category_id(productRegisterRespDto.getCategory())
                     .pdt_name(productRegisterRespDto.getName())
+                    .pdt_price(productRegisterRespDto.getPrice())
                     .origin_name(originName)
+                    .save_name(saveName)
                     .build());
         });
         productManagementRepository.saveProduct(products);

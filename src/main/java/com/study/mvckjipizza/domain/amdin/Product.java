@@ -16,5 +16,5 @@ public class Product {
     private String pdt_name;
     private int pdt_price;
     private String origin_name;
-
+    private String save_name;
 }

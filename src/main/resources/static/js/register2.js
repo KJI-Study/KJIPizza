@@ -69,8 +69,6 @@ class PdtRegisterApi{
 
     createProductRequest(formData){
 
-        let responseData = null;
-
         $.ajax({
             async : false,
             type: "post",
@@ -82,22 +80,17 @@ class PdtRegisterApi{
             dataType: "json",
             success: (response) => {
                 console.log(response.data);
-                responseData = response.data;
                 alert("상품 등록 완료");
             },
 
             error : (error) => {
                 console.log(error);
-
                 let entries = formData.entries();
                 for (const pair of entries) {
                 console.log(pair[0]+ ', ' + pair[1]); 
                 }
-                
-                console.log(formData);
             }
         })
-        return responseData;
     }
 }
 
@@ -192,7 +185,7 @@ class RegisterEventService{
             reader.onload = function  () {
                 imgContainer.src = reader.result ;
             }; 
-            formData.append("img", filesInput.files[0]);
+            formData.append("files", filesInput.files[0]);
         }
 
         this.#registButtonObj.onclick = () => {
@@ -261,6 +254,7 @@ class RegisterService{
 }
 
 window.onload = () => {
+
     RegisterService.getInstance().getCategoryList();
 //     RegisterService.getInstance().setRegisterHeaderEvent();
 }

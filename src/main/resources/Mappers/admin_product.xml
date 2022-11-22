@@ -31,6 +31,7 @@
             #{img.pdt_name},
             #{img.pdt_price},
             #{img.origin_name},
+            #{img.save_name},
             now(),
             now()
             )

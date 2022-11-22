@@ -15,7 +15,7 @@ public class CollectionsProduct {
     private int id;
     private String pdt_name;
     private int pdt_price;
-    private String origin_name;
+    private String save_name;
 
 
 
@@ -24,7 +24,7 @@ public class CollectionsProduct {
                 .productId(id)
                 .productName(pdt_name)
                 .productPrice(pdt_price)
-                .Img(origin_name)
+                .Img(save_name)
                 .build();
     }
 }
