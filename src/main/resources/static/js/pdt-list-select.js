@@ -3,6 +3,7 @@ const pdtCategoryList = document.querySelectorAll(".pdt-category-list");
 const pdtMstSelect = document.querySelector(".product-mst-list");
 
 
+
 pdtCategoryListSelect.onchange = () => {
             
     pdtCategoryList.forEach(category => {
@@ -38,13 +39,44 @@ pdtCategoryListSelect.onchange = () => {
             `;
         });
     }
+    
+        });
+    
+        
+    }
+    
+const updateButton = document.querySelectorAll(".btn")[0];
+const deleteButton = document.querySelectorAll(".btn")[1];
+updateButton.onclick = () => {
+    const productInputs = document.querySelectorAll(".pdt-regist");
+
+    let product = {
+        categoryId : productInputs[0].value,
+        pdtName : productInputs[1].value,
+        pdtPrice : productInputs[2].value
+                
+        }
+    
+    $.ajax({
+    async: false,
+    type: "PUT",
+    url: "/api/admin/product/update",
+    contentType : "/application/json",
+    data : JSON.stringify(product),
+    dataType: "json",
+    success: (response) => {
+    console.log(response);
+    alert("상품 수정 완료");
+    },
+        
+    error: (error) => {
+    console.log(error);
+         }
+    
+    });
+
+}
 
 
     
         
-
-
-    });
-
-    
-}

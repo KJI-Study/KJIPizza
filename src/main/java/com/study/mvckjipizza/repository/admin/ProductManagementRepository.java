@@ -11,6 +11,8 @@ import java.util.List;
 public interface ProductManagementRepository {
     public int pdtRegisterMst(Product product) throws Exception;
 
+    public int registerUpdate(Product product) throws Exception;
+
     //public int registerImgFiles(Product product) throws Exception;
 
     public List<ProductCategory> getCategoryList() throws Exception;

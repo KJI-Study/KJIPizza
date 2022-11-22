@@ -1,5 +1,6 @@
 package com.study.mvckjipizza.service.admin;
 
+import com.study.mvckjipizza.domain.amdin.Product;
 import com.study.mvckjipizza.dto.CategoryResponseDto;
 import com.study.mvckjipizza.dto.admin.ProductListSelectRespDto;
 import com.study.mvckjipizza.dto.admin.ProductRegisterRespDto;
@@ -39,7 +40,14 @@ public class ProductManagementServiceImpl implements ProductManagementService {
 
     }
 
-//    @Override
+    @Override
+    public void updateRegister(ProductRegisterRespDto productRegisterRespDto) throws Exception {
+        Product product = productRegisterRespDto.toEntity();
+        productManagementRepository.registerUpdate(product);
+
+    }
+
+    //    @Override
 //    public void registerImg(ProductRegisterRespDto productRegisterRespDto) throws Exception {
 //
 //

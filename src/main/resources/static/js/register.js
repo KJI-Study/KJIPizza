@@ -89,26 +89,26 @@ class PdtRegisterApi{
         return responseData;
     }
 
-    registerImgFiles(formData){
-        $.ajax({
-            async: false,
-            type: "post",
-            url: "/api/admin/product/register",
-            enctype: "multipart/form-data",
-            contentType: false, //img form-data 쓸때, contentType, processType : false 설정해줘야함
-            processType: false,
-            data: formData,
-            dataType: "json",
-            success: (response) => {
-                alert("이미지 등록 완료");
-                location.reload();
-            },
-            error: (error) => {
+    // registerImgFiles(formData){
+    //     $.ajax({
+    //         async: false,
+    //         type: "post",
+    //         url: "/api/admin/product/register",
+    //         enctype: "multipart/form-data",
+    //         contentType: false, //img form-data 쓸때, contentType, processType : false 설정해줘야함
+    //         processType: false,
+    //         data: formData,
+    //         dataType: "json",
+    //         success: (response) => {
+    //             alert("이미지 등록 완료");
+    //             location.reload();
+    //         },
+    //         error: (error) => {
 
-                console.log(error);
-            }
-        })
-    }
+    //             console.log(error);
+    //         }
+    //     })
+    // }
 
 
     
@@ -121,16 +121,16 @@ class RegisterEventService{
     #nameInputObj;
     #priceInputObj;
     #registButtonObj;
-    #updateButtonObj;
-    #deleteButtonObj;
+    // #updateButtonObj;
+    // #deleteButtonObj;
 
     constructor() {
         this.#categorySelectObj = document.querySelectorAll(".product-inputs")[0];
         this.#nameInputObj = document.querySelectorAll(".product-inputs")[1];
         this.#priceInputObj = document.querySelectorAll(".product-inputs")[2];
         this.#registButtonObj = document.querySelector(".pdt-regist-btn");
-        this.#updateButtonObj = document.querySelectorAll(".btn")[0];
-        this.#deleteButtonObj = document.querySelectorAll(".btn")[1];
+        // this.#updateButtonObj = document.querySelectorAll(".btn")[0];
+        // this.#deleteButtonObj = document.querySelectorAll(".btn")[1];
 
         this.init();
 
@@ -139,8 +139,8 @@ class RegisterEventService{
         this.addNameInputEvent();
         this.addPriceInputEvent();
         this.addRegistButtonEvent();
-        this.addUpdateButtonEvent();
-        this.addDeleteButtonEvent();
+        // this.addUpdateButtonEvent();
+        // this.addDeleteButtonEvent();
         
         
 
@@ -185,7 +185,7 @@ class RegisterEventService{
     
       }
 
-    addRegistButtonEvent() {
+    addRegistButtonEvent() { //
         this.#registButtonObj.onclick = () => {
 
             const category = this.#categorySelectObj.value;
@@ -194,10 +194,10 @@ class RegisterEventService{
 
             const pdtRegisterMst = new PdtRegisterMst(category, name, price);
 
-            const formData = new FormData();
-            PdtRegisterApi.getInstance().registerImgFiles(formData);
+            // const formData = new FormData();
+            // PdtRegisterApi.getInstance().registerImgFiles(formData);
             
-            console.log(pdtRegisterMst); //getObject 안쓰는이유
+            console.log(pdtRegisterMst);
 
             const pdtRegisterApi = new PdtRegisterApi();
 
@@ -209,47 +209,47 @@ class RegisterEventService{
         }
     }
 
-    addUpdateButtonEvent(){
-        this.#updateButtonObj.onclick = () => {
+    // addUpdateButtonEvent(){ //수정 이벤트
+    //     this.#updateButtonObj.onclick = () => {
             
-            const productinputs = document.querySelector(".pdt-regist");
+    //         const productinputs = document.querySelector(".pdt-regist"); //pdt-regist 주는게 맞는지요?.?
 
-                let PdtRegisterMst ={
-                    categoryId : productinputs[0].value,
-                    pdtName : productinputs[1].value,
-                    pdtPrice : productinputs[2].value
-                }
+    //             let product = {
+    //                 categoryId : productinputs[0].value,
+    //                 pdtName : productinputs[1].value,
+    //                 pdtPrice : productinputs[2].value
+    //             }
                     
 
-                $.ajax({
-                    async: false,
-                    type: "PUT",
-                    url: "/api/admin/product/update",
-                    contentType : "/application/json",
-                    data : JSON.stringify(PdtRegisterMst),
-                    dataType: "json",
-                    success: (response) => {
-                        alert("상품 수정 완료");
-                    },
+    //             $.ajax({
+    //                 async: false,
+    //                 type: "PUT",
+    //                 url: "/api/admin/product/update",
+    //                 contentType : "/application/json",
+    //                 data : JSON.stringify(product),
+    //                 dataType: "json",
+    //                 success: (response) => {
+    //                     console.log(response);
+    //                     alert("상품 수정 완료");
+    //                 },
         
-                    error: (error) => {
-                        console.log(error);
-                    }
-                })
+    //                 error: (error) => {
+    //                     console.log(error);
+    //                 }
+    //             });
         
-            }
+    //         }
+
+    //     }
+
+    //     addDeleteButtonEvent(){
+    //         this.#deleteButtonObj.onclick = () => {
 
 
+    //         }
+
+    //     }
         }
-
-        addDeleteButtonEvent(){
-            this.#deleteButtonObj.onclick = () => {
-
-
-            }
-
-        }
-    }
 
 
 class RegisterService{

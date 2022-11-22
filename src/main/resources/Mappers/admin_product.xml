@@ -20,23 +20,7 @@
     </select>
 
 
-<!--    <insert id="pdtRegisterMst" parameterType="com.study.mvckjipizza.domain.amdin.Product">-->
-<!--        Insert into-->
-<!--        pdt_mst-->
-
-<!--        values(-->
-<!--        0,-->
-<!--        #{category_id},-->
-<!--        #{pdt_name},-->
-<!--        #{pdt_price},-->
-<!--        #{origin_name},-->
-<!--        now(),-->
-<!--        now()-->
-<!--        )-->
-
-<!--    </insert>-->
-
-    <insert id="registerImgFiles" parameterType="com.study.mvckjipizza.domain.amdin.Product">
+    <insert id="pdtRegisterMst" parameterType="com.study.mvckjipizza.domain.amdin.Product">
         Insert into
         pdt_mst
 
@@ -51,6 +35,38 @@
         )
 
     </insert>
+
+    <update id="registerUpdate" parameterType="com.study.mvckjipizza.domain.amdin.Product">
+        update
+            pdt_mst
+        set
+            category_id = #{category_id},
+            pdt_name = #{pdt_name},
+            pdt_price = #{pdt_price},
+            create_date= now(),
+            update_date = now()
+
+        where
+            pdt_id = #{pdt_id}
+
+
+    </update>
+
+<!--    <insert id="registerImgFiles" parameterType="com.study.mvckjipizza.domain.amdin.Product">-->
+<!--        Insert into-->
+<!--        pdt_mst-->
+
+<!--        values(-->
+<!--        0,-->
+<!--        #{category_id},-->
+<!--        #{pdt_name},-->
+<!--        #{pdt_price},-->
+<!--        #{origin_name},-->
+<!--        now(),-->
+<!--        now()-->
+<!--        )-->
+
+<!--    </insert>-->
 
     <select id="getProductListSelect" resultType="com.study.mvckjipizza.domain.amdin.SelectProduct">
         SELECT
