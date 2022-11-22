@@ -29,11 +29,10 @@
             option_mst om
     </select>
 
-    <insert id="addCartList" parameterType="com.study.mvckjipizza.domain.Cart" useGeneratedKeys="true" keyProperty="cart_id">
+    <insert id="addCartList" parameterType="com.study.mvckjipizza.domain.Cart" useGeneratedKeys="true" keyProperty="id">
         insert into
-            cart_mst
+            cart_mst (table_id, pdt_id, create_date, update_date)
         values(
-            0,
             #{table_id},
             #{pdt_id},
             now(),
@@ -41,4 +40,19 @@
         )
     </insert>
 
+    <insert id="addCartDtls" parameterType="list">
+        insert into
+            order_dtl
+        values
+            <foreach collection="list" item="list" separator=",">
+                (
+                    0,
+                    #{list.cart_id},
+                    #{list.option_id},
+                    now(),
+                    now()
+                )
+            </foreach>
+
+    </insert>
 </mapper>

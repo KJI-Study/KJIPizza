@@ -13,8 +13,17 @@ var entity = {
 
 var cart = {
   pdtId : 0,
-  tableId : tableNumber
+  tableId : tableNumber,
+  size: 1,
+  crust: 1,
+  topping: 1
 };
+
+var optionlist = {
+  size: 1,
+  crust: 1,
+  topping: 1
+} 
 
 
 class TableSelectApi {
@@ -240,6 +249,31 @@ class CartApi {
       }
     })
   }
+  
+  // check() {
+  //   const sized = document.getElementsByName("size-select").length;
+  //   const crusted = document.getElementsByName("crust-select").length;
+  //   const toppinged = document.getElementsByName("topping-select").length;
+
+  //   for(var i = 0; i<sized; i++){
+  //     if(document.getElementsByName("size-select")[i].checked == true){
+  //       optionlist['size'] = document.getElementsByName("size-select")[i].value;
+  //     }
+  //   }
+
+  //   for(var i = 0; i<crusted; i++){
+  //     if(document.getElementsByName("crust-select")[i].checked == true){
+  //       optionlist['crust'] = document.getElementsByName("crust-select")[i].value;
+  //     }
+  //   }
+  //   for(var i =0; i<toppinged; i++){
+  //     if(document.getElementsByName("topping-select")[i].checked == true){
+  //       optionlist['topping'] = document.getElementsByName("topping-select")[i].value;
+  //     }
+  //   }
+  //   console.log(optionlist);
+  // }
+
 }
 
 

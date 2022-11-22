@@ -2,7 +2,7 @@ package com.study.mvckjipizza.api;
 
 
 import com.study.mvckjipizza.dto.CMRespDto;
-import com.study.mvckjipizza.dto.CartRespDto;
+import com.study.mvckjipizza.dto.CartReqDto;
 import com.study.mvckjipizza.service.CartService;
 import com.study.mvckjipizza.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -27,11 +27,14 @@ public class ProductApi {
     }
 
     @PostMapping("/products/cart")
-    public ResponseEntity<?> addCartId(@RequestBody CartRespDto cartRespDto) throws Exception {
+    public ResponseEntity<?> addCartId(@RequestBody CartReqDto cartRespDto) throws Exception {
 
-        //첫번째 insert 실행.
+        //첫번째 insert 실행.s
         cartService.addCart(cartRespDto);
+
+        System.out.println(cartRespDto);
         //두번째 insert실행.
+//        cartService.addOption(optionListRespDto);
 
         return ResponseEntity.ok(new CMRespDto<>("Successfully",true));
     }
