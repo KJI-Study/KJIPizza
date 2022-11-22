@@ -1,7 +1,3 @@
-document.querySelector(".img-container").onclick = () => {
-    document.querySelector(".file-input").click();
-}
-
 class PdtRegisterMst{ //앞에 #을 붙이는건 private이라는뜻
     #category;
     #name;
@@ -12,8 +8,6 @@ class PdtRegisterMst{ //앞에 #을 붙이는건 private이라는뜻
         this.#category = category;
         this.#name = name;
         this.#price = price; 
-
-
     }
 
     getCategory() {return this.#category;}
@@ -64,7 +58,16 @@ class CommonApi {
 
 class PdtRegisterApi{
 
-    createProductRequest(pdtRegisterMst){
+    static #instance = null;
+    static getInstance() {
+        if(this.#instance == null) {
+            this.#instance = new PdtRegisterApi();
+        }
+        return this.#instance;
+    }
+
+
+    createProductRequest(formData){
 
         let responseData = null;
 
@@ -72,8 +75,10 @@ class PdtRegisterApi{
             async : false,
             type: "post",
             url: "/api/admin/product/register",
-            contentType : "application/json",
-            data : JSON.stringify(pdtRegisterMst),
+            enctype: "multipart/form-data",
+            contentType: false,
+            processData: false,
+            data: formData,
             dataType: "json",
             success: (response) => {
                 console.log(response.data);
@@ -83,9 +88,15 @@ class PdtRegisterApi{
 
             error : (error) => {
                 console.log(error);
+
+                let entries = formData.entries();
+                for (const pair of entries) {
+                console.log(pair[0]+ ', ' + pair[1]); 
+                }
+                
+                console.log(formData);
             }
         })
-
         return responseData;
     }
 }
@@ -99,13 +110,13 @@ class RegisterEventService{
     #registButtonObj;
 
     constructor() {
+
         this.#categorySelectObj = document.querySelectorAll(".product-inputs")[0];
         this.#nameInputObj = document.querySelectorAll(".product-inputs")[1];
         this.#priceInputObj = document.querySelectorAll(".product-inputs")[2];
         this.#registButtonObj = document.querySelector(".pdt-regist-btn");
 
         this.init();
-
 
         this.addCategorySelectEvent();
         this.addNameInputEvent();
@@ -115,9 +126,11 @@ class RegisterEventService{
     }
 
     init(){
+
         this.#nameInputObj.disabled = true;
         this.#priceInputObj.disabled = true;
         this.#registButtonObj.disabled = true;
+
     }
 
     addCategorySelectEvent(){
@@ -153,35 +166,60 @@ class RegisterEventService{
       }
 
     addRegistButtonEvent() {
+        // const category = document.querySelectorAll(".product-inputs")[0].value;
+        // const name = document.querySelectorAll(".product-inputs")[1].value;
+        // const price = document.querySelectorAll(".product-inputs")[2].value;
+
+
+        const filesInput = document.querySelector(".file-input");
+        const imgAddButton = document.querySelector(".img-regist-btn");
+        const imgContainer = document.querySelector(".preview");
+
+        const formData = new FormData();
+
+        imgAddButton.onclick = () => {
+            filesInput.click();
+        }
+
+        filesInput.onchange = () => {
+
+            var fileList = filesInput.files;
+
+            var reader = new FileReader();
+
+            reader.readAsDataURL(fileList [0]);
+
+            reader.onload = function  () {
+                imgContainer.src = reader.result ;
+            }; 
+            formData.append("img", filesInput.files[0]);
+        }
+
         this.#registButtonObj.onclick = () => {
 
-            const category = this.#categorySelectObj.value;
-            const name = this.#nameInputObj.value;
-            const price = this.#priceInputObj.value;
+            formData.append("category", this.#categorySelectObj.value);
 
-            const pdtRegisterMst = new PdtRegisterMst(category, name, price);
-            
-            console.log(pdtRegisterMst); //getObject 안쓰는이유
+            formData.append("name", this.#nameInputObj.value);
 
-            const pdtRegisterApi = new PdtRegisterApi();
+            formData.append("price", this.#priceInputObj.value);
 
-            if(pdtRegisterApi.createProductRequest(pdtRegisterMst.getObject())){
-
-               // location.reload();
+            let entries = formData.entries();
+            for (const pair of entries) {
+            console.log(pair[0]+ ', ' + pair[1]); 
             }
 
+             PdtRegisterApi.getInstance().createProductRequest(formData);
+
+            // if(pdtRegisterApi.createProductRequest(pdtRegisterMst(formData))){
+
+            // location.reload();
+            // }
         }
     }
-
 } 
+
 class RegisterService{
     static #instance=null;
-
-    constructor() {
-       this.loadRegister();
-    
-    }
-        
 
     static getInstance(){
         if(this.#instance == null){
@@ -191,13 +229,17 @@ class RegisterService{
         
     }
 
+    constructor() {
+        this.loadRegister();
+     }
+         
     loadRegister(){
         new RegisterEventService();
     }
 
-    setRegisterHeaderEvent(){ /*무슨의미*/
-        new RegisterEventService();
-    }
+    // setRegisterHeaderEvent(){ /*무슨의미*/
+    //     new RegisterEventService();
+    // }
 
 
         
@@ -211,7 +253,6 @@ class RegisterService{
         productCategoryList.forEach(category => {
             productCategory.innerHTML += `
             <option value="${category.id}">${category.name}</option>
-            
             `;
         })
             
@@ -221,5 +262,5 @@ class RegisterService{
 
 window.onload = () => {
     RegisterService.getInstance().getCategoryList();
-    RegisterService.getInstance().setRegisterHeaderEvent();
+//     RegisterService.getInstance().setRegisterHeaderEvent();
 }

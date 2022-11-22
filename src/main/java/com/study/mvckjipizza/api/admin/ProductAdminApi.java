@@ -15,11 +15,11 @@ public class ProductAdminApi {
     private final ProductManagementService productManagementService;
 
     @PostMapping("product/register")
-    public ResponseEntity<?> pdtRegisterMst(@RequestBody ProductRegisterRespDto productRegisterRespDto ) throws Exception {
+    public ResponseEntity<?> registerProduct(ProductRegisterRespDto productRegisterRespDto ) throws Exception {
 
         productManagementService.registerProduct(productRegisterRespDto);
 
-        return ResponseEntity.ok().body(new CMRespDto<>("Register Successfully", true));
+        return ResponseEntity.created(null).body(new CMRespDto<>("Register Successfully",true));
     }
 
     @GetMapping("/product/category")
