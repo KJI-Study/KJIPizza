@@ -64,7 +64,16 @@ class CommonApi {
 
 class PdtRegisterApi{
 
-    createProductRequest(pdtRegisterMst){
+    static #instance = null;
+    static getInstance() {
+        if(this.#instance == null) {
+            this.#instance = new PdtRegisterApi();
+        }
+        return this.#instance;
+    }
+
+
+    createProductRequest(formData){
 
         let responseData = null;
 
@@ -72,8 +81,10 @@ class PdtRegisterApi{
             async : false,
             type: "post",
             url: "/api/admin/product/register",
-            contentType : "application/json",
-            data : JSON.stringify(pdtRegisterMst),
+            enctype: "multipart/form-data",
+            contentType: false,
+            processData: false,
+            data: formData,
             dataType: "json",
             success: (response) => {
                 console.log(response.data);
@@ -85,7 +96,6 @@ class PdtRegisterApi{
                 console.log(error);
             }
         })
-
         return responseData;
     }
 }
@@ -99,6 +109,7 @@ class RegisterEventService{
     #registButtonObj;
 
     constructor() {
+
         this.#categorySelectObj = document.querySelectorAll(".product-inputs")[0];
         this.#nameInputObj = document.querySelectorAll(".product-inputs")[1];
         this.#priceInputObj = document.querySelectorAll(".product-inputs")[2];
@@ -115,9 +126,11 @@ class RegisterEventService{
     }
 
     init(){
+
         this.#nameInputObj.disabled = true;
         this.#priceInputObj.disabled = true;
         this.#registButtonObj.disabled = true;
+
     }
 
     addCategorySelectEvent(){
@@ -155,20 +168,29 @@ class RegisterEventService{
     addRegistButtonEvent() {
         this.#registButtonObj.onclick = () => {
 
+            const formData = new FormData();
+
+            
             const category = this.#categorySelectObj.value;
             const name = this.#nameInputObj.value;
             const price = this.#priceInputObj.value;
-
-            const pdtRegisterMst = new PdtRegisterMst(category, name, price);
             
-            console.log(pdtRegisterMst); //getObject 안쓰는이유
+            Object.entries(PdtRegisterMst.getObject().obj).forEach(item => formData.append(item[0], item[1]));
 
-            const pdtRegisterApi = new PdtRegisterApi();
-
-            if(pdtRegisterApi.createProductRequest(pdtRegisterMst.getObject())){
-
-               // location.reload();
+            // const pdtRegisterMst = new PdtRegisterMst(formData);
+            
+            let entries = formData.entries();
+            for (const pair of entries) {
+            console.log(pair[0]+ ', ' + pair[1]); 
             }
+
+
+            // PdtRegisterApi.getInstance().createProductRequest(formData);
+
+            // if(pdtRegisterApi.createProductRequest(pdtRegisterMst(formData))){
+
+            //    // location.reload();
+            // }
 
         }
     }
