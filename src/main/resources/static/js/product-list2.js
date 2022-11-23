@@ -13,8 +13,12 @@ var entity = {
 
 var cart = {
   pdtId : 0,
-  tableId : tableNumber
+  tableId : tableNumber,
+  size: 1,
+  crust: 1,
+  topping: 1
 };
+
 
 
 class TableSelectApi {
@@ -107,7 +111,7 @@ class TableService {
          mainContainer[entity.page].innerHTML += `
         <div class="product-select">
           <div class="product-images">
-              <img src="/static/upload/product/${product.Img}">
+              <img src="/static/upload/product/${product.img}">
           </div>
           <div class="product-detail">
               <div class="product-name">${product.productName}</div>
@@ -143,7 +147,7 @@ class TableService {
                  <div class="product-modal">
                      <div class="left-modal">
                          <div class="modal-img-container">
-                             <img src="/static/upload/product/">
+                             <img src="/static/upload/product/${responseData[index].img}">
                          </div>
                          <div class="modal-detail">
                              <div class="modal-name">${responseData[index].productName}</div>
@@ -201,6 +205,28 @@ class TableService {
          document.querySelector(".modal-cart-btn").onclick = () => {
          document.querySelector(".modal-container").classList.add("hidden");
          document.querySelectorAll(".product-select")[index].classList.add("goCart");
+
+         const sized = document.getElementsByName("size-select").length;  // 2 
+         const crusted = document.getElementsByName("crust-select").length;  // 4
+         const toppinged = document.getElementsByName("topping-select").length; // 2
+
+           for(var i = 0; i<sized; i++){
+             if(document.getElementsByName("size-select")[i].checked == true){
+               cart['size'] = document.getElementsByName("size-select")[i].value;
+             }
+           }
+  
+           for(var i = 0; i<crusted; i++){
+             if(document.getElementsByName("crust-select")[i].checked == true){
+               cart['crust'] = document.getElementsByName("crust-select")[i].value;
+             }
+           }
+
+           for(var i =0; i<toppinged; i++){
+             if(document.getElementsByName("topping-select")[i].checked == true){
+               cart['topping'] = document.getElementsByName("topping-select")[i].value;
+             }
+           }
          CartApi.getInstance().getCartId();
          }
       }

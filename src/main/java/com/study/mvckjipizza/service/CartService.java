@@ -1,8 +1,9 @@
 package com.study.mvckjipizza.service;
 
-import com.study.mvckjipizza.dto.CartRespDto;
+import com.study.mvckjipizza.dto.CartReqDto;
 
 public interface CartService {
 
-    public void addCart(CartRespDto cartRespDto) throws Exception;
+    public void addCart(CartReqDto cartRespDto) throws Exception;
+
 }

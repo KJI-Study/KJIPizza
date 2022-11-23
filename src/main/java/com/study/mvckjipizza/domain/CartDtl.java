@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-
-public class Cart {
-    int id;
-    private int table_id;
-    private int pdt_id;
+public class CartDtl {
+    private int id;
+    private int cart_id;
+    private int option_id;
 }

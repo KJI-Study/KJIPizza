@@ -20,20 +20,22 @@
     </select>
 
 
-    <insert id="pdtRegisterMst" parameterType="com.study.mvckjipizza.domain.amdin.Product">
+    <insert id="saveProduct" parameterType="java.util.List">
         Insert into
-        pdt_mst
-
-        values(
-        0,
-        #{category_id},
-        #{pdt_name},
-        #{pdt_price},
-        #{origin_name},
-        now(),
-        now()
-        )
-
+            pdt_mst
+        values
+        <foreach collection="list" item="img" separator=",">
+           (
+            0,
+            #{img.category_id},
+            #{img.pdt_name},
+            #{img.pdt_price},
+            #{img.origin_name},
+            #{img.save_name},
+            now(),
+            now()
+            )
+        </foreach>
     </insert>
 
     <update id="registerUpdate" parameterType="com.study.mvckjipizza.domain.amdin.Product">

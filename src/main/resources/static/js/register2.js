@@ -1,7 +1,3 @@
-document.querySelector(".img-container").onclick = () => {
-    document.querySelector(".file-input").click();
-}
-
 class PdtRegisterMst{ //앞에 #을 붙이는건 private이라는뜻
     #category;
     #name;
@@ -12,8 +8,6 @@ class PdtRegisterMst{ //앞에 #을 붙이는건 private이라는뜻
         this.#category = category;
         this.#name = name;
         this.#price = price; 
-
-
     }
 
     getCategory() {return this.#category;}
@@ -64,29 +58,44 @@ class CommonApi {
 
 class PdtRegisterApi{
 
-    createProductRequest(pdtRegisterMst){
+    static #instance = null;
+    static getInstance() {
+        if(this.#instance == null) {
+            this.#instance = new PdtRegisterApi();
+        }
+        return this.#instance;
+    }
 
-        let responseData = null;
+
+    createProductRequest(formData){
 
         $.ajax({
             async : false,
             type: "post",
             url: "/api/admin/product/register",
-            contentType : "application/json",
-            data : JSON.stringify(pdtRegisterMst),
+            enctype: "multipart/form-data",
+            contentType: false,
+            processData: false,
+            data: formData,
             dataType: "json",
             success: (response) => {
                 console.log(response.data);
+<<<<<<< HEAD:src/main/resources/static/js/register.js
                 responseData = response.data;
                 alert("제품 등록 완료");
+=======
+                alert("상품 등록 완료");
+>>>>>>> main:src/main/resources/static/js/register2.js
             },
 
             error : (error) => {
                 console.log(error);
+                let entries = formData.entries();
+                for (const pair of entries) {
+                console.log(pair[0]+ ', ' + pair[1]); 
+                }
             }
         })
-
-        return responseData;
     }
 
     // registerImgFiles(formData){
@@ -125,6 +134,7 @@ class RegisterEventService{
     // #deleteButtonObj;
 
     constructor() {
+
         this.#categorySelectObj = document.querySelectorAll(".product-inputs")[0];
         this.#nameInputObj = document.querySelectorAll(".product-inputs")[1];
         this.#priceInputObj = document.querySelectorAll(".product-inputs")[2];
@@ -133,7 +143,6 @@ class RegisterEventService{
         // this.#deleteButtonObj = document.querySelectorAll(".btn")[1];
 
         this.init();
-
 
         this.addCategorySelectEvent();
         this.addNameInputEvent();
@@ -147,6 +156,7 @@ class RegisterEventService{
     }
 
     init(){
+
         this.#nameInputObj.disabled = true;
         this.#priceInputObj.disabled = true;
         this.#registButtonObj.disabled = true;
@@ -185,29 +195,72 @@ class RegisterEventService{
     
       }
 
+<<<<<<< HEAD:src/main/resources/static/js/register.js
     addRegistButtonEvent() { //
+=======
+    addRegistButtonEvent() {
+        // const category = document.querySelectorAll(".product-inputs")[0].value;
+        // const name = document.querySelectorAll(".product-inputs")[1].value;
+        // const price = document.querySelectorAll(".product-inputs")[2].value;
+
+
+        const filesInput = document.querySelector(".file-input");
+        const imgAddButton = document.querySelector(".img-regist-btn");
+        const imgContainer = document.querySelector(".preview");
+
+        const formData = new FormData();
+
+        imgAddButton.onclick = () => {
+            filesInput.click();
+        }
+
+        filesInput.onchange = () => {
+
+            var fileList = filesInput.files;
+
+            var reader = new FileReader();
+
+            reader.readAsDataURL(fileList [0]);
+
+            reader.onload = function  () {
+                imgContainer.src = reader.result ;
+            }; 
+            formData.append("files", filesInput.files[0]);
+        }
+
+>>>>>>> main:src/main/resources/static/js/register2.js
         this.#registButtonObj.onclick = () => {
 
-            const category = this.#categorySelectObj.value;
-            const name = this.#nameInputObj.value;
-            const price = this.#priceInputObj.value;
+            formData.append("category", this.#categorySelectObj.value);
 
+<<<<<<< HEAD:src/main/resources/static/js/register.js
             const pdtRegisterMst = new PdtRegisterMst(category, name, price);
 
             // const formData = new FormData();
             // PdtRegisterApi.getInstance().registerImgFiles(formData);
             
             console.log(pdtRegisterMst);
+=======
+            formData.append("name", this.#nameInputObj.value);
+>>>>>>> main:src/main/resources/static/js/register2.js
 
-            const pdtRegisterApi = new PdtRegisterApi();
+            formData.append("price", this.#priceInputObj.value);
 
-            if(pdtRegisterApi.createProductRequest(pdtRegisterMst.getObject())){
+          
+             PdtRegisterApi.getInstance().createProductRequest(formData);
 
+<<<<<<< HEAD:src/main/resources/static/js/register.js
             location.reload();
             }
+=======
+            // if(pdtRegisterApi.createProductRequest(pdtRegisterMst(formData))){
+>>>>>>> main:src/main/resources/static/js/register2.js
 
+            // location.reload();
+            // }
         }
     }
+<<<<<<< HEAD:src/main/resources/static/js/register.js
 
     // addUpdateButtonEvent(){ //수정 이벤트
     //     this.#updateButtonObj.onclick = () => {
@@ -251,15 +304,12 @@ class RegisterEventService{
     //     }
         }
 
+=======
+} 
+>>>>>>> main:src/main/resources/static/js/register2.js
 
 class RegisterService{
     static #instance=null;
-
-    constructor() {
-       this.loadRegister();
-    
-    }
-        
 
     static getInstance(){
         if(this.#instance == null){
@@ -269,13 +319,23 @@ class RegisterService{
         
     }
 
+    constructor() {
+        this.loadRegister();
+     }
+         
     loadRegister(){
         new RegisterEventService();
     }
 
+<<<<<<< HEAD:src/main/resources/static/js/register.js
     setRegisterHeaderEvent(){ 
         new RegisterEventService();
     }
+=======
+    // setRegisterHeaderEvent(){ /*무슨의미*/
+    //     new RegisterEventService();
+    // }
+>>>>>>> main:src/main/resources/static/js/register2.js
 
 
         
@@ -289,7 +349,6 @@ class RegisterService{
         productCategoryList.forEach(category => {
             productCategory.innerHTML += `
             <option value="${category.id}">${category.name}</option>
-            
             `;
         })
             
@@ -298,6 +357,7 @@ class RegisterService{
 }
 
 window.onload = () => {
+
     RegisterService.getInstance().getCategoryList();
-    RegisterService.getInstance().setRegisterHeaderEvent();
+//     RegisterService.getInstance().setRegisterHeaderEvent();
 }

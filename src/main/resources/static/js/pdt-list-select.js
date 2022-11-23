@@ -33,6 +33,7 @@ pdtCategoryListSelect.onchange = () => {
                 <td>${product.categoryName}</td>
                 <td>${product.pdtName}</td>
                 <td>${product.pdtPrice}</td>
+                <td><button type="button" class="btn">정보</button></td>
                 <td><button type="button" class="btn">수정</button></td>
                 <td><button type="button" class="btn">삭제</button></td>
                 </tr>
