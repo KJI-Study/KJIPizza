@@ -60,22 +60,19 @@ class load {
             <td><button type="button" class="btn delete">삭제</button></td>
             </tr>
         `;
-
+        }); 
+        
         const detailbutton =  document.querySelectorAll(".detail");
         const updateButton = document.querySelectorAll(".insert");
         const deleteButton = document.querySelectorAll(".delete");
 
-        [].forEach.call(detailbutton, function(col) {
-            col.addEventListener("click",click,false);
+        detailbutton.forEach((button,index) => {
+            button.onclick = () => {
+                categorySelectObj.value = responseData[index].categoryName;
+                nameInputObj.value = responseData[index].pdtName;
+                priceInputObj.value = responseData[index].pdtPrice; 
+            }
         })
-        function click(e){ 
-            console.log(responseData[e]);
-            categorySelectObj.text = responseData[index].categoryName;
-            nameInputObj.value = responseData[index].pdtName;
-            priceInputObj.value = responseData[index].pdtPrice;
-        }
-        
-        }); 
     }
 }
     // updateButton.onclick = () => {
