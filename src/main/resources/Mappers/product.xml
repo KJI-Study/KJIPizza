@@ -55,4 +55,21 @@
             </foreach>
 
     </insert>
+
+    <select id="getCartItemsList" resultType="com.study.mvckjipizza.domain.CartItems">
+        SELECT
+            cm.table_id,
+            cm.id AS cart_id,
+            pm.pdt_name,
+            pm.pdt_price,
+            opm.option_name,
+            opm.option_price
+        FROM
+            cart_mst cm
+            LEFT OUTER JOIN pdt_mst pm ON(pm.id = cm.pdt_id)
+            LEFT OUTER JOIN order_dtl od ON(od.cart_id = cm.id)
+            LEFT OUTER JOIN option_mst opm ON(opm.id = od.option_id)
+        WHERE
+            cm.table_id = #{table_id}
+    </select>
 </mapper>

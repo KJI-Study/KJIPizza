@@ -2,6 +2,7 @@ package com.study.mvckjipizza.api;
 
 
 import com.study.mvckjipizza.dto.CMRespDto;
+import com.study.mvckjipizza.dto.CartItemsRespDto;
 import com.study.mvckjipizza.dto.CartReqDto;
 import com.study.mvckjipizza.service.CartService;
 import com.study.mvckjipizza.service.ProductService;
@@ -37,5 +38,10 @@ public class ProductApi {
 //        cartService.addOption(optionListRespDto);
 
         return ResponseEntity.ok(new CMRespDto<>("Successfully",true));
+    }
+
+    @GetMapping("/products/cart/item/{tableId}")
+    public ResponseEntity<?> getCartItemsList(@PathVariable int tableId) throws Exception {
+        return ResponseEntity.ok().body(new CMRespDto<>("Get Successfully", cartService.getCartItems(tableId)));
     }
 }
