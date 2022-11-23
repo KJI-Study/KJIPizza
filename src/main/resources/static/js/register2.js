@@ -189,15 +189,7 @@ class RegisterEventService{
          }
     
       }
-
-<<<<<<< HEAD:src/main/resources/static/js/register.js
-    addRegistButtonEvent() { //
-=======
     addRegistButtonEvent() {
-        // const category = document.querySelectorAll(".product-inputs")[0].value;
-        // const name = document.querySelectorAll(".product-inputs")[1].value;
-        // const price = document.querySelectorAll(".product-inputs")[2].value;
-
 
         const filesInput = document.querySelector(".file-input");
         const imgAddButton = document.querySelector(".img-regist-btn");
@@ -223,85 +215,21 @@ class RegisterEventService{
             formData.append("files", filesInput.files[0]);
         }
 
->>>>>>> main:src/main/resources/static/js/register2.js
         this.#registButtonObj.onclick = () => {
 
             formData.append("category", this.#categorySelectObj.value);
 
-<<<<<<< HEAD:src/main/resources/static/js/register.js
-            const pdtRegisterMst = new PdtRegisterMst(category, name, price);
-
-            // const formData = new FormData();
-            // PdtRegisterApi.getInstance().registerImgFiles(formData);
-            
-            console.log(pdtRegisterMst);
-=======
             formData.append("name", this.#nameInputObj.value);
->>>>>>> main:src/main/resources/static/js/register2.js
+
 
             formData.append("price", this.#priceInputObj.value);
 
           
              PdtRegisterApi.getInstance().createProductRequest(formData);
-
-<<<<<<< HEAD:src/main/resources/static/js/register.js
-            location.reload();
-            }
-=======
-            // if(pdtRegisterApi.createProductRequest(pdtRegisterMst(formData))){
->>>>>>> main:src/main/resources/static/js/register2.js
-
-            // location.reload();
-            // }
-        }
-    }
-<<<<<<< HEAD:src/main/resources/static/js/register.js
-
-    // addUpdateButtonEvent(){ //수정 이벤트
-    //     this.#updateButtonObj.onclick = () => {
-            
-    //         const productinputs = document.querySelector(".pdt-regist"); //pdt-regist 주는게 맞는지요?.?
-
-    //             let product = {
-    //                 categoryId : productinputs[0].value,
-    //                 pdtName : productinputs[1].value,
-    //                 pdtPrice : productinputs[2].value
-    //             }
-                    
-
-    //             $.ajax({
-    //                 async: false,
-    //                 type: "PUT",
-    //                 url: "/api/admin/product/update",
-    //                 contentType : "/application/json",
-    //                 data : JSON.stringify(product),
-    //                 dataType: "json",
-    //                 success: (response) => {
-    //                     console.log(response);
-    //                     alert("상품 수정 완료");
-    //                 },
-        
-    //                 error: (error) => {
-    //                     console.log(error);
-    //                 }
-    //             });
-        
-    //         }
-
-    //     }
-
-    //     addDeleteButtonEvent(){
-    //         this.#deleteButtonObj.onclick = () => {
-
-
-    //         }
-
-    //     }
-        }
-
-=======
-} 
->>>>>>> main:src/main/resources/static/js/register2.js
+                    }
+                }
+             }
+          
 
 class RegisterService{
     static #instance=null;
@@ -321,16 +249,6 @@ class RegisterService{
     loadRegister(){
         new RegisterEventService();
     }
-
-<<<<<<< HEAD:src/main/resources/static/js/register.js
-    setRegisterHeaderEvent(){ 
-        new RegisterEventService();
-    }
-=======
-    // setRegisterHeaderEvent(){ /*무슨의미*/
-    //     new RegisterEventService();
-    // }
->>>>>>> main:src/main/resources/static/js/register2.js
 
 
         
@@ -352,7 +270,5 @@ class RegisterService{
 }
 
 window.onload = () => {
-
     RegisterService.getInstance().getCategoryList();
-//     RegisterService.getInstance().setRegisterHeaderEvent();
 }

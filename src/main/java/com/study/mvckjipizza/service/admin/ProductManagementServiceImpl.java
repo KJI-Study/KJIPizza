@@ -110,8 +110,8 @@ public class ProductManagementServiceImpl implements ProductManagementService {
 
     @Override
     public void updateRegister(ProductRegisterRespDto productRegisterRespDto) throws Exception {
-        Product product = productRegisterRespDto.toEntity();
-        productManagementRepository.registerUpdate(product);
+      //  Product product = productRegisterRespDto.toEntity();
+       // productManagementRepository.registerUpdate(product);
 
     }
 
