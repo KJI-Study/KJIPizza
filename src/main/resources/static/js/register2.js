@@ -93,29 +93,32 @@ class PdtRegisterApi{
         })
     }
 
-    // registerImgFiles(formData){
-    //     $.ajax({
-    //         async: false,
-    //         type: "post",
-    //         url: "/api/admin/product/register",
-    //         enctype: "multipart/form-data",
-    //         contentType: false, //img form-data 쓸때, contentType, processType : false 설정해줘야함
-    //         processType: false,
-    //         data: formData,
-    //         dataType: "json",
-    //         success: (response) => {
-    //             alert("이미지 등록 완료");
-    //             location.reload();
-    //         },
-    //         error: (error) => {
+    updateProduct(formData) {
 
-    //             console.log(error);
-    //         }
-    //     })
-    // }
+         $.ajax({
+            async : false,
+            type: "post",
+            url: "/api/admin/product/register",
+            enctype: "multipart/form-data",
+            contentType: false,
+            processData: false,
+            data: formData,
+            dataType: "json",
+            success: (response) => {
+                console.log(response.data);
+                alert("제품 등록 완료");
+            },
 
+            error : (error) => {
+                console.log(error);
+                let entries = formData.entries();
+                for (const pair of entries) {
+                console.log(pair[0]+ ', ' + pair[1]); 
+                }
+            }
+        })
+    }       
 
-    
 }
 
 
@@ -220,8 +223,17 @@ class RegisterEventService{
              PdtRegisterApi.getInstance().createProductRequest(formData);
                     }
                 }
-             }
-          
+
+    insertButtonEvent(){
+        
+
+
+    }
+    
+
+}
+            
+    
 
 class RegisterService{
     static #instance=null;

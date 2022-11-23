@@ -18,6 +18,7 @@ public class ProductRegisterRespDto {
 
     private List<MultipartFile> files;
 
+    private int id;
     private int category;
     private String name;
     private int price;

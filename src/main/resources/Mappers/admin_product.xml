@@ -36,20 +36,21 @@
         </foreach>
     </insert>
 
-    <update id="registerUpdate" parameterType="com.study.mvckjipizza.domain.amdin.Product">
+    <update id="updateProduct" parameterType="java.util.List">
         update
             pdt_mst
         set
-            category_id = #{category_id},
-            pdt_name = #{pdt_name},
-            pdt_price = #{pdt_price},
-            create_date= now(),
+        <foreach collection="list" item="img" separator=",">
+            category_id = #{img.category_id},
+            pdt_name = #{img.pdt_name},
+            pdt_price = #{img.pdt_price},
+            origin_name = #{img.origin_name},
+            save_name = #{img.save_name},
+            create_date = now(),
             update_date = now()
-
-        where
-            pdt_id = #{pdt_id}
-
-
+            where
+            id = #{img.id}
+        </foreach>
     </update>
 
 <!--    <insert id="registerImgFiles" parameterType="com.study.mvckjipizza.domain.amdin.Product">-->

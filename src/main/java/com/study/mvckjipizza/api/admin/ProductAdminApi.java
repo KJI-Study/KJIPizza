@@ -22,21 +22,23 @@ public class ProductAdminApi {
             return ResponseEntity.created(null).body(new CMRespDto<>("Register Successfully",true));
     }
 
+    @PutMapping("/product/update")
+
+    public ResponseEntity<?> registerUpdate (ProductRegisterRespDto productRegisterRespDto) throws Exception {
+
+        productManagementService.updateRegister(productRegisterRespDto);
+
+        return ResponseEntity.ok().body(new CMRespDto<> ("Update Successfully", true));
+    }
+
+
     @GetMapping("/product/category")
     public ResponseEntity<?> getCategoryList() throws Exception {
 
         return ResponseEntity.ok().body(new CMRespDto<> ("Get Successfully", productManagementService.getCategoryList()));
     }
 
-    @PutMapping("/product/update")
 
-    public ResponseEntity<?> registerUpdate (@RequestBody ProductRegisterRespDto productRegisterRespDto ) throws Exception {
-
-        productManagementService.updateRegister(productRegisterRespDto);
-
-        return ResponseEntity.ok().body(new CMRespDto<> ("Update Successfully", true));
-
-    }
 
 //    @PostMapping("/product/register")
 //    public ResponseEntity<?> registerImgFiles(@RequestBody ProductRegisterRespDto productRegisterRespDto) throws Exception {
