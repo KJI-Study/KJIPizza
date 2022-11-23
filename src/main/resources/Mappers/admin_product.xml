@@ -13,9 +13,7 @@
         select
         id,
         category_name
-
         from
-
         pdt_category_mst
     </select>
 
@@ -80,7 +78,7 @@
             pdt_mst pm
             LEFT OUTER JOIN pdt_category_mst pcm ON(pcm.id = pm.category_id)
         WHERE
-            pcm.category_name = #{categoryName}
+            pcm.id = #{categoryName}
     </select>
 
 

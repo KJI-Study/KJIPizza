@@ -255,6 +255,8 @@ class RegisterService{
             productCategory.innerHTML += `
             <option value="${category.id}">${category.name}</option>
             `;
+
+            console.log(category);
         })
             
     }

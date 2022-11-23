@@ -19,14 +19,13 @@ public class ProductAdminApi {
 
         productManagementService.registerProduct(productRegisterRespDto);
 
-        return ResponseEntity.created(null).body(new CMRespDto<>("Register Successfully",true));
+            return ResponseEntity.created(null).body(new CMRespDto<>("Register Successfully",true));
     }
 
     @GetMapping("/product/category")
     public ResponseEntity<?> getCategoryList() throws Exception {
 
-        return ResponseEntity.ok().
-                body(new CMRespDto<> ("Get Successfully", productManagementService.getCategoryList()));
+        return ResponseEntity.ok().body(new CMRespDto<> ("Get Successfully", productManagementService.getCategoryList()));
     }
 
     @PutMapping("/product/update")
@@ -49,7 +48,7 @@ public class ProductAdminApi {
 
     //재률이가 만든거
     @GetMapping("/productlist/{categoryName}")
-    public ResponseEntity<?> getProductList(@PathVariable String categoryName) throws Exception {
+    public ResponseEntity<?> getProductList(@PathVariable int categoryName) throws Exception {
         return ResponseEntity.ok().body(new CMRespDto<>("Get successfully", productManagementService.getProductListSelect(categoryName)));
     }
 }

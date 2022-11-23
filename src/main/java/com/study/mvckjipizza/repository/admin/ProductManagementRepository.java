@@ -17,7 +17,7 @@ public interface ProductManagementRepository {
 
     public List<ProductCategory> getCategoryList() throws Exception;
     //재률이가한거
-    public List<SelectProduct> getProductListSelect(String categoryName) throws Exception;
+    public List<SelectProduct> getProductListSelect(int categoryName) throws Exception;
 
     public int saveProduct(List<Product> products)throws Exception;
 }

@@ -2,15 +2,15 @@ const pdtCategoryListSelect = document.querySelector(".pdt-category-list-select"
 const pdtCategoryList = document.querySelectorAll(".pdt-category-list");
 const pdtMstSelect = document.querySelector(".product-mst-list");
 
-const categorySelectObj = document.querySelectorAll(".product-inputs")[0];
+const categorySelectObj = document.querySelector(".regist-category-select");
 const nameInputObj = document.querySelectorAll(".product-inputs")[1];
 const priceInputObj = document.querySelectorAll(".product-inputs")[2];
 
 
 pdtCategoryListSelect.onchange = () => {
             
-
     pdtCategoryList.forEach(category => {
+        console.log(category);
         if(category.value == pdtCategoryListSelect.value) {
 
         let responseData = null;
@@ -68,7 +68,8 @@ class load {
 
         detailbutton.forEach((button,index) => {
             button.onclick = () => {
-                categorySelectObj.value = responseData[index].categoryName;
+                console.log(responseData);
+                categorySelectObj.value = pdtCategoryListSelect.value ;
                 nameInputObj.value = responseData[index].pdtName;
                 priceInputObj.value = responseData[index].pdtPrice; 
             }

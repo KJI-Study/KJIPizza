@@ -117,7 +117,7 @@ public class ProductManagementServiceImpl implements ProductManagementService {
 
     //재률이가한거
     @Override
-    public List<ProductListSelectRespDto> getProductListSelect(String categoryName) throws Exception {
+    public List<ProductListSelectRespDto> getProductListSelect(int categoryName) throws Exception {
         List<ProductListSelectRespDto> list = new ArrayList<ProductListSelectRespDto>();
         productManagementRepository.getProductListSelect(categoryName).forEach(pdtMst -> {
             list.add(pdtMst.toDto());

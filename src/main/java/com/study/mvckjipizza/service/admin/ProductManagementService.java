@@ -17,6 +17,6 @@ public interface ProductManagementService {
    // public void registerImg(ProductRegisterRespDto productRegisterRespDto) throws Exception;
 
     //재률이가 한거
-    public List<ProductListSelectRespDto> getProductListSelect(String categoryName) throws Exception;
+    public List<ProductListSelectRespDto> getProductListSelect(int categoryName) throws Exception;
 
 }
