@@ -9,6 +9,6 @@ import java.util.List;
 public interface CartService {
 
     public void addCart(CartReqDto cartRespDto) throws Exception;
-    public List<CartItemsRespDto> getCartItems(int tableId) throws Exception;
+    public CartItemsRespDto getCartItems(int tableId) throws Exception;
 
 }

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -15,6 +17,7 @@ public class CartItems {
     private int pdt_price;
     private String option_name;
     private int option_price;
+    private List<Option> cart_options;
 
     public CartItemsRespDto toDto() {
         return CartItemsRespDto.builder()
@@ -22,8 +25,6 @@ public class CartItems {
                 .cartId(cart_id)
                 .pdtName(pdt_name)
                 .pdtPrice(pdt_price)
-                .optionName(option_name)
-                .optionPrice(option_price)
                 .build();
     }
 }
