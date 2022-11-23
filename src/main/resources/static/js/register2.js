@@ -125,8 +125,6 @@ class RegisterEventService{
     #nameInputObj;
     #priceInputObj;
     #registButtonObj;
-    // #updateButtonObj;
-    // #deleteButtonObj;
 
     constructor() {
 
@@ -134,8 +132,6 @@ class RegisterEventService{
         this.#nameInputObj = document.querySelectorAll(".product-inputs")[1];
         this.#priceInputObj = document.querySelectorAll(".product-inputs")[2];
         this.#registButtonObj = document.querySelector(".pdt-regist-btn");
-        // this.#updateButtonObj = document.querySelectorAll(".btn")[0];
-        // this.#deleteButtonObj = document.querySelectorAll(".btn")[1];
 
         this.init();
 
@@ -143,11 +139,7 @@ class RegisterEventService{
         this.addNameInputEvent();
         this.addPriceInputEvent();
         this.addRegistButtonEvent();
-        // this.addUpdateButtonEvent();
-        // this.addDeleteButtonEvent();
         
-        
-
     }
 
     init(){
