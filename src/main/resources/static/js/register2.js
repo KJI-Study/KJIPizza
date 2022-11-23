@@ -80,12 +80,7 @@ class PdtRegisterApi{
             dataType: "json",
             success: (response) => {
                 console.log(response.data);
-<<<<<<< HEAD:src/main/resources/static/js/register.js
-                responseData = response.data;
                 alert("제품 등록 완료");
-=======
-                alert("상품 등록 완료");
->>>>>>> main:src/main/resources/static/js/register2.js
             },
 
             error : (error) => {
