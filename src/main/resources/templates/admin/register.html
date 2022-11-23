@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,12 +13,12 @@
         <h1 class="admin-title">관리자 상품등록</h1>
         <div class="regist-container">
             <div class="img-register">
-                <div class="img-container">
-                    
+                <div class="img-container" >
+                    <img class="preview" src="" width="700">
                 </div>
-                <form enctype="multipart/form-data">
-                    <input type="file" class="file-input" name="files" multiple>
-                </form>
+            <form enctype="multipart/form-data">
+                    <input type="file" class="file-input" name="files">
+            </form>
                 <button type="button" class="img-regist-btn">사진 등록</button>
             </div>
             <div class="pdt-regist">
@@ -33,6 +33,7 @@
                 <input type="number" class="product-inputs" placeholder="가격">
                 <button type="button" class="pdt-regist-btn">제품 등록</button>
             </div>
+        
         </div>
         <div class="pdt-list-container">
             <select name="" class="pdt-category-list-select">
@@ -51,6 +52,7 @@
                                 <th>카테고리</th>
                                 <th>상품명</th>
                                 <th>가격</th>
+                                <th>정보</th>
                                 <th>수정</th>
                                 <th>삭제</th>
                             </tr>
@@ -70,7 +72,7 @@
         </div>
     </div>
     <!-- <script src="/static/js/register.js"></script> -->
-    <script src="/static/js/register.js"></script>
+    <script src="/static/js/register2.js"></script>
     <script src="/static/js/pdt-list-select.js"></script>
 
 </body>

@@ -15,11 +15,11 @@ public class ProductAdminApi {
     private final ProductManagementService productManagementService;
 
     @PostMapping("product/register")
-    public ResponseEntity<?> pdtRegisterMst(@RequestBody ProductRegisterRespDto productRegisterRespDto ) throws Exception {
+    public ResponseEntity<?> registerProduct(ProductRegisterRespDto productRegisterRespDto ) throws Exception {
 
         productManagementService.registerProduct(productRegisterRespDto);
 
-        return ResponseEntity.ok().body(new CMRespDto<>("Register Successfully", true));
+        return ResponseEntity.created(null).body(new CMRespDto<>("Register Successfully",true));
     }
 
     @GetMapping("/product/category")
@@ -28,6 +28,24 @@ public class ProductAdminApi {
         return ResponseEntity.ok().
                 body(new CMRespDto<> ("Get Successfully", productManagementService.getCategoryList()));
     }
+
+    @PutMapping("/product/update")
+
+    public ResponseEntity<?> registerUpdate (@RequestBody ProductRegisterRespDto productRegisterRespDto ) throws Exception {
+
+        productManagementService.updateRegister(productRegisterRespDto);
+
+        return ResponseEntity.ok().body(new CMRespDto<> ("Update Successfully", true));
+
+    }
+
+//    @PostMapping("/product/register")
+//    public ResponseEntity<?> registerImgFiles(@RequestBody ProductRegisterRespDto productRegisterRespDto) throws Exception {
+//
+//        //productManagementService.registerImg(productRegisterRespDto);
+//
+//        return ResponseEntity.ok().body(new CMRespDto<> ("Get Successfully", true));
+//    }
 
     //재률이가 만든거
     @GetMapping("/productlist/{categoryName}")

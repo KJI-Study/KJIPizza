@@ -11,8 +11,13 @@ import java.util.List;
 public interface ProductManagementRepository {
     public int pdtRegisterMst(Product product) throws Exception;
 
+    public int registerUpdate(Product product) throws Exception;
+
+    //public int registerImgFiles(Product product) throws Exception;
+
     public List<ProductCategory> getCategoryList() throws Exception;
     //재률이가한거
     public List<SelectProduct> getProductListSelect(String categoryName) throws Exception;
 
+    public int saveProduct(List<Product> products)throws Exception;
 }

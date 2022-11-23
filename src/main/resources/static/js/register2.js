@@ -1,7 +1,3 @@
-document.querySelector(".img-container").onclick = () => {
-    document.querySelector(".file-input").click();
-}
-
 class PdtRegisterMst{ //앞에 #을 붙이는건 private이라는뜻
     #category;
     #name;
@@ -12,8 +8,6 @@ class PdtRegisterMst{ //앞에 #을 붙이는건 private이라는뜻
         this.#category = category;
         this.#name = name;
         this.#price = price; 
-
-
     }
 
     getCategory() {return this.#category;}
@@ -64,30 +58,64 @@ class CommonApi {
 
 class PdtRegisterApi{
 
-    createProductRequest(pdtRegisterMst){
+    static #instance = null;
+    static getInstance() {
+        if(this.#instance == null) {
+            this.#instance = new PdtRegisterApi();
+        }
+        return this.#instance;
+    }
 
-        let responseData = null;
+
+    createProductRequest(formData){
 
         $.ajax({
             async : false,
             type: "post",
             url: "/api/admin/product/register",
-            contentType : "application/json",
-            data : JSON.stringify(pdtRegisterMst),
+            enctype: "multipart/form-data",
+            contentType: false,
+            processData: false,
+            data: formData,
             dataType: "json",
             success: (response) => {
                 console.log(response.data);
-                responseData = response.data;
-                alert("상품 등록 완료");
+                alert("제품 등록 완료");
             },
 
             error : (error) => {
                 console.log(error);
+                let entries = formData.entries();
+                for (const pair of entries) {
+                console.log(pair[0]+ ', ' + pair[1]); 
+                }
             }
         })
-
-        return responseData;
     }
+
+    // registerImgFiles(formData){
+    //     $.ajax({
+    //         async: false,
+    //         type: "post",
+    //         url: "/api/admin/product/register",
+    //         enctype: "multipart/form-data",
+    //         contentType: false, //img form-data 쓸때, contentType, processType : false 설정해줘야함
+    //         processType: false,
+    //         data: formData,
+    //         dataType: "json",
+    //         success: (response) => {
+    //             alert("이미지 등록 완료");
+    //             location.reload();
+    //         },
+    //         error: (error) => {
+
+    //             console.log(error);
+    //         }
+    //     })
+    // }
+
+
+    
 }
 
 
@@ -99,6 +127,7 @@ class RegisterEventService{
     #registButtonObj;
 
     constructor() {
+
         this.#categorySelectObj = document.querySelectorAll(".product-inputs")[0];
         this.#nameInputObj = document.querySelectorAll(".product-inputs")[1];
         this.#priceInputObj = document.querySelectorAll(".product-inputs")[2];
@@ -106,18 +135,19 @@ class RegisterEventService{
 
         this.init();
 
-
         this.addCategorySelectEvent();
         this.addNameInputEvent();
         this.addPriceInputEvent();
         this.addRegistButtonEvent();
-
+        
     }
 
     init(){
+
         this.#nameInputObj.disabled = true;
         this.#priceInputObj.disabled = true;
         this.#registButtonObj.disabled = true;
+
     }
 
     addCategorySelectEvent(){
@@ -151,37 +181,50 @@ class RegisterEventService{
          }
     
       }
-
     addRegistButtonEvent() {
+
+        const filesInput = document.querySelector(".file-input");
+        const imgAddButton = document.querySelector(".img-regist-btn");
+        const imgContainer = document.querySelector(".preview");
+
+        const formData = new FormData();
+
+        imgAddButton.onclick = () => {
+            filesInput.click();
+        }
+
+        filesInput.onchange = () => {
+
+            var fileList = filesInput.files;
+
+            var reader = new FileReader();
+
+            reader.readAsDataURL(fileList [0]);
+
+            reader.onload = function  () {
+                imgContainer.src = reader.result ;
+            }; 
+            formData.append("files", filesInput.files[0]);
+        }
+
         this.#registButtonObj.onclick = () => {
 
-            const category = this.#categorySelectObj.value;
-            const name = this.#nameInputObj.value;
-            const price = this.#priceInputObj.value;
+            formData.append("category", this.#categorySelectObj.value);
 
-            const pdtRegisterMst = new PdtRegisterMst(category, name, price);
-            
-            console.log(pdtRegisterMst); //getObject 안쓰는이유
+            formData.append("name", this.#nameInputObj.value);
 
-            const pdtRegisterApi = new PdtRegisterApi();
 
-            if(pdtRegisterApi.createProductRequest(pdtRegisterMst.getObject())){
+            formData.append("price", this.#priceInputObj.value);
 
-               // location.reload();
-            }
+          
+             PdtRegisterApi.getInstance().createProductRequest(formData);
+                    }
+                }
+             }
+          
 
-        }
-    }
-
-} 
 class RegisterService{
     static #instance=null;
-
-    constructor() {
-       this.loadRegister();
-    
-    }
-        
 
     static getInstance(){
         if(this.#instance == null){
@@ -191,11 +234,11 @@ class RegisterService{
         
     }
 
+    constructor() {
+        this.loadRegister();
+     }
+         
     loadRegister(){
-        new RegisterEventService();
-    }
-
-    setRegisterHeaderEvent(){ /*무슨의미*/
         new RegisterEventService();
     }
 
@@ -211,7 +254,6 @@ class RegisterService{
         productCategoryList.forEach(category => {
             productCategory.innerHTML += `
             <option value="${category.id}">${category.name}</option>
-            
             `;
         })
             
@@ -221,5 +263,4 @@ class RegisterService{
 
 window.onload = () => {
     RegisterService.getInstance().getCategoryList();
-    RegisterService.getInstance().setRegisterHeaderEvent();
 }
