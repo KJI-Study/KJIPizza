@@ -196,11 +196,7 @@ class RegisterEventService{
 
             formData.append("price", this.#priceInputObj.value);
 
-            let entries = formData.entries();
-            for (const pair of entries) {
-            console.log(pair[0]+ ', ' + pair[1]); 
-            }
-
+          
              PdtRegisterApi.getInstance().createProductRequest(formData);
 
             // if(pdtRegisterApi.createProductRequest(pdtRegisterMst(formData))){
