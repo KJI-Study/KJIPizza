@@ -15,5 +15,5 @@ public interface ProductRepository {
     public int addCartList(Cart cart) throws Exception;
     public int addCartDtls(List<CartDtl> list) throws Exception;
 
-    public CartItems getCartItemsList(int tableId) throws Exception;
+    public List<CartItems> getCartItemsList(int tableId) throws Exception;
 }

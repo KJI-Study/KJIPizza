@@ -31,33 +31,16 @@ public class CartServiceImpl implements CartService{
     }
 
     @Override
-    public CartItemsRespDto getCartItems(int tableId) throws Exception {
-        CartItems cartItems = productRepository.getCartItemsList(tableId);
+    public List<CartItemsRespDto> getCartItems(int tableId) throws Exception {
 
-        Map<Integer, List<Map<String, Object>>> cartOptions = new HashMap<Integer, List<Map<String, Object>>>();
+        List<CartItemsRespDto> cartItemsRespDtos = new ArrayList<CartItemsRespDto>();
 
-        cartItems.getCart_options().forEach(opt -> {
-            if(!cartOptions.containsKey(opt.getId())) {
-                cartOptions.put(opt.getCart_id(), new ArrayList<Map<String, Object>>());
-            }
+        List<CartItems> cartItems = productRepository.getCartItemsList(tableId);
+
+        cartItems.forEach(cartItem -> {
+            cartItemsRespDtos.add(cartItem.toDto());
         });
 
-        cartItems.getCart_options().forEach(opt -> {
-           Map<String, Object> optNameAndPrice =new HashMap<String, Object>();
-           optNameAndPrice.put("option_name", opt.getOption_name());
-           optNameAndPrice.put("option_price", opt.getOption_price());
-
-           cartOptions.get(opt.getCart_id()).add(optNameAndPrice);
-        });
-
-        CartItemsRespDto dto = CartItemsRespDto.builder()
-                .tableId(cartItems.getTable_id())
-                .cartId(cartItems.getCart_id())
-                .pdtName(cartItems.getPdt_name())
-                .pdtPrice(cartItems.getPdt_price())
-                .cartOptions(cartOptions)
-                .build();
-
-        return dto;
+        return cartItemsRespDtos;
     }
 }

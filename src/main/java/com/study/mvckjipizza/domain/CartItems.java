@@ -5,7 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,11 +23,23 @@ public class CartItems {
     private List<Option> cart_options;
 
     public CartItemsRespDto toDto() {
+        List<Map<String, Object>> cartOptions = new ArrayList<Map<String, Object>>();
+        cart_options.forEach(option -> {
+            Map<String, Object> optionMap = new HashMap<String, Object>();
+            optionMap.put("id", option.getId());
+            optionMap.put("optionName", option.getOption_name());
+            optionMap.put("optionPrice", option.getOption_price());
+            optionMap.put("cartId", option.getCart_id());
+            cartOptions.add(optionMap);
+        });
+
         return CartItemsRespDto.builder()
                 .tableId(table_id)
                 .cartId(cart_id)
                 .pdtName(pdt_name)
                 .pdtPrice(pdt_price)
+                .cartOptions(cartOptions)
                 .build();
+
     }
 }

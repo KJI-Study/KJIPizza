@@ -13,7 +13,7 @@ public class CartItemsRespDto {
     private int cartId;
     private String pdtName;
     private int pdtPrice;
-    private Map<Integer, List<Map<String, Object>>> cartOptions;
+    private List<Map<String, Object>> cartOptions;
 
 
 }
