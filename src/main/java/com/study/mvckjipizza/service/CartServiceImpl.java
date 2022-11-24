@@ -1,6 +1,7 @@
 package com.study.mvckjipizza.service;
 
 import com.study.mvckjipizza.domain.Cart;
+import com.study.mvckjipizza.domain.CartItems;
 import com.study.mvckjipizza.dto.CartItemsRespDto;
 import com.study.mvckjipizza.dto.CartReqDto;
 import com.study.mvckjipizza.excetpion.CustomInternalServerErrorException;
@@ -9,7 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -29,10 +32,15 @@ public class CartServiceImpl implements CartService{
 
     @Override
     public List<CartItemsRespDto> getCartItems(int tableId) throws Exception {
-        List<CartItemsRespDto> list = new ArrayList<CartItemsRespDto>();
-        productRepository.getCartItemsList(tableId).forEach(cartMst -> {
-           list.add(cartMst.toDto());
+
+        List<CartItemsRespDto> cartItemsRespDtos = new ArrayList<CartItemsRespDto>();
+
+        List<CartItems> cartItems = productRepository.getCartItemsList(tableId);
+
+        cartItems.forEach(cartItem -> {
+            cartItemsRespDtos.add(cartItem.toDto());
         });
-        return list;
+
+        return cartItemsRespDtos;
     }
 }

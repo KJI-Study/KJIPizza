@@ -56,7 +56,21 @@
 
     </insert>
 
-    <select id="getCartItemsList" resultType="com.study.mvckjipizza.domain.CartItems">
+    <resultMap id="CartItemsList" type="com.study.mvckjipizza.domain.Option">
+        <result property="option_name" column="option_name"></result>
+        <result property="option_price" column="option_price"></result>
+
+    </resultMap>
+
+    <resultMap id="cartListMap" type="com.study.mvckjipizza.domain.CartItems">
+        <result property="table_id" column="table_id"></result>
+        <result property="cart_id" column="cart_id"></result>
+        <result property="pdt_name" column="pdt_name"></result>
+        <result property="pdt_price" column="pdt_price"></result>
+        <collection property="cart_options" javaType="list" resultMap="CartItemsList"></collection>
+    </resultMap>
+
+    <select id="getCartItemsList" resultMap="cartListMap">
         SELECT
             cm.table_id,
             cm.id AS cart_id,
