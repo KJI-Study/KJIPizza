@@ -177,6 +177,16 @@ public class ProductManagementServiceImpl implements ProductManagementService {
         productManagementRepository.updateProduct(products);
     }
 
+    @Override
+    public void productDelete(ProductListSelectRespDto productListSelectRespDto) throws Exception {
+
+        Product product = productListSelectRespDto.toEntity();
+
+        productManagementRepository.deleteProduct(product);
+
+    }
+
+
     //재률이가한거
     @Override
     public List<ProductListSelectRespDto> getProductListSelect(int categoryName) throws Exception {
