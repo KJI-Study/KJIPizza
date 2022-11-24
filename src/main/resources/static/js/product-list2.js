@@ -142,62 +142,91 @@ class TableService {
       cart['tableId'] = tableNumber;
       collectionProducts[index].classList.remove("goCart");
       modalProduct.classList.remove("hidden");
-      modalProduct.innerHTML = `
-      <div class="bg"></div>
-                 <div class="product-modal">
-                     <div class="left-modal">
-                         <div class="modal-img-container">
-                             <img src="/static/upload/product/${responseData[index].img}">
+      if((entity.page+1) == 2){
+
+        modalProduct.innerHTML = `
+        <div class="bg"></div>
+                   <div class="product-modal">
+                       <div class="left-modal">
+                           <div class="modal-img-container">
+                               <img src="/static/upload/product/${responseData[index].img}">
+                           </div>
+                           <div class="modal-detail">
+                               <div class="modal-name">${responseData[index].productName}</div>
+                               <div class="modal-price">${responseData[index].productPrice}</div>
+                           </div>
+                       </div>
+                       <div class="right-modal">
+                           <div class="size-select"><b>1.사이즈 선택</b>
+                               <div class="size-select-container">
+                                   <label for="s">
+                                       <input type="radio" id="s" name="size-select" value="${response.data[0].optionId}">${response.data[0].optionName}
+                                   </label>
+                                   <label for="l">
+                                       <input type="radio" id="l" name="size-select" value="${response.data[1].optionId}">${response.data[1].optionName} (+4000)
+                                   </label>
+                               </div>
+                           </div>
+                           <div class="crust-select"><b>2. 크러스트 선택</b>
+                               <div class="curst-select-container">
+                                   <label for="normal">
+                                       <input type="radio" id="normal" name="crust-select" value="${response.data[2].optionId}"> ${response.data[2].optionName}
+                                   </label>
+                                   <label for="cc">
+                                       <input type="radio" id="cc" name="crust-select" value="${response.data[3].optionId}"> ${response.data[3].optionName}
+                                   </label>
+                                   <label for="hc">
+                                       <input type="radio" id="hc" name="crust-select" value="${response.data[4].optionId}"> ${response.data[4].optionName}
+                                   </label>
+                                   <label for="ch">
+                                       <input type="radio" id="ch" name="crust-select" value="${response.data[5].optionId}"> ${response.data[5].optionName}
+                                   </label>
+                               </div>
+                           </div>
+                           <div class="topping-select"><b>3. 토핑 추가</b>
+                               <div class="topping-select-container">
+                                   <label for="pat">
+                                       <input type="radio" id="pat" name="topping-select" value="${response.data[6].optionId}"> ${response.data[6].optionName}
+                                   </label>
+                                   <label for="ot">
+                                       <input type="radio" id="ot" name="topping-select" value="${response.data[7].optionId}"> ${response.data[7].optionName}
+                                   </label>
+                               </div>
+                           </div>
+                           <div class="pdt-modal-btn">
+                               <button type="button" class="modal-close-btn btn" ><i class="fa-solid fa-xmark"></i> 취소</button>                         
+                               <button type="button" class="modal-cart-btn btn"><i class="fa-solid fa-cart-shopping"></i> 장바구니담기</button>
+                           </div>
+                       </div>
+                   </div>
+        `;
+        }
+        else{
+          modalProduct.innerHTML = `
+          <div class="bg"></div>
+                     <div class="product-modal">
+                         <div class="left-modal">
+                             <div class="modal-img-container">
+                                 <img src="/static/upload/product/${responseData[index].img}">
+                             </div>
+                             <div class="modal-detail">
+                                 <div class="modal-name">${responseData[index].productName}</div>
+                                 <div class="modal-price">${responseData[index].productPrice}</div>
+                             </div>
                          </div>
-                         <div class="modal-detail">
-                             <div class="modal-name">${responseData[index].productName}</div>
-                             <div class="modal-price">${responseData[index].productPrice}</div>
+                         <div class="right-modal">
+                          <div class="modal-content">
+                            <i class="fa-solid fa-cart-plus"></i>
+                          장바구니에 담으시겠습니까?
+                          </div>
+                             <div class="pdt-modal-btn">
+                                 <button type="button" class="modal-close-btn btn" ><i class="fa-solid fa-xmark"></i> 취소</button>                         
+                                 <button type="button" class="modal-cart-btn btn"><i class="fa-solid fa-cart-shopping"></i> 장바구니담기</button>
+                             </div>
                          </div>
                      </div>
-                     <div class="right-modal">
-                         <div class="size-select"><b>1.사이즈 선택</b>
-                             <div class="size-select-container">
-                                 <label for="s">
-                                     <input type="radio" id="s" name="size-select" value="${response.data[0].optionId}">${response.data[0].optionName}
-                                 </label>
-                                 <label for="l">
-                                     <input type="radio" id="l" name="size-select" value="${response.data[1].optionId}">${response.data[1].optionName} (+4000)
-                                 </label>
-                             </div>
-                         </div>
-                         <div class="crust-select"><b>2. 크러스트 선택</b>
-                             <div class="curst-select-container">
-                                 <label for="normal">
-                                     <input type="radio" id="normal" name="crust-select" value="${response.data[2].optionId}"> ${response.data[2].optionName}
-                                 </label>
-                                 <label for="cc">
-                                     <input type="radio" id="cc" name="crust-select" value="${response.data[3].optionId}"> ${response.data[3].optionName}
-                                 </label>
-                                 <label for="hc">
-                                     <input type="radio" id="hc" name="crust-select" value="${response.data[4].optionId}"> ${response.data[4].optionName}
-                                 </label>
-                                 <label for="ch">
-                                     <input type="radio" id="ch" name="crust-select" value="${response.data[5].optionId}"> ${response.data[5].optionName}
-                                 </label>
-                             </div>
-                         </div>
-                         <div class="topping-select"><b>3. 토핑 추가</b>
-                             <div class="topping-select-container">
-                                 <label for="pat">
-                                     <input type="radio" id="pat" name="topping-select" value="${response.data[6].optionId}"> ${response.data[6].optionName}
-                                 </label>
-                                 <label for="ot">
-                                     <input type="radio" id="ot" name="topping-select" value="${response.data[7].optionId}"> ${response.data[7].optionName}
-                                 </label>
-                             </div>
-                         </div>
-                         <div class="pdt-modal-btn">
-                             <button type="button" class="modal-close-btn btn" ><i class="fa-solid fa-xmark"></i> 취소</button>                         
-                             <button type="button" class="modal-cart-btn btn"><i class="fa-solid fa-cart-shopping"></i> 장바구니담기</button>
-                         </div>
-                     </div>
-                 </div>
-      `;
+          `;
+        }
          document.querySelector(".modal-close-btn").onclick = () => {
          document.querySelector(".modal-container").classList.add("hidden");
         };
