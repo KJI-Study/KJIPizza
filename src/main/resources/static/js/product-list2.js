@@ -14,10 +14,10 @@ var entity = {
 var cart = {
   pdtId : 0,
   tableId : tableNumber,
-  size: 1,
-  crust: 1,
-  topping: 1
-};
+  size: "",
+  crust: "",
+  topping: 3
+}
 
 
 

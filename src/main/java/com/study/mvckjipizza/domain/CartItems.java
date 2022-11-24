@@ -18,6 +18,7 @@ public class CartItems {
     private int cart_id;
     private String pdt_name;
     private int pdt_price;
+    private int category_id;
     private String option_name;
     private int option_price;
     private List<Option> cart_options;
@@ -38,6 +39,7 @@ public class CartItems {
                 .cartId(cart_id)
                 .pdtName(pdt_name)
                 .pdtPrice(pdt_price)
+                .cartegoryId(category_id)
                 .cartOptions(cartOptions)
                 .build();
 
