@@ -5,6 +5,7 @@ import com.study.mvckjipizza.dto.admin.ProductRegisterRespDto;
 import com.study.mvckjipizza.service.admin.ProductManagementService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,11 +26,13 @@ public class ProductAdminApi {
     @PutMapping("/product/update")
 
     public ResponseEntity<?> registerUpdate (ProductRegisterRespDto productRegisterRespDto) throws Exception {
+        //responsebody json으로 받으려고 쓰는객첸데, formdata여서 필요가없다!
 
         productManagementService.updateRegister(productRegisterRespDto);
 
         return ResponseEntity.ok().body(new CMRespDto<> ("Update Successfully", true));
     }
+
 
 
     @GetMapping("/product/category")
