@@ -9,11 +9,10 @@ import java.util.List;
 
 @Mapper
 public interface ProductManagementRepository {
-    public int pdtRegisterMst(Product product) throws Exception;
+//    public int pdtRegisterMst(Product product) throws Exception;
+//
+//    public int registerUpdate(Product product) throws Exception;
 
-    public int registerUpdate(Product product) throws Exception;
-
-    //public int registerImgFiles(Product product) throws Exception;
 
     public List<ProductCategory> getCategoryList() throws Exception;
     //재률이가한거
@@ -22,4 +21,6 @@ public interface ProductManagementRepository {
     public int saveProduct(List<Product> products)throws Exception;
 
     public int updateProduct(List<Product> products)throws Exception;
+
+    public int deleteProduct(Product product) throws Exception;
 }

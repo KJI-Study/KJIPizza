@@ -18,7 +18,6 @@ public class CollectionsProduct {
     private String save_name;
 
 
-
     public ProductListRespDto toDto() {
         return ProductListRespDto.builder()
                 .productId(id)

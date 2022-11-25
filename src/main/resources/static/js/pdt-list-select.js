@@ -11,6 +11,11 @@ const imgAddButton = document.querySelector(".img-regist-btn");
 const imgContainer = document.querySelector(".preview");
 const imgContain = document.querySelector(".img-container");
 
+var deletepdt = {
+    pdtId : 0
+}
+
+
 pdtCategoryListSelect.onchange = () => {
             
     pdtCategoryList.forEach(category => {
@@ -32,6 +37,8 @@ pdtCategoryListSelect.onchange = () => {
                 console.log(error);
                 }
             });
+
+            return responseData;
         }
     });
 }
@@ -74,6 +81,38 @@ class pdtUpdateApi{
    }       
 
 }
+
+class pdtDeleteApi{
+    static #instance = null;
+    
+    static getInstance() {
+        if(this.#instance == null){
+            this.#instance = new pdtDeleteApi();
+        }
+        return this.#instance;
+    }
+
+    deleteProduct(){
+        $.ajax({
+            async: false,
+            type: "delete",
+            url: "/api/admin/product/delete",
+            contentType: "application/json",
+            data: JSON.stringify(deletepdt),
+            dataType: "json",
+            success: (response) => {
+                alert("제품 삭제 완료");
+            },
+
+            error: (error) => {
+                console.log(error);
+                alert("제품 삭제 실패");
+            }
+        })
+    }
+}
+
+
 
 class load {
 
@@ -156,6 +195,16 @@ class load {
                 
             }
         })
+        deleteButton.forEach((button,index) => {
+
+            button.onclick = () => {
+                deletepdt['pdtId'] = responseData[index].pdtId;
+                pdtDeleteApi.getInstance().deleteProduct();
+            }
+        })
+
+
+
 
 
 

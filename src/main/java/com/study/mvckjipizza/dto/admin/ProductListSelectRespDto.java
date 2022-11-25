@@ -1,5 +1,6 @@
 package com.study.mvckjipizza.dto.admin;
 
+import com.study.mvckjipizza.domain.amdin.Product;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,4 +11,11 @@ public class ProductListSelectRespDto {
     private String categoryName;
     private String pdtName;
     private int pdtPrice;
+
+
+    public Product toEntity() {
+        return Product.builder()
+                .id(pdtId)
+                .build();
+    }
 }

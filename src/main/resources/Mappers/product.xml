@@ -67,6 +67,7 @@
         <result property="cart_id" column="cart_id"></result>
         <result property="pdt_name" column="pdt_name"></result>
         <result property="pdt_price" column="pdt_price"></result>
+        <result property="category_id" column="category_id"></result>
         <collection property="cart_options" javaType="list" resultMap="CartItemsList"></collection>
     </resultMap>
 
@@ -76,6 +77,7 @@
             cm.id AS cart_id,
             pm.pdt_name,
             pm.pdt_price,
+            pm.category_id,
             opm.option_name,
             opm.option_price
         FROM

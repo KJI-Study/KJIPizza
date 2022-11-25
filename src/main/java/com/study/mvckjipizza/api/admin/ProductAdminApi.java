@@ -1,6 +1,7 @@
 package com.study.mvckjipizza.api.admin;
 
 import com.study.mvckjipizza.dto.CMRespDto;
+import com.study.mvckjipizza.dto.admin.ProductListSelectRespDto;
 import com.study.mvckjipizza.dto.admin.ProductRegisterRespDto;
 import com.study.mvckjipizza.service.admin.ProductManagementService;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,15 @@ public class ProductAdminApi {
         productManagementService.updateRegister(productRegisterRespDto);
 
         return ResponseEntity.ok().body(new CMRespDto<> ("Update Successfully", true));
+    }
+
+
+    @DeleteMapping("/product/delete")
+    public ResponseEntity<?> deleteProduct (@RequestBody ProductListSelectRespDto productListSelectRespDto) throws Exception {
+
+        productManagementService.productDelete(productListSelectRespDto);
+
+        return ResponseEntity.ok().body(new CMRespDto<> ("Delete Successfully", true));
     }
 
 

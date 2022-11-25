@@ -90,7 +90,6 @@ class CartItemsApi {
                 </div>
             `;
             }
-        
             const plusbtn = document.querySelectorAll(".cart-plus-btn");
             const miusbtn = document.querySelectorAll(".cart-minus-btn");
             const numbersum = document.querySelectorAll(".numbertext");

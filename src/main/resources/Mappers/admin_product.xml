@@ -53,6 +53,17 @@
         </foreach>
     </update>
 
+    <delete id="deleteProduct" parameterType="com.study.mvckjipizza.domain.amdin.Product">
+        delete
+        from
+            pdt_mst
+        where
+            id = #{id}
+
+
+
+
+    </delete>
 <!--    <insert id="registerImgFiles" parameterType="com.study.mvckjipizza.domain.amdin.Product">-->
 <!--        Insert into-->
 <!--        pdt_mst-->
