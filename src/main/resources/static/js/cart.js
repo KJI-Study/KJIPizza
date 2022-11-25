@@ -110,12 +110,10 @@ class CartItemsApi {
              miusbtn.forEach((button, index) => {
                 button.onclick = () =>{
                    numbersum[index].value--;
-                   result = 0;
-
-                    for(var i =0; i<plusbtn.length; i++){
-                    result += responseData[i].pdtPrice * numbersum[i].value;   
-                    }
-                resultsum.value = result;
+                   result = resultsum.value;
+                   result -= responseData[index].pdtPrice;   
+        
+                   resultsum.value = result;
                   // result.value = responseData[index].pdtPrice * numbersum[index].value;
                    }
                })
