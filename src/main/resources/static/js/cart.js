@@ -101,6 +101,6 @@ class CartItemsApi {
     }
 }
 
-window.onload = () => {
-    CartItemsApi.getInstance().getCartItems();
-}
+// window.onload = () => {
+//     CartItemsApi.getInstance().getCartItems();
+// }

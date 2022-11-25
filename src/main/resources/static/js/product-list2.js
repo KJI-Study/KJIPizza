@@ -310,6 +310,7 @@ window.onload = () => {
     this.entity['page'] = 0;
     TableSelectApi.getInstance().getCollections(entity.btnvalue);
     TableService.getInstance().loadCollections();
-
+    CartItemsApi.getInstance().getCartItems();
+    
  };
 
