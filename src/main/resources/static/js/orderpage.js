@@ -5,21 +5,15 @@ class ImportApi {
         this.#IMP = window.IMP;
         this.#IMP.init("imp45236213");
         this.addPaymentEvent();
-
     }
 
     addPaymentEvent() {
-        document.querySelector(".order-btn").onclick = () => {
-            console.log("버튼되냐");
-            this.requestPay();
-            
-        }
-
+        this.requestPay();
     }
 
     requestPay(){
-        const price = document.querySelector(".total-price");
-        
+        const price = document.querySelector(".total-price").value;
+  
             IMP.request_pay({
                 pg: "html5_inicis",
                 pay_method: "card",
@@ -39,6 +33,9 @@ class ImportApi {
    
      }
 
+document.querySelector(".order-btn").onclick = () => {
+    new ImportApi;
+}
 
 
 

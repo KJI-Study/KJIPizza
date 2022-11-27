@@ -311,6 +311,6 @@ window.onload = () => {
     TableSelectApi.getInstance().getCollections(entity.btnvalue);
     TableService.getInstance().loadCollections();
     CartItemsApi.getInstance().getCartItems();
-    new ImportApi();
+  
  };
 
