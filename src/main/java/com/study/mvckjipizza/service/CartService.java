@@ -12,6 +12,7 @@ public interface CartService {
     public List<CartItemsRespDto> getCartItems(int tableId) throws Exception;
 
     public void deleteCart(int cartId) throws Exception;
-
+    public void deleteSelect(int cartId) throws Exception;
     public void delCartList(int tableId) throws Exception;
+
 }

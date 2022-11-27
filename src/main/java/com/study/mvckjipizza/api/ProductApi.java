@@ -49,6 +49,7 @@ public class ProductApi {
     public ResponseEntity<?> deleteCartProduct(@PathVariable int cartId) throws Exception {
 
         cartService.deleteCart(cartId);
+        cartService.deleteSelect(cartId);
 
         return ResponseEntity.ok().body(new CMRespDto<>("Delete Successfully", true));
     }

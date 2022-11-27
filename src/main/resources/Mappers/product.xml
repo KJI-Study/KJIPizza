@@ -97,6 +97,14 @@
            id = #{cart_id}
     </delete>
 
+    <delete id="delselect" parameterType="com.study.mvckjipizza.domain.CartItems">
+        delete
+        from
+            order_dtl
+        where
+            cart_id = #{cart_id}
+    </delete>
+
     <delete id="delCartList" parameterType="com.study.mvckjipizza.domain.CartItems">
         delete
         from
