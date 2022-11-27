@@ -88,4 +88,20 @@
         WHERE
             cm.table_id = #{table_id}
     </select>
+
+    <delete id="deleteCart" parameterType="com.study.mvckjipizza.domain.CartItems">
+        delete
+        from
+            cart_mst
+        where
+           id = #{cart_id}
+    </delete>
+
+    <delete id="delCartList" parameterType="com.study.mvckjipizza.domain.CartItems">
+        delete
+        from
+            cart_mst
+        where
+            table_id = #{tableId}
+    </delete>
 </mapper>

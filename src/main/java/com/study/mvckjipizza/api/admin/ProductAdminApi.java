@@ -21,7 +21,7 @@ public class ProductAdminApi {
 
         productManagementService.registerProduct(productRegisterRespDto);
 
-            return ResponseEntity.created(null).body(new CMRespDto<>("Register Successfully",true));
+        return ResponseEntity.created(null).body(new CMRespDto<>("Register Successfully",true));
     }
 
     @PutMapping("/product/update")
@@ -50,9 +50,6 @@ public class ProductAdminApi {
 
         return ResponseEntity.ok().body(new CMRespDto<> ("Get Successfully", productManagementService.getCategoryList()));
     }
-
-
-
 
     //재률이가 만든거
     @GetMapping("/productlist/{categoryName}")

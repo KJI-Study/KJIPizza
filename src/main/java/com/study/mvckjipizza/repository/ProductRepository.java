@@ -1,6 +1,7 @@
 package com.study.mvckjipizza.repository;
 
 import com.study.mvckjipizza.domain.*;
+import com.study.mvckjipizza.dto.CartReqDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -16,4 +17,7 @@ public interface ProductRepository {
     public int addCartDtls(List<CartDtl> list) throws Exception;
 
     public List<CartItems> getCartItemsList(int tableId) throws Exception;
+
+    public int deleteCart(int cartId) throws Exception;
+    public int delCartList(int tableId) throws Exception;
 }

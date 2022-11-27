@@ -60,9 +60,6 @@
         where
             id = #{id}
 
-
-
-
     </delete>
 <!--    <insert id="registerImgFiles" parameterType="com.study.mvckjipizza.domain.amdin.Product">-->
 <!--        Insert into-->

@@ -14,8 +14,8 @@ var entity = {
 var cart = {
   pdtId : 0,
   tableId : tableNumber,
-  size: "",
-  crust: "",
+  size: 1,
+  crust: 3,
   topping: 3
 }
 

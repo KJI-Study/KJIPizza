@@ -1,6 +1,7 @@
 package com.study.mvckjipizza.service;
 
 import com.study.mvckjipizza.domain.Cart;
+import com.study.mvckjipizza.domain.CartDtl;
 import com.study.mvckjipizza.domain.CartItems;
 import com.study.mvckjipizza.dto.CartItemsRespDto;
 import com.study.mvckjipizza.dto.CartReqDto;
@@ -24,6 +25,7 @@ public class CartServiceImpl implements CartService{
     @Override
     public void addCart(CartReqDto cartReqDto) throws Exception {
         Cart cart = cartReqDto.toCartEntity();
+        System.out.println(cart);
         if(productRepository.addCartList(cart) == 0){
             throw new CustomInternalServerErrorException("장바구니 추가 실패");
         }
@@ -42,5 +44,15 @@ public class CartServiceImpl implements CartService{
         });
 
         return cartItemsRespDtos;
+    }
+
+    @Override
+    public void deleteCart(int cartId) throws Exception {
+      productRepository.deleteCart(cartId);
+    }
+
+    @Override
+    public void delCartList(int tableId) throws Exception {
+        productRepository.delCartList(tableId);
     }
 }

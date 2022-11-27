@@ -4,12 +4,16 @@ package com.study.mvckjipizza.dto;
 import com.study.mvckjipizza.domain.Cart;
 import com.study.mvckjipizza.domain.CartDtl;
 import com.study.mvckjipizza.domain.Option;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class CartReqDto {
     int cartId;
@@ -36,6 +40,7 @@ public class CartReqDto {
         cartDtls.add(CartDtl.builder().cart_id(cartId).option_id(size).build());
         cartDtls.add(CartDtl.builder().cart_id(cartId).option_id(crust).build());
         cartDtls.add(CartDtl.builder().cart_id(cartId).option_id(topping).build());
+
         return cartDtls;
     }
 }

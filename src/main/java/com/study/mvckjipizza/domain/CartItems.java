@@ -2,6 +2,7 @@ package com.study.mvckjipizza.domain;
 
 import com.study.mvckjipizza.dto.CartItemsRespDto;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 public class CartItems {
     private int table_id;
     private int cart_id;
@@ -42,6 +44,6 @@ public class CartItems {
                 .cartegoryId(category_id)
                 .cartOptions(cartOptions)
                 .build();
-
     }
+
 }

@@ -1,5 +1,6 @@
 const cartMain = document.querySelector(".cart-main");
 const goCartButton = document.querySelector(".bag-btn");
+const cartClear = document.querySelector(".cart-clear");
 
 class CartItemsApi {
     static #instance = null;
@@ -19,7 +20,6 @@ class CartItemsApi {
 
         goCartButton.onclick = () => {
             cartMain.innerHTML = "";
-            
             let responseData = null;
 
         $.ajax({
@@ -36,27 +36,7 @@ class CartItemsApi {
             }
         });
 
-        // const obj1 = Object.values(responseData[0]);
-        // const obj2 = Object.values(responseData[1]);
-        // const obj3 = Object.values(responseData[2]);
-        // const sum = obj1.concat(obj2,obj3);
-        // const union = sum.filter((item, index) => sum.indexOf(item) === index); //합집합
-        // const intersec = sum.filter((item, index) => sum.indexOf(item) !== index); //교집합
-        // const difference = union.filter(x => !intersec.includes(x)); // 차집합
-        // console.log("합집합 : " + union);
-        // console.log("교집합 : " + intersec);
-        // console.log("차집합 : " + difference);
-
-
-    //     for(var k = 0; k<responseData.length; k++){
-    //         if(responseData[k].cartegoryId == 2){
-    //             for(var i = 0; i<3; i++){
-    //                 console.log(responseData[k].cartOptions[i].optionName);
-    //         }
-    //     }
-    // }
-
-
+        console.log(responseData);
         responseData.forEach(product => {
             if(product.cartegoryId == 2){
                 cartMain.innerHTML += `
@@ -94,6 +74,7 @@ class CartItemsApi {
             const miusbtn = document.querySelectorAll(".cart-minus-btn");
             const numbersum = document.querySelectorAll(".numbertext");
             const resultsum = document.querySelector(".total-price");
+            const deletebtn = document.querySelectorAll(".cart-remove-btn")
             var result = 0;
              plusbtn.forEach((button, index) => {
              button.onclick = () =>{
@@ -114,16 +95,64 @@ class CartItemsApi {
                    result -= responseData[index].pdtPrice;   
         
                    resultsum.value = result;
-                  // result.value = responseData[index].pdtPrice * numbersum[index].value;
+
                    }
                })
+               deletebtn.forEach((button, index) => {
+                button.onclick = () => {
+                    DeleteApi.getInstance().deleteCart(responseData[index].cartId);
+                    console.log(responseData[index].cartId)
+                }
+               })
             });
-        
-       
         }
     }
 }
 
-// window.onload = () => {
-//     CartItemsApi.getInstance().getCartItems();
-// }
+class DeleteApi {
+    static #instance = null;
+  
+    static getInstance() {
+    if (this.#instance == null) {
+        this.#instance = new DeleteApi();
+    }
+    return this.#instance;
+    }
+    
+    deleteCart(cartId){
+        $.ajax({
+            async: false,
+            type: "delete",
+            url: "/api/products/cart/deleteitem/" + cartId,
+            data:  JSON.stringify(cartId),
+            contentType: "application/json",
+            dataType: "json",
+            success: (response) => {
+                console.log(response.data);
+            },
+            error: (error) => {
+                console.log(error);
+            }
+        })
+    }
+
+}
+
+cartClear.onclick = () => {
+
+    $.ajax({
+        async: false,
+        type: "delete",
+        url: "/api/products/cart/item/" + tableNumber,
+        data:  JSON.stringify(tableNumber),
+        contentType: "application/json",
+        dataType: "json",
+        success: (response) => {
+            console.log(response.data);
+        },
+        error: (error) => {
+            console.log(error);
+        }
+    })
+
+}

@@ -35,7 +35,7 @@ public class ProductApi {
 
         System.out.println(cartRespDto);
         //두번째 insert실행.
-//        cartService.addOption(optionListRespDto);
+//      cartService.addOption(optionListRespDto);
 
         return ResponseEntity.ok(new CMRespDto<>("Successfully",true));
     }
@@ -44,4 +44,20 @@ public class ProductApi {
     public ResponseEntity<?> getCartItemsList(@PathVariable int tableId) throws Exception {
         return ResponseEntity.ok().body(new CMRespDto<>("Get Successfully", cartService.getCartItems(tableId)));
     }
+
+    @DeleteMapping("/products/cart/deleteitem/{cartId}")
+    public ResponseEntity<?> deleteCartProduct(@PathVariable int cartId) throws Exception {
+
+        cartService.deleteCart(cartId);
+
+        return ResponseEntity.ok().body(new CMRespDto<>("Delete Successfully", true));
+    }
+
+    @DeleteMapping("/products/cart/item/{tableId}")
+    public ResponseEntity<?> delteCartItemsList(@PathVariable int tableId) throws Exception {
+        cartService.delCartList(tableId);
+        return ResponseEntity.ok().body(new CMRespDto<>("Get Successfully", true));
+    }
+
+
 }
