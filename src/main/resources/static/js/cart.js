@@ -19,8 +19,20 @@ class CartItemsApi {
     getCartItems() {
 
         goCartButton.onclick = () => {
-            cartMain.innerHTML = "";
-            let responseData = null;
+
+        cartMain.innerHTML = "";
+            
+        this.getCartList();
+       
+        }
+
+    }
+
+        getCartList(){
+
+        let responseData = null;
+
+        cartMain.innerHTML = "";
 
         $.ajax({
             async: false,
@@ -36,7 +48,6 @@ class CartItemsApi {
             }
         });
 
-        console.log(responseData);
         responseData.forEach(product => {
             if(product.cartegoryId == 2){
                 cartMain.innerHTML += `
@@ -103,10 +114,10 @@ class CartItemsApi {
                     DeleteApi.getInstance().deleteCart(responseData[index].cartId);
                     console.log(responseData[index].cartId)
                 }
-               })
-            });
-        }
-    }
+            })
+        });
+        
+    }  
 }
 
 class DeleteApi {
@@ -129,6 +140,7 @@ class DeleteApi {
             dataType: "json",
             success: (response) => {
                 console.log(response.data);
+                CartItemsApi.getInstance().getCartList();
             },
             error: (error) => {
                 console.log(error);
@@ -149,6 +161,7 @@ cartClear.onclick = () => {
         dataType: "json",
         success: (response) => {
             console.log(response.data);
+            CartItemsApi.getInstance().getCartList();
         },
         error: (error) => {
             console.log(error);
