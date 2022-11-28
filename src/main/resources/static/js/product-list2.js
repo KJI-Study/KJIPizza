@@ -189,11 +189,29 @@ class TableService {
                            </div>
                            <div class="topping-select"><b>3. 토핑 추가</b>
                                <div class="topping-select-container">
+                                   <label for="not">
+                                       <input type="radio" id="not" name="topping-select" value="${response.data[6].optionId}"> ${response.data[6].optionName}
+                                   </label>
                                    <label for="pat">
-                                       <input type="radio" id="pat" name="topping-select" value="${response.data[6].optionId}"> ${response.data[6].optionName}
+                                       <input type="radio" id="pat" name="topping-select" value="${response.data[7].optionId}"> ${response.data[7].optionName} &nbsp;&nbsp;&nbsp;(+2000)
                                    </label>
                                    <label for="ot">
-                                       <input type="radio" id="ot" name="topping-select" value="${response.data[7].optionId}"> ${response.data[7].optionName}
+                                       <input type="radio" id="ot" name="topping-select" value="${response.data[8].optionId}"> ${response.data[8].optionName} &nbsp;&nbsp;&nbsp;(+2000)
+                                   </label>
+                                   <label for="mt">
+                                       <input type="radio" id="mt" name="topping-select" value="${response.data[9].optionId}"> ${response.data[9].optionName} &nbsp;&nbsp;&nbsp;(+2000)
+                                   </label>
+                                   <label for="ct">
+                                       <input type="radio" id="ct" name="topping-select" value="${response.data[10].optionId}"> ${response.data[10].optionName} &nbsp;&nbsp;&nbsp;(+3000)
+                                   </label>
+                                   <label for="bt">
+                                       <input type="radio" id="bt" name="topping-select" value="${response.data[11].optionId}"> ${response.data[11].optionName} &nbsp;&nbsp;&nbsp;(+4000)
+                                   </label>
+                                   <label for="bgt">
+                                       <input type="radio" id="bgt" name="topping-select" value="${response.data[12].optionId}"> ${response.data[12].optionName} &nbsp;&nbsp;&nbsp;(+4000)
+                                   </label>
+                                   <label for="ppt">
+                                       <input type="radio" id="ppt" name="topping-select" value="${response.data[13].optionId}"> ${response.data[13].optionName} &nbsp;&nbsp;&nbsp;(+4000)
                                    </label>
                                </div>
                            </div>
