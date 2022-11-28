@@ -5,7 +5,7 @@ const url = location.href;
 const tableNumber = url.substring(url.lastIndexOf("/") + 1 );
 
 document.querySelector(".order-detail-btn").onclick = () => {
-  location.href = "/order";
+  location.href = "/order/" + tableNumber;
 }
 
 

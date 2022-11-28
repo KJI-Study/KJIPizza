@@ -24,6 +24,8 @@ public class CartItems {
     private String option_name;
     private int option_price;
     private List<Option> cart_options;
+    private String origin_name;
+    private String save_name;
 
     public CartItemsRespDto toDto() {
         List<Map<String, Object>> cartOptions = new ArrayList<Map<String, Object>>();
@@ -42,6 +44,8 @@ public class CartItems {
                 .pdtName(pdt_name)
                 .pdtPrice(pdt_price)
                 .cartegoryId(category_id)
+                .origin_name(origin_name)
+                .save_name(save_name)
                 .cartOptions(cartOptions)
                 .build();
     }

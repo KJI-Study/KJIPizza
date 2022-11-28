@@ -20,6 +20,8 @@ public class CartItemsRespDto {
     private String pdtName;
     private int pdtPrice;
     private int cartegoryId;
+    private String origin_name;
+    private String save_name;
     private List<Map<String, Object>> cartOptions;
 
     public CartItems toEntity() {

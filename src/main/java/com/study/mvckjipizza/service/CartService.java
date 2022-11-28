@@ -11,6 +11,8 @@ public interface CartService {
     public void addCart(CartReqDto cartRespDto) throws Exception;
     public List<CartItemsRespDto> getCartItems(int tableId) throws Exception;
 
+    public List<CartItemsRespDto> getPayItems(int tableId) throws Exception;
+
     public void deleteCart(int cartId) throws Exception;
     public void deleteSelect(int cartId) throws Exception;
     public void delCartList(int tableId) throws Exception;

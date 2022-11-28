@@ -60,5 +60,10 @@ public class ProductApi {
         return ResponseEntity.ok().body(new CMRespDto<>("Get Successfully", true));
     }
 
+    @GetMapping("/products/pay/item/{tableId}")
+    public ResponseEntity<?> getPayItems(@PathVariable int tableId) throws Exception {
+        return ResponseEntity.ok().body(new CMRespDto<>("Get Successfully", cartService.getPayItems(tableId)));
+    }
+
 
 }

@@ -30,8 +30,11 @@ public class TableSelect {
         return "product/product";
     }
     
-    @GetMapping("/order")
-    public String orderPage() {
+    @GetMapping("/order/{number}")
+    public String orderPage(Model model , @PathVariable int number) {
+
+        model.addAttribute("text", number);
+
         return "product/orderpage";
     }
 

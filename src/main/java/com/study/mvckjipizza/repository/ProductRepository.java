@@ -18,6 +18,8 @@ public interface ProductRepository {
 
     public List<CartItems> getCartItemsList(int tableId) throws Exception;
 
+    public List<CartItems> getPayItems(int tableId) throws Exception;
+
     public int deleteCart(int cartId) throws Exception;
     public int delCartList(int tableId) throws Exception;
     public int delselect(int cartId) throws Exception;
