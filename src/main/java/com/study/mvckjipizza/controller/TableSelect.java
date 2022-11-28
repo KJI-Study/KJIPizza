@@ -1,5 +1,7 @@
 package com.study.mvckjipizza.controller;
 
+import com.study.mvckjipizza.dto.CartItemsRespDto;
+import com.study.mvckjipizza.dto.CartReqDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +21,13 @@ public class TableSelect {
 
 
     @GetMapping("/table/{number}")
-    public String productmain(@PathVariable int number)
+    public String productmain(Model model , @PathVariable int number )
     {
+        model.addAttribute("text", number);
+
+
+
         return "product/product";
     }
+
 }
