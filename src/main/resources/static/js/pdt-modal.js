@@ -6,9 +6,7 @@
 //     document.querySelector(".modal-container").classList.add("hidden");
 // }
 
-document.querySelector(".bg").onclick =() => {
-    document.querySelector(".modal-container").classList.add("hidden");
-}
+
 
 const modalCart = document.querySelector(".modal-cart");
 const cartOpen = document.querySelector(".bag-btn");

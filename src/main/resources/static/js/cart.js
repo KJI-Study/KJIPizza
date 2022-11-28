@@ -1,6 +1,7 @@
 const cartMain = document.querySelector(".cart-main");
 const goCartButton = document.querySelector(".bag-btn");
 const cartClear = document.querySelector(".cart-clear");
+const resultsum = document.querySelector(".total-price");
 
 class CartItemsApi {
     static #instance = null;
@@ -19,8 +20,19 @@ class CartItemsApi {
     getCartItems() {
 
         goCartButton.onclick = () => {
-            cartMain.innerHTML = "";
-            let responseData = null;
+
+        cartMain.innerHTML = "";
+            
+        this.getCartList();
+       
+        }
+    }
+    
+        getCartList(){
+
+        let responseData = null;
+
+        cartMain.innerHTML = "";
 
         $.ajax({
             async: false,
@@ -36,7 +48,11 @@ class CartItemsApi {
             }
         });
 
-        console.log(responseData);
+        if(responseData.length == 0){
+            resultsum.value = 0;
+        }
+
+
         responseData.forEach(product => {
             if(product.cartegoryId == 2){
                 cartMain.innerHTML += `
@@ -47,7 +63,7 @@ class CartItemsApi {
                     ${product.cartOptions[1].optionName}
                     ${product.cartOptions[2].optionName}
                     </div>
-                    <div class="cart-item-price">${product.pdtPrice}</div>
+                    <div class="cart-item-price">${product.pdtPrice + product.cartOptions[0].optionPrice + product.cartOptions[1].optionPrice + product.cartOptions[2].optionPrice}</div>
                 </div>
                 <button type="button" class="cart-minus-btn">-</button>
                 <input type="text" class="numbertext" value=1>
@@ -70,23 +86,35 @@ class CartItemsApi {
                 </div>
             `;
             }
+
+            const itemList = document.querySelectorAll(".cart-item");
             const plusbtn = document.querySelectorAll(".cart-plus-btn");
             const miusbtn = document.querySelectorAll(".cart-minus-btn");
             const numbersum = document.querySelectorAll(".numbertext");
-            const resultsum = document.querySelector(".total-price");
             const deletebtn = document.querySelectorAll(".cart-remove-btn")
+
             var result = 0;
+            
+            console.log(responseData.length);
+
+            
+
+            for(var i = 0; i<itemList.length; i++){
+                result += responseData[i].pdtPrice;   
+            }
+            resultsum.value = result;
+
+
              plusbtn.forEach((button, index) => {
              button.onclick = () =>{
                 numbersum[index].value++;
                 result = 0;
 
-                for(var i =0; i<plusbtn.length; i++){
+                for(var i = 0; i<plusbtn.length; i++){
                     result += responseData[i].pdtPrice * numbersum[i].value;   
                 }
                 resultsum.value = result;
             }
-            
             })
              miusbtn.forEach((button, index) => {
                 button.onclick = () =>{
@@ -103,10 +131,10 @@ class CartItemsApi {
                     DeleteApi.getInstance().deleteCart(responseData[index].cartId);
                     console.log(responseData[index].cartId)
                 }
-               })
-            });
-        }
-    }
+            })
+        });
+        
+    }  
 }
 
 class DeleteApi {
@@ -129,6 +157,7 @@ class DeleteApi {
             dataType: "json",
             success: (response) => {
                 console.log(response.data);
+                CartItemsApi.getInstance().getCartList();
             },
             error: (error) => {
                 console.log(error);
@@ -149,6 +178,7 @@ cartClear.onclick = () => {
         dataType: "json",
         success: (response) => {
             console.log(response.data);
+            CartItemsApi.getInstance().getCartList();
         },
         error: (error) => {
             console.log(error);

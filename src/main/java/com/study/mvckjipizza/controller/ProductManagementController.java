@@ -14,4 +14,9 @@ public class ProductManagementController {
 
         return "/admin/register";
     }
+
+    @GetMapping("/sales")
+    public String loadLsales() {
+        return "/admin/sales";
+    }
 }

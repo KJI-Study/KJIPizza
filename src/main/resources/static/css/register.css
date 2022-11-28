@@ -4,11 +4,40 @@
     font-size: 12px;
 }
 
+body {
+    margin: 0;
+}
+
+.menu-container {
+    display: flex;
+    align-items: center;
+    
+    width: 1024;
+    height: 50px;
+}
+
+.product-management-link, .sales-management-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 50%;
+    height: 100%;
+
+    font-size: 20px;
+    text-decoration: none;
+
+    color: white;
+    background-color: rgb(34, 72, 238);
+
+    border: 1px solid rgb(173, 173, 173);
+}
+
 #container {
     display: flex;
     flex-direction: column;
 
-    padding: 50px;
+    padding: 20px 50px 50px;
 
     width: 1024px;
 }
