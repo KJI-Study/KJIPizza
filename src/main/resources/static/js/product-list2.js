@@ -2,7 +2,11 @@ const categoryButtons = document.querySelectorAll(".category");
 const mainContainer = document.querySelectorAll(".main-container");
 
 const url = location.href;
-const tableNumber = url.substring(url.lastIndexOf("/") + 1 ); 
+const tableNumber = url.substring(url.lastIndexOf("/") + 1 );
+
+document.querySelector(".order-detail-btn").onclick = () => {
+  location.href = "/order";
+}
 
 
 

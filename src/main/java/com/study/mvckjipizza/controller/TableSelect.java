@@ -29,5 +29,10 @@ public class TableSelect {
 
         return "product/product";
     }
+    
+    @GetMapping("/order")
+    public String orderPage() {
+        return "product/orderpage";
+    }
 
 }
