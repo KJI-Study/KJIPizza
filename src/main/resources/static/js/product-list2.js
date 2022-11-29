@@ -4,6 +4,7 @@ const url = location.href;
 const tableNumber = url.substring(url.lastIndexOf("/") + 1 );
 
 const selectPdtId = new Array();
+const pdtChecked = new Array();
 
 document.querySelector(".order-detail-btn").onclick = () => {
   location.href = "/order/" + tableNumber;
@@ -279,20 +280,22 @@ class TableService {
                cart['topping'] = document.getElementsByName("topping-select")[i].value;
              }
            }
+          CartApi.getInstance().postCartId();
 
           let emptyFlag = true;
 
-          const selectPdt = responseData[index].pdtId;
+          const selectPdt = responseData[index].productId;
 
           for(let selectPdtObj of selectPdtId) {
-            if(selectPdtObj.pdtId == selectPdt){
+            if(selectPdtObj == selectPdt){
                 emptyFlag = false;  
+                pdtChecked.push(emptyFlag);
                 break;
             }
           }
           if(emptyFlag){
-            selectPdtId.push(cart);
-            CartApi.getInstance().postCartId();
+            selectPdtId.push(selectPdt);
+            pdtChecked.push(emptyFlag);
           }
          
          }

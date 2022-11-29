@@ -53,7 +53,8 @@ class CartItemsApi {
         }
         
         
-        responseData.forEach(product => {
+        responseData.forEach((product,index) => {
+            if(pdtChecked[index] == true){
             if(product.cartegoryId == 2){
                 cartMain.innerHTML += `
                 <div class="cart-item">
@@ -86,6 +87,7 @@ class CartItemsApi {
                 </div>
             `;
             }
+        }
 
 
             const itemList = document.querySelectorAll(".cart-item");
@@ -127,7 +129,8 @@ class CartItemsApi {
                })
                deletebtn.forEach((button, index) => {
                 button.onclick = () => {
-                    DeleteApi.getInstance().deleteCart(responseData[index].cartId);
+                    
+                    DeleteApi.getInstance().deleteCart(responseData[index].pdtId);
                     console.log(responseData[index].cartId)
                 }
             })
@@ -145,12 +148,12 @@ class DeleteApi {
     return this.#instance;
     }
     
-    deleteCart(cartId){
+    deleteCart(pdtId){
         $.ajax({
             async: false,
             type: "delete",
-            url: "/api/products/cart/deleteitem/" + cartId,
-            data:  JSON.stringify(cartId),
+            url: "/api/products/cart/deleteitem/" + pdtId,
+            data:  JSON.stringify(pdtId),
             contentType: "application/json",
             dataType: "json",
             success: (response) => {

@@ -19,6 +19,8 @@ public class CartItems {
     private int table_id;
     private int cart_id;
     private String pdt_name;
+
+    private int pdt_id;
     private int id;
     private int pdt_price;
     private int category_id;
