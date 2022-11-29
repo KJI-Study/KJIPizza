@@ -45,7 +45,7 @@ class TableSelectApi {
       contentType : "json",
       success: (response) => {
         responseData = response.data
-
+        console.log(responseData)
       },
       error: (error) => {
         console.log(error);

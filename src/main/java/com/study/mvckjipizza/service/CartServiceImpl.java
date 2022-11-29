@@ -50,7 +50,7 @@ public class CartServiceImpl implements CartService{
     public List<CartItemsRespDto> getPayItems(int tableId) throws Exception {
         List<CartItemsRespDto> cartItemsRespDtos = new ArrayList<CartItemsRespDto>();
 
-        List<CartItems> cartItems = productRepository.getCartItemsList(tableId);
+        List<CartItems> cartItems = productRepository.getPayItems(tableId);
 
         cartItems.forEach(cartItem -> {
             cartItemsRespDtos.add(cartItem.toDto());
