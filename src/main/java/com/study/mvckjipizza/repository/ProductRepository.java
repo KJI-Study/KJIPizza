@@ -22,5 +22,5 @@ public interface ProductRepository {
 
     public int deleteCart(int cartId) throws Exception;
     public int delCartList(int tableId) throws Exception;
-    public int delselect(int cartId) throws Exception;
+//    public int delselect(int cartId) throws Exception;
 }

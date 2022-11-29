@@ -64,10 +64,10 @@ public class CartServiceImpl implements CartService{
       productRepository.deleteCart(cartId);
     }
 
-    @Override
-    public void deleteSelect(int cartId) throws Exception {
-        productRepository.delselect(cartId);
-    }
+//    @Override
+//    public void deleteSelect(int cartId) throws Exception {
+//        productRepository.delselect(cartId);
+//    }
 
     @Override
     public void delCartList(int tableId) throws Exception {

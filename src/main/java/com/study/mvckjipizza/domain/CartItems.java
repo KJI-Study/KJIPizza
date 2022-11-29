@@ -19,6 +19,9 @@ public class CartItems {
     private int table_id;
     private int cart_id;
     private String pdt_name;
+
+    private int pdt_id;
+    private int id;
     private int pdt_price;
     private int category_id;
     private String option_name;
@@ -41,6 +44,7 @@ public class CartItems {
         return CartItemsRespDto.builder()
                 .tableId(table_id)
                 .cartId(cart_id)
+                .pdtId(id)
                 .pdtName(pdt_name)
                 .pdtPrice(pdt_price)
                 .cartegoryId(category_id)
