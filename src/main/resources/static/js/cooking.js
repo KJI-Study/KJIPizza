@@ -79,6 +79,11 @@ class PayItemsApi{
     }
 }
 
+
+document.querySelector(".exit-button").onclick = () => {
+    
+
+}
 window.onload = () => {
     PayItemsApi.getInstance().getPayItems();
 }
