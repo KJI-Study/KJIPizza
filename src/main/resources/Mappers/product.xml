@@ -121,7 +121,8 @@
         from
             cart_mst
         where
-           pdt_id = #{pdt_id}
+           id = #{cart_id}
+
     </delete>
 
     <delete id="delselect" parameterType="com.study.mvckjipizza.domain.CartItems">
@@ -133,6 +134,7 @@
     </delete>
 
     <delete id="delCartList" parameterType="com.study.mvckjipizza.domain.CartItems">
+
         DELETE
         FROM
         a,b
@@ -140,5 +142,6 @@
         LEFT JOIN order_dtl AS b
         ON a.id = b.cart_id
         WHERE table_id = #{tableId}
+
     </delete>
 </mapper>

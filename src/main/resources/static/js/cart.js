@@ -72,7 +72,7 @@ class CartItemsApi {
                 <button type="button" class="cart-remove-btn">삭제</button>
                 </div>
                 `;
-            }else {
+            } else {
                 cartMain.innerHTML += `
                 <div class="cart-item">
                 <div class="cart-item-dtl">
@@ -88,7 +88,6 @@ class CartItemsApi {
             `;
             }
         }
-
 
             const itemList = document.querySelectorAll(".cart-item");
             const plusbtn = document.querySelectorAll(".cart-plus-btn");
@@ -129,12 +128,12 @@ class CartItemsApi {
                })
                deletebtn.forEach((button, index) => {
                 button.onclick = () => {
-                    
-                    DeleteApi.getInstance().deleteCart(responseData[index].pdtId);
+                    DeleteApi.getInstance().deleteCart(responseData[index].cartId);
                     console.log(responseData[index].cartId)
                 }
             })
         });
+        
     }  
 }
 
@@ -148,12 +147,12 @@ class DeleteApi {
     return this.#instance;
     }
     
-    deleteCart(pdtId){
+    deleteCart(cartId){
         $.ajax({
             async: false,
             type: "delete",
-            url: "/api/products/cart/deleteitem/" + pdtId,
-            data:  JSON.stringify(pdtId),
+            url: "/api/products/cart/deleteitem/" + cartId,
+            data:  JSON.stringify(cartId),
             contentType: "application/json",
             dataType: "json",
             success: (response) => {
