@@ -64,6 +64,7 @@
 
     <resultMap id="cartListMap" type="com.study.mvckjipizza.domain.CartItems">
         <result property="table_id" column="table_id"></result>
+        <result property="id" column="id"></result>
         <result property="cart_id" column="cart_id"></result>
         <result property="pdt_name" column="pdt_name"></result>
         <result property="pdt_price" column="pdt_price"></result>
@@ -81,6 +82,7 @@
             pm.pdt_name,
             pm.pdt_price,
             pm.category_id,
+            pm.id,
             opm.option_name,
             opm.option_price
         FROM

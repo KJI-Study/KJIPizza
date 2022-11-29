@@ -17,6 +17,7 @@ import java.util.Map;
 public class CartItemsRespDto {
     private int tableId;
     private int cartId;
+    private int pdtId;
     private String pdtName;
     private int pdtPrice;
     private int cartegoryId;

@@ -1,8 +1,9 @@
 const categoryButtons = document.querySelectorAll(".category");
 const mainContainer = document.querySelectorAll(".main-container");
-
 const url = location.href;
 const tableNumber = url.substring(url.lastIndexOf("/") + 1 );
+
+const selectPdtId = new Array();
 
 document.querySelector(".order-detail-btn").onclick = () => {
   location.href = "/order/" + tableNumber;
@@ -22,8 +23,6 @@ var cart = {
   crust: 3,
   topping: 3
 }
-
-
 
 class TableSelectApi {
   static #instance = null;
@@ -130,8 +129,6 @@ class TableService {
 
      addProductListEvent(response) {
 
-
-      
       const collectionProducts = document.querySelectorAll(".product-select");
       
       const modalProduct = document.querySelector(".modal-container");
@@ -146,8 +143,8 @@ class TableService {
       cart['tableId'] = tableNumber;
       collectionProducts[index].classList.remove("goCart");
       modalProduct.classList.remove("hidden");
+      
       if((entity.page+1) == 2){
-
         modalProduct.innerHTML = `
         <div class="bg"></div>
                    <div class="product-modal">
@@ -282,7 +279,22 @@ class TableService {
                cart['topping'] = document.getElementsByName("topping-select")[i].value;
              }
            }
-         CartApi.getInstance().getCartId();
+
+          let emptyFlag = true;
+
+          const selectPdt = responseData[index].pdtId;
+
+          for(let selectPdtObj of selectPdtId) {
+            if(selectPdtObj.pdtId == selectPdt){
+                emptyFlag = false;  
+                break;
+            }
+          }
+          if(emptyFlag){
+            selectPdtId.push(cart);
+            CartApi.getInstance().postCartId();
+          }
+         
          }
       }
     });
@@ -304,7 +316,7 @@ class CartApi {
   }
 
 
-  getCartId(){
+  postCartId(){
 
     $.ajax({
       async:false,

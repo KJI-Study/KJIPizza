@@ -51,8 +51,8 @@ class CartItemsApi {
         if(responseData.length == 0){
             resultsum.value = 0;
         }
-
-
+        
+        
         responseData.forEach(product => {
             if(product.cartegoryId == 2){
                 cartMain.innerHTML += `
@@ -87,6 +87,7 @@ class CartItemsApi {
             `;
             }
 
+
             const itemList = document.querySelectorAll(".cart-item");
             const plusbtn = document.querySelectorAll(".cart-plus-btn");
             const miusbtn = document.querySelectorAll(".cart-minus-btn");
@@ -96,8 +97,6 @@ class CartItemsApi {
             var result = 0;
             
             console.log(responseData.length);
-
-            
 
             for(var i = 0; i<itemList.length; i++){
                 result += responseData[i].pdtPrice;   
@@ -133,7 +132,6 @@ class CartItemsApi {
                 }
             })
         });
-        
     }  
 }
 
