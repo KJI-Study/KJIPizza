@@ -21,9 +21,11 @@ body {
 }
 
 .table-button{
+
     display: flex;
     justify-content: center;
-    align-items: center;
+   
+    text-align: center;
 
     margin-left: 20px;
     margin-top: 20px;
@@ -38,6 +40,23 @@ body {
     color: white;
 
 
+}
+
+.exit-button{
+
+    width:40px;
+    height: 40px;
+
+    border: 2px solid gray;
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+   
+    margin-top: -50px;
+    margin-left: 335%;
+    
+    cursor:pointer;
+ 
 }
 
 .text{

@@ -26,7 +26,6 @@ public class TableSelect {
         model.addAttribute("text", number);
 
 
-
         return "product/product";
     }
     

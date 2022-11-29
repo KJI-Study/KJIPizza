@@ -101,6 +101,7 @@
             pm.category_id,
             opm.option_name,
             pm.save_name,
+            pm.origin_name,
             opm.option_price
 
         FROM
