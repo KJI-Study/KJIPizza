@@ -37,7 +37,7 @@ class CartItemsApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "/api/products/cart/item/" +   ,
+            url: "/api/products/cart/item/" + tableNumber,
             dataType: "json",
             success: (response) => {
                 responseData = response.data;
