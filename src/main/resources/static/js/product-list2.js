@@ -144,7 +144,7 @@ class TableService {
       cart['tableId'] = tableNumber;
       collectionProducts[index].classList.remove("goCart");
       modalProduct.classList.remove("hidden");
-      
+      console.log(response.data);
       if((entity.page+1) == 2){
         modalProduct.innerHTML = `
         <div class="bg"></div>
@@ -284,9 +284,9 @@ class TableService {
           const cartpush = {
             pdtDtlId : responseData[index].productId,
             pdtDtlCartegory : (entity.page +1 ),
-            pdtDtlSize : cart.size,
-            pdtDtlCrust : cart.crust,
-            pdtDtlTopping : cart.topping
+            pdtDtlSize : (cart.size -1) ,
+            pdtDtlCrust : (cart.crust -1),
+            pdtDtlTopping : (cart.topping -1)
           }
 
           let emptyFlag = true;
@@ -300,6 +300,39 @@ class TableService {
            if(emptyFlag){
             cartItems.push(cartpush); 
             console.log(cartItems);
+            
+            if(cartpush.pdtDtlCartegory == 2){
+            cartMain.innerHTML += `
+            <div class="cart-item" value="">
+            <div class="cart-item-dtl">
+                <div class="cart-item-name">${responseData[index].productName}</div>
+                <div class="cart-item-option">${response.data[cartpush.pdtDtlSize].optionName}
+                ${response.data[cartpush.pdtDtlCrust].optionName}
+                ${response.data[cartpush.pdtDtlTopping].optionName}
+                </div>
+                <div class="cart-item-price">${responseData[index].productPrice + response.data[cartpush.pdtDtlSize].optionPrice + response.data[cartpush.pdtDtlCrust].optionPrice + response.data[cartpush.pdtDtlTopping].optionPrice} </div>
+            </div>
+            <button type="button" class="cart-minus-btn">-</button>
+            <input type="text" class="numbertext" value=1>
+            <button type="button" class="cart-plus-btn">+</button>
+            <button type="button" class="cart-remove-btn">삭제</button>
+            </div>
+            `;
+            }else {
+              cartMain.innerHTML += `
+              <div class="cart-item" value="">
+              <div class="cart-item-dtl">
+                  <div class="cart-item-name">${responseData[index].productName}</div>
+                  <div class="cart-item-option"></div>
+                  <div class="cart-item-price">${responseData[index].productPrice}</div>
+              </div>
+              <button type="button" class="cart-minus-btn">-</button>
+              <input type="text" class="numbertext" value=1>
+              <button type="button" class="cart-plus-btn">+</button>
+              <button type="button" class="cart-remove-btn">삭제</button>
+              </div>
+              `;
+            }
           }
          }
       }
@@ -354,7 +387,7 @@ window.onload = () => {
     this.entity['page'] = 0;
     TableSelectApi.getInstance().getCollections(entity.btnvalue);
     TableService.getInstance().loadCollections();
-    CartItemsApi.getInstance().getCartItems();
+   // CartItemsApi.getInstance().getCartItems();
   
  };
 
