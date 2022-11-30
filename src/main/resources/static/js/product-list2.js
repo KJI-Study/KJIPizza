@@ -300,7 +300,8 @@ class TableService {
            if(emptyFlag){
             cartItems.push(cartpush); 
             console.log(cartItems);
-            
+
+            //아마도 메소드로 빼야할듯..?
             if(cartpush.pdtDtlCartegory == 2){
             cartMain.innerHTML += `
             <div class="cart-item" value="">
@@ -310,7 +311,7 @@ class TableService {
                 ${response.data[cartpush.pdtDtlCrust].optionName}
                 ${response.data[cartpush.pdtDtlTopping].optionName}
                 </div>
-                <div class="cart-item-price">${responseData[index].productPrice + response.data[cartpush.pdtDtlSize].optionPrice + response.data[cartpush.pdtDtlCrust].optionPrice + response.data[cartpush.pdtDtlTopping].optionPrice} </div>
+                <div class="cart-item-price">${responseData[index].productPrice + response.data[cartpush.pdtDtlSize].optionPrice + response.data[cartpush.pdtDtlCrust].optionPrice + response.data[cartpush.pdtDtlTopping].optionPrice}</div>
             </div>
             <button type="button" class="cart-minus-btn">-</button>
             <input type="text" class="numbertext" value=1>
@@ -334,6 +335,53 @@ class TableService {
               `;
             }
           }
+
+          const resultsum = document.querySelector(".total-price");
+          const itemList = document.querySelectorAll(".cart-item");
+          const plusbtn = document.querySelectorAll(".cart-plus-btn");
+          const miusbtn = document.querySelectorAll(".cart-minus-btn");
+          const numbersum = document.querySelectorAll(".numbertext");
+          const deletebtn = document.querySelectorAll(".cart-remove-btn");
+          const firstPrice = document.querySelectorAll(".cart-item-price");
+          var result = 0;
+
+          for(var i = 0; i<firstPrice.length; i++){
+              result += (firstPrice[i].innerText * 1);   
+          }
+
+          resultsum.value = result;
+
+           plusbtn.forEach((button, index) => {
+           button.onclick = () =>{
+              numbersum[index].value++;
+              
+              result = 0;
+
+              for(var i = 0; i<plusbtn.length; i++){
+                  result += (firstPrice[i].innerText * numbersum[i].value);   
+              }
+              resultsum.value = result;
+            }
+          })
+
+           miusbtn.forEach((button, index) => {
+              button.onclick = () =>{
+                 numbersum[index].value--;
+
+                 result = resultsum.value;
+
+                 result -= (firstPrice[index].innerText * 1);   
+      
+                 resultsum.value = result;
+
+                 }
+             })
+            deletebtn.forEach((button, index) => {
+              button.onclick = () => {
+                cartItems.pop(cartItems[index]);
+
+              }
+          })
          }
       }
     });
