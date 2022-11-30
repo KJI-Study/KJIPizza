@@ -50,7 +50,7 @@ public class CartServiceImpl implements CartService{
     public List<CartItemsRespDto> getPayItems(int tableId) throws Exception {
         List<CartItemsRespDto> cartItemsRespDtos = new ArrayList<CartItemsRespDto>();
 
-        List<CartItems> cartItems = productRepository.getCartItemsList(tableId);
+        List<CartItems> cartItems = productRepository.getPayItems(tableId);
 
         cartItems.forEach(cartItem -> {
             cartItemsRespDtos.add(cartItem.toDto());
@@ -64,10 +64,10 @@ public class CartServiceImpl implements CartService{
       productRepository.deleteCart(cartId);
     }
 
-    @Override
-    public void deleteSelect(int cartId) throws Exception {
-        productRepository.delselect(cartId);
-    }
+//    @Override
+//    public void deleteSelect(int cartId) throws Exception {
+//        productRepository.delselect(cartId);
+//    }
 
     @Override
     public void delCartList(int tableId) throws Exception {

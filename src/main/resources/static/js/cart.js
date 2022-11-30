@@ -51,9 +51,10 @@ class CartItemsApi {
         if(responseData.length == 0){
             resultsum.value = 0;
         }
-
-
-        responseData.forEach(product => {
+        
+        
+        responseData.forEach((product,index) => {
+            if(pdtChecked[index] == true){
             if(product.cartegoryId == 2){
                 cartMain.innerHTML += `
                 <div class="cart-item">
@@ -71,7 +72,7 @@ class CartItemsApi {
                 <button type="button" class="cart-remove-btn">삭제</button>
                 </div>
                 `;
-            }else {
+            } else {
                 cartMain.innerHTML += `
                 <div class="cart-item">
                 <div class="cart-item-dtl">
@@ -86,6 +87,7 @@ class CartItemsApi {
                 </div>
             `;
             }
+        }
 
             const itemList = document.querySelectorAll(".cart-item");
             const plusbtn = document.querySelectorAll(".cart-plus-btn");
@@ -96,8 +98,6 @@ class CartItemsApi {
             var result = 0;
             
             console.log(responseData.length);
-
-            
 
             for(var i = 0; i<itemList.length; i++){
                 result += responseData[i].pdtPrice;   
@@ -128,7 +128,7 @@ class CartItemsApi {
                })
                deletebtn.forEach((button, index) => {
                 button.onclick = () => {
-                    DeleteApi.getInstance().deleteCart(responseData[index].cartId);
+                    DeleteApi.getInstance().deleteCart(responseData[index].pdtId);
                     console.log(responseData[index].cartId)
                 }
             })
@@ -147,12 +147,12 @@ class DeleteApi {
     return this.#instance;
     }
     
-    deleteCart(cartId){
+    deleteCart(pdtId){
         $.ajax({
             async: false,
             type: "delete",
-            url: "/api/products/cart/deleteitem/" + cartId,
-            data:  JSON.stringify(cartId),
+            url: "/api/products/cart/deleteitem/" + pdtId,
+            data:  JSON.stringify(pdtId),
             contentType: "application/json",
             dataType: "json",
             success: (response) => {

@@ -64,6 +64,7 @@
 
     <resultMap id="cartListMap" type="com.study.mvckjipizza.domain.CartItems">
         <result property="table_id" column="table_id"></result>
+        <result property="id" column="id"></result>
         <result property="cart_id" column="cart_id"></result>
         <result property="pdt_name" column="pdt_name"></result>
         <result property="pdt_price" column="pdt_price"></result>
@@ -81,6 +82,7 @@
             pm.pdt_name,
             pm.pdt_price,
             pm.category_id,
+            pm.id,
             opm.option_name,
             opm.option_price
         FROM
@@ -101,6 +103,7 @@
             pm.category_id,
             opm.option_name,
             pm.save_name,
+            pm.origin_name,
             opm.option_price
 
         FROM
@@ -115,27 +118,37 @@
 
 
     <delete id="deleteCart" parameterType="com.study.mvckjipizza.domain.CartItems">
-        delete
-        from
-            cart_mst
-        where
-           id = #{cart_id}
+        DELETE FROM
+        a,b
+        USING cart_mst AS a
+        LEFT JOIN order_dtl AS b
+        ON a.id = b.cart_id
+        WHERE a.pdt_id = #{pdt_id}
+<!--        delete-->
+<!--        from-->
+<!--            cart_mst-->
+<!--        where-->
+<!--           id = #{cart_id}-->
     </delete>
 
-    <delete id="delselect" parameterType="com.study.mvckjipizza.domain.CartItems">
-        delete
-        from
-            order_dtl
-        where
-            cart_id = #{cart_id}
-    </delete>
+<!--    <delete id="delselect" parameterType="com.study.mvckjipizza.domain.CartItems">-->
+<!--        delete-->
+<!--        from-->
+<!--            order_dtl-->
+<!--        where-->
+<!--            cart_id = #{cart_id}-->
+<!--    </delete>-->
 
     <delete id="delCartList" parameterType="com.study.mvckjipizza.domain.CartItems">
-        delete
-        from
-            cart_mst
-        where
-            table_id = #{tableId}
+
+        DELETE
+        FROM
+        a,b
+        USING cart_mst AS a
+        LEFT JOIN order_dtl AS b
+        ON a.id = b.cart_id
+        WHERE table_id = #{tableId}
+
     </delete>
 
     <insert id="saveSales" parameterType="com.study.mvckjipizza.domain.Sales">
