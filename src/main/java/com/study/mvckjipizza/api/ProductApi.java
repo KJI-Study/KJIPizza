@@ -2,8 +2,10 @@ package com.study.mvckjipizza.api;
 
 
 import com.study.mvckjipizza.dto.CMRespDto;
-//import com.study.mvckjipizza.dto.CartItemsRespDto;
-//import com.study.mvckjipizza.dto.CartReqDto;
+
+import com.study.mvckjipizza.dto.CartItemsRespDto;
+import com.study.mvckjipizza.dto.SalesDto;
+
 import com.study.mvckjipizza.service.CartService;
 import com.study.mvckjipizza.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,7 @@ public class ProductApi {
     public ResponseEntity<?> getProductOption() throws Exception {
         return ResponseEntity.ok(new CMRespDto<>("Successfully",productService.getOptionList()));
     }
+
 
 //    @PostMapping("/products/cart")
 //    public ResponseEntity<?> addCartId(@RequestBody CartReqDto cartRespDto) throws Exception {
@@ -65,5 +68,12 @@ public class ProductApi {
 //        return ResponseEntity.ok().body(new CMRespDto<>("Get Successfully", cartService.getPayItems(tableId)));
 //    }
 
+    @PostMapping("/payments")
+    public ResponseEntity<?> sales(@RequestBody SalesDto salesDto) throws Exception {
+
+        productService.saveSales(salesDto);
+
+        return ResponseEntity.ok().body(new CMRespDto<>("Successfully", true));
+    }
 
 }

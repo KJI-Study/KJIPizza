@@ -18,7 +18,8 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 
-public class CartServiceImpl implements CartService{
+public class CartServiceImpl implements CartService {
+
 
 //     private final ProductRepository productRepository;
 //
@@ -64,14 +65,4 @@ public class CartServiceImpl implements CartService{
 //      productRepository.deleteCart(cartId);
 //    }
 //
-//    @Override
-//    public void deleteSelect(int cartId) throws Exception {
-//        productRepository.delselect(cartId);
-//    }
-//
-//    @Override
-//    public void delCartList(int tableId) throws Exception {
-//        productRepository.delCartList(tableId);
-//    }
-
 }
