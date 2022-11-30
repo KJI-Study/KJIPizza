@@ -29,113 +29,113 @@
             option_mst om
     </select>
 
-    <insert id="addCartList" parameterType="com.study.mvckjipizza.domain.Cart" useGeneratedKeys="true" keyProperty="id">
-        insert into
-            cart_mst (table_id, pdt_id, create_date, update_date)
-        values(
-            #{table_id},
-            #{pdt_id},
-            now(),
-            now()
-        )
-    </insert>
+<!--    <insert id="addCartList" parameterType="com.study.mvckjipizza.domain.Cart" useGeneratedKeys="true" keyProperty="id">-->
+<!--        insert into-->
+<!--            cart_mst (table_id, pdt_id, create_date, update_date)-->
+<!--        values(-->
+<!--            #{table_id},-->
+<!--            #{pdt_id},-->
+<!--            now(),-->
+<!--            now()-->
+<!--        )-->
+<!--    </insert>-->
 
-    <insert id="addCartDtls" parameterType="list">
-        insert into
-            order_dtl
-        values
-            <foreach collection="list" item="list" separator=",">
-                (
-                    0,
-                    #{list.cart_id},
-                    #{list.option_id},
-                    now(),
-                    now()
-                )
-            </foreach>
+<!--    <insert id="addCartDtls" parameterType="list">-->
+<!--        insert into-->
+<!--            order_dtl-->
+<!--        values-->
+<!--            <foreach collection="list" item="list" separator=",">-->
+<!--                (-->
+<!--                    0,-->
+<!--                    #{list.cart_id},-->
+<!--                    #{list.option_id},-->
+<!--                    now(),-->
+<!--                    now()-->
+<!--                )-->
+<!--            </foreach>-->
 
-    </insert>
+<!--    </insert>-->
 
-    <resultMap id="CartItemsList" type="com.study.mvckjipizza.domain.Option">
-        <result property="option_name" column="option_name"></result>
-        <result property="option_price" column="option_price"></result>
+<!--    <resultMap id="CartItemsList" type="com.study.mvckjipizza.domain.Option">-->
+<!--        <result property="option_name" column="option_name"></result>-->
+<!--        <result property="option_price" column="option_price"></result>-->
 
-    </resultMap>
+<!--    </resultMap>-->
 
-    <resultMap id="cartListMap" type="com.study.mvckjipizza.domain.CartItems">
-        <result property="table_id" column="table_id"></result>
-        <result property="cart_id" column="cart_id"></result>
-        <result property="pdt_name" column="pdt_name"></result>
-        <result property="pdt_price" column="pdt_price"></result>
-        <result property="category_id" column="category_id"></result>
-        <result property="save_name" column="save_name"></result>
-        <result property="origin_name" column="origin_name"></result>
+<!--    <resultMap id="cartListMap" type="com.study.mvckjipizza.domain.CartItems">-->
+<!--        <result property="table_id" column="table_id"></result>-->
+<!--        <result property="cart_id" column="cart_id"></result>-->
+<!--        <result property="pdt_name" column="pdt_name"></result>-->
+<!--        <result property="pdt_price" column="pdt_price"></result>-->
+<!--        <result property="category_id" column="category_id"></result>-->
+<!--        <result property="save_name" column="save_name"></result>-->
+<!--        <result property="origin_name" column="origin_name"></result>-->
 
-        <collection property="cart_options" javaType="list" resultMap="CartItemsList"></collection>
-    </resultMap>
+<!--        <collection property="cart_options" javaType="list" resultMap="CartItemsList"></collection>-->
+<!--    </resultMap>-->
 
-    <select id="getCartItemsList" resultMap="cartListMap">
-        SELECT
-            cm.table_id,
-            cm.id AS cart_id,
-            pm.pdt_name,
-            pm.pdt_price,
-            pm.category_id,
-            opm.option_name,
-            opm.option_price
-        FROM
-            cart_mst cm
-            LEFT OUTER JOIN pdt_mst pm ON(pm.id = cm.pdt_id)
-            LEFT OUTER JOIN order_dtl od ON(od.cart_id = cm.id)
-            LEFT OUTER JOIN option_mst opm ON(opm.id = od.option_id)
-        WHERE
-            cm.table_id = #{table_id}
-    </select>
+<!--    <select id="getCartItemsList" resultMap="cartListMap">-->
+<!--        SELECT-->
+<!--            cm.table_id,-->
+<!--            cm.id AS cart_id,-->
+<!--            pm.pdt_name,-->
+<!--            pm.pdt_price,-->
+<!--            pm.category_id,-->
+<!--            opm.option_name,-->
+<!--            opm.option_price-->
+<!--        FROM-->
+<!--            cart_mst cm-->
+<!--            LEFT OUTER JOIN pdt_mst pm ON(pm.id = cm.pdt_id)-->
+<!--            LEFT OUTER JOIN order_dtl od ON(od.cart_id = cm.id)-->
+<!--            LEFT OUTER JOIN option_mst opm ON(opm.id = od.option_id)-->
+<!--        WHERE-->
+<!--            cm.table_id = #{table_id}-->
+<!--    </select>-->
 
-    <select id="getPayItems" resultMap="cartListMap">
-        SELECT
-            cm.table_id,
-            cm.id AS cart_id,
-            pm.pdt_name,
-            pm.pdt_price,
-            pm.category_id,
-            opm.option_name,
-            pm.save_name,
-            pm.origin_name,
-            opm.option_price
+<!--    <select id="getPayItems" resultMap="cartListMap">-->
+<!--        SELECT-->
+<!--            cm.table_id,-->
+<!--            cm.id AS cart_id,-->
+<!--            pm.pdt_name,-->
+<!--            pm.pdt_price,-->
+<!--            pm.category_id,-->
+<!--            opm.option_name,-->
+<!--            pm.save_name,-->
+<!--            pm.origin_name,-->
+<!--            opm.option_price-->
 
-        FROM
-            cart_mst cm
-            LEFT OUTER JOIN pdt_mst pm ON(pm.id = cm.pdt_id)
-            LEFT OUTER JOIN order_dtl od ON(od.cart_id = cm.id)
-            LEFT OUTER JOIN option_mst opm ON(opm.id = od.option_id)
+<!--        FROM-->
+<!--            cart_mst cm-->
+<!--            LEFT OUTER JOIN pdt_mst pm ON(pm.id = cm.pdt_id)-->
+<!--            LEFT OUTER JOIN order_dtl od ON(od.cart_id = cm.id)-->
+<!--            LEFT OUTER JOIN option_mst opm ON(opm.id = od.option_id)-->
 
-        WHERE
-            cm.table_id = #{table_id}
-    </select>
+<!--        WHERE-->
+<!--            cm.table_id = #{table_id}-->
+<!--    </select>-->
 
 
-    <delete id="deleteCart" parameterType="com.study.mvckjipizza.domain.CartItems">
-        delete
-        from
-            cart_mst
-        where
-           id = #{cart_id}
-    </delete>
+<!--    <delete id="deleteCart" parameterType="com.study.mvckjipizza.domain.CartItems">-->
+<!--        delete-->
+<!--        from-->
+<!--            cart_mst-->
+<!--        where-->
+<!--           id = #{cart_id}-->
+<!--    </delete>-->
 
-    <delete id="delselect" parameterType="com.study.mvckjipizza.domain.CartItems">
-        delete
-        from
-            order_dtl
-        where
-            cart_id = #{cart_id}
-    </delete>
+<!--    <delete id="delselect" parameterType="com.study.mvckjipizza.domain.CartItems">-->
+<!--        delete-->
+<!--        from-->
+<!--            order_dtl-->
+<!--        where-->
+<!--            cart_id = #{cart_id}-->
+<!--    </delete>-->
 
-    <delete id="delCartList" parameterType="com.study.mvckjipizza.domain.CartItems">
-        delete
-        from
-            cart_mst
-        where
-            table_id = #{tableId}
-    </delete>
+<!--    <delete id="delCartList" parameterType="com.study.mvckjipizza.domain.CartItems">-->
+<!--        delete-->
+<!--        from-->
+<!--            cart_mst-->
+<!--        where-->
+<!--            table_id = #{tableId}-->
+<!--    </delete>-->
 </mapper>
