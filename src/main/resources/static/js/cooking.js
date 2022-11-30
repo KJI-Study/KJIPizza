@@ -81,6 +81,7 @@ class PayItemsApi{
 
 
 document.querySelector(".exit-button").onclick = () => {
+    location.href ="/table/" + tableNumber;
     
 
 }
