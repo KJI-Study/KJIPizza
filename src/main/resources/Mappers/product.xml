@@ -137,4 +137,14 @@
         where
             table_id = #{tableId}
     </delete>
+
+    <insert id="saveSales" parameterType="com.study.mvckjipizza.domain.Sales">
+        INSERT INTO
+            sales_mst
+        VALUES(
+            0,
+            #{merchant_uid},
+            #{paid_amount}
+        )
+    </insert>
 </mapper>

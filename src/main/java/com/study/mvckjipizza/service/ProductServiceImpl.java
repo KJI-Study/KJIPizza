@@ -1,7 +1,10 @@
 package com.study.mvckjipizza.service;
 
+import com.study.mvckjipizza.domain.Sales;
 import com.study.mvckjipizza.dto.OptionListRespDto;
 import com.study.mvckjipizza.dto.ProductListRespDto;
+import com.study.mvckjipizza.dto.SalesDto;
+import com.study.mvckjipizza.excetpion.CustomInternalServerErrorException;
 import com.study.mvckjipizza.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -40,5 +43,14 @@ public class ProductServiceImpl implements ProductService {
             optionList.add(optionProduct.toDto());
         });
         return optionList;
+    }
+
+    @Override
+    public void saveSales(SalesDto salesDto) throws Exception {
+        Sales sales = salesDto.toEntity();
+
+        if(productRepository.saveSales(sales) == 0) {
+            throw new CustomInternalServerErrorException("결제중 문제 발생");
+        }
     }
 }
