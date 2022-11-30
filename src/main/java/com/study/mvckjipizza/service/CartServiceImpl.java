@@ -60,14 +60,11 @@ public class CartServiceImpl implements CartService{
 
     }
     @Override
-    public void deleteCart(int cartId) throws Exception {
-      productRepository.deleteCart(cartId);
+    public void deleteCart(CartReqDto cartRespDto) throws Exception {
+        Cart cart = cartRespDto.toCartEntity();
+        System.out.println(cart);
+        productRepository.deleteCart(cart);
     }
-
-//    @Override
-//    public void deleteSelect(int cartId) throws Exception {
-//        productRepository.delselect(cartId);
-//    }
 
     @Override
     public void delCartList(int tableId) throws Exception {

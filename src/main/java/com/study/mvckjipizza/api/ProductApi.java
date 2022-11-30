@@ -45,11 +45,10 @@ public class ProductApi {
         return ResponseEntity.ok().body(new CMRespDto<>("Get Successfully", cartService.getCartItems(tableId)));
     }
 
-    @DeleteMapping("/products/cart/deleteitem/{cartId}")
-    public ResponseEntity<?> deleteCartProduct(@PathVariable int cartId) throws Exception {
+    @DeleteMapping("/products/cart/deleteitem")
+    public ResponseEntity<?> deleteCartProduct(@RequestBody CartReqDto cartRespDto) throws Exception {
 
-        cartService.deleteCart(cartId);
-//        cartService.deleteSelect(cartId);
+        cartService.deleteCart(cartRespDto);
 
         return ResponseEntity.ok().body(new CMRespDto<>("Delete Successfully", true));
     }

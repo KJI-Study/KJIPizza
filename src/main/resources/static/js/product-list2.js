@@ -3,8 +3,8 @@ const mainContainer = document.querySelectorAll(".main-container");
 const url = location.href;
 const tableNumber = url.substring(url.lastIndexOf("/") + 1 );
 
-const selectPdtId = new Array();
-const pdtChecked = new Array();
+const cartItems = new Array(); // true false 
+
 
 document.querySelector(".order-detail-btn").onclick = () => {
   location.href = "/order/" + tableNumber;
@@ -17,7 +17,7 @@ var entity = {
   page : 1
 };
 
-var cart = {
+const cart = {
   pdtId : 0,
   tableId : tableNumber,
   size: 1,
@@ -259,9 +259,9 @@ class TableService {
          document.querySelector(".modal-container").classList.add("hidden");
          document.querySelectorAll(".product-select")[index].classList.add("goCart");
 
-         const sized = document.getElementsByName("size-select").length;  // 2 
-         const crusted = document.getElementsByName("crust-select").length;  // 4
-         const toppinged = document.getElementsByName("topping-select").length; // 2
+         const sized = document.getElementsByName("size-select").length;  
+         const crusted = document.getElementsByName("crust-select").length; 
+         const toppinged = document.getElementsByName("topping-select").length; 
 
            for(var i = 0; i<sized; i++){
              if(document.getElementsByName("size-select")[i].checked == true){
@@ -280,24 +280,27 @@ class TableService {
                cart['topping'] = document.getElementsByName("topping-select")[i].value;
              }
            }
-          CartApi.getInstance().postCartId();
+
+          const cartpush = {
+            pdtDtlId : responseData[index].productId,
+            pdtDtlCartegory : (entity.page +1 ),
+            pdtDtlSize : cart.size,
+            pdtDtlCrust : cart.crust,
+            pdtDtlTopping : cart.topping
+          }
 
           let emptyFlag = true;
 
-          const selectPdt = responseData[index].productId;
-
-          for(let selectPdtObj of selectPdtId) {
-            if(selectPdtObj == selectPdt){
+          for(let selectPdtItems of cartItems) {
+            if(JSON.stringify(selectPdtItems) === JSON.stringify(cartpush)){
                 emptyFlag = false;  
-                pdtChecked.push(emptyFlag);
                 break;
             }
           }
-          if(emptyFlag){
-            selectPdtId.push(selectPdt);
-            pdtChecked.push(emptyFlag);
+           if(emptyFlag){
+            cartItems.push(cartpush); 
+            console.log(cartItems);
           }
-         
          }
       }
     });

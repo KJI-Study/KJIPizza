@@ -117,27 +117,14 @@
     </select>
 
 
-    <delete id="deleteCart" parameterType="com.study.mvckjipizza.domain.CartItems">
+    <delete id="deleteCart" parameterType="com.study.mvckjipizza.domain.Cart">
         DELETE FROM
         a,b
         USING cart_mst AS a
         LEFT JOIN order_dtl AS b
         ON a.id = b.cart_id
-        WHERE a.pdt_id = #{pdt_id}
-<!--        delete-->
-<!--        from-->
-<!--            cart_mst-->
-<!--        where-->
-<!--           id = #{cart_id}-->
+        WHERE a.pdt_id = #{pdt_id} AND a.table_id = #{table_id}
     </delete>
-
-<!--    <delete id="delselect" parameterType="com.study.mvckjipizza.domain.CartItems">-->
-<!--        delete-->
-<!--        from-->
-<!--            order_dtl-->
-<!--        where-->
-<!--            cart_id = #{cart_id}-->
-<!--    </delete>-->
 
     <delete id="delCartList" parameterType="com.study.mvckjipizza.domain.CartItems">
 
