@@ -3,8 +3,8 @@ const mainContainer = document.querySelectorAll(".main-container");
 const url = location.href;
 const tableNumber = url.substring(url.lastIndexOf("/") + 1 );
 
-const selectPdtId = new Array();
-const pdtChecked = new Array();
+const cartItems = new Array(); // true false 
+const cartItems2 = new Array() // 중복 된것들 넣는 배열.
 
 document.querySelector(".order-detail-btn").onclick = () => {
   location.href = "/order/" + tableNumber;
@@ -17,7 +17,7 @@ var entity = {
   page : 1
 };
 
-var cart = {
+const cart = {
   pdtId : 0,
   tableId : tableNumber,
   size: 1,
@@ -144,7 +144,7 @@ class TableService {
       cart['tableId'] = tableNumber;
       collectionProducts[index].classList.remove("goCart");
       modalProduct.classList.remove("hidden");
-      
+      console.log(response.data);
       if((entity.page+1) == 2){
         modalProduct.innerHTML = `
         <div class="bg"></div>
@@ -255,13 +255,13 @@ class TableService {
           document.querySelector(".modal-container").classList.add("hidden");
         };
         
-         document.querySelector(".modal-cart-btn").onclick = () => {
+        document.querySelector(".modal-cart-btn").onclick = () => {
          document.querySelector(".modal-container").classList.add("hidden");
          document.querySelectorAll(".product-select")[index].classList.add("goCart");
 
-         const sized = document.getElementsByName("size-select").length;  // 2 
-         const crusted = document.getElementsByName("crust-select").length;  // 4
-         const toppinged = document.getElementsByName("topping-select").length; // 2
+         const sized = document.getElementsByName("size-select").length;  
+         const crusted = document.getElementsByName("crust-select").length; 
+         const toppinged = document.getElementsByName("topping-select").length; 
 
            for(var i = 0; i<sized; i++){
              if(document.getElementsByName("size-select")[i].checked == true){
@@ -280,24 +280,117 @@ class TableService {
                cart['topping'] = document.getElementsByName("topping-select")[i].value;
              }
            }
-          CartApi.getInstance().postCartId();
+
+          const cartpush = {
+            pdtDtlId : responseData[index].productId,
+            pdtDtlCartegory : (entity.page +1 ),
+            pdtDtlSize : (cart.size -1) ,
+            pdtDtlCrust : (cart.crust -1),
+            pdtDtlTopping : (cart.topping -1)
+          }
 
           let emptyFlag = true;
 
-          const selectPdt = responseData[index].productId;
-
-          for(let selectPdtObj of selectPdtId) {
-            if(selectPdtObj == selectPdt){
-                emptyFlag = false;  
-                pdtChecked.push(emptyFlag);
+          for(let [index,selectPdtItems]  of cartItems.entries()) {
+            if(JSON.stringify(selectPdtItems) === JSON.stringify(cartpush)){
+                emptyFlag = false;
+                cartItems2.push(cartpush);
                 break;
             }
           }
-          if(emptyFlag){
-            selectPdtId.push(selectPdt);
-            pdtChecked.push(emptyFlag);
+
+           if(emptyFlag){
+            cartItems.push(cartpush); 
+            console.log(cartItems);
+            //아마도 메소드로 빼야할듯..?
+            if(cartpush.pdtDtlCartegory == 2){
+            cartMain.innerHTML += `
+            <div class="cart-item" value="">
+            <div class="cart-item-dtl">
+                <div class="cart-item-name">${responseData[index].productName}</div>
+                <div class="cart-item-option">${response.data[cartpush.pdtDtlSize].optionName}
+                ${response.data[cartpush.pdtDtlCrust].optionName}
+                ${response.data[cartpush.pdtDtlTopping].optionName}
+                </div>
+                <div class="cart-item-price">${responseData[index].productPrice + response.data[cartpush.pdtDtlSize].optionPrice + response.data[cartpush.pdtDtlCrust].optionPrice + response.data[cartpush.pdtDtlTopping].optionPrice}</div>
+            </div>
+            <button type="button" class="cart-minus-btn">-</button>
+            <input type="text" class="numbertext" value=1 >
+            <button type="button" class="cart-plus-btn">+</button>
+            <button type="button" class="cart-remove-btn">삭제</button>
+            </div>
+            `;
+            }else {
+              cartMain.innerHTML += `
+              <div class="cart-item" value="">
+              <div class="cart-item-dtl">
+                  <div class="cart-item-name">${responseData[index].productName}</div>
+                  <div class="cart-item-option"></div>
+                  <div class="cart-item-price">${responseData[index].productPrice}</div>
+              </div>
+              <button type="button" class="cart-minus-btn">-</button>
+              <input type="text" class="numbertext" value=1>
+              <button type="button" class="cart-plus-btn">+</button>
+              <button type="button" class="cart-remove-btn">삭제</button>
+              </div>
+              `;
+            }
           }
-         
+
+          const resultsum = document.querySelector(".total-price");
+          const itemList = document.querySelectorAll(".cart-item");
+          const plusbtn = document.querySelectorAll(".cart-plus-btn");
+          const miusbtn = document.querySelectorAll(".cart-minus-btn");
+          const numbersum = document.querySelectorAll(".numbertext");
+          const deletebtn = document.querySelectorAll(".cart-remove-btn");
+          const firstPrice = document.querySelectorAll(".cart-item-price");
+          var result = 0;
+
+
+          for(var i = 0; i<itemList.length; i++){
+            if(JSON.stringify(cartItems2[i]) === JSON.stringify(cartpush)){
+
+            }
+          }
+
+
+          for(var i = 0; i<firstPrice.length; i++){
+              result += (firstPrice[i].innerText * 1);   
+          }
+
+          resultsum.value = result;
+
+           plusbtn.forEach((button, index) => {
+           button.onclick = () =>{
+              numbersum[index].value++;
+              
+              result = 0;
+
+              for(var i = 0; i<plusbtn.length; i++){
+                  result += (firstPrice[i].innerText * numbersum[i].value);   
+              }
+              resultsum.value = result;
+            }
+          })
+
+           miusbtn.forEach((button, index) => {
+              button.onclick = () =>{
+                 numbersum[index].value--;
+
+                 result = resultsum.value;
+
+                 result -= (firstPrice[index].innerText * 1);   
+      
+                 resultsum.value = result;
+
+                 }
+             })
+            deletebtn.forEach((button, index) => {
+              button.onclick = () => {
+                cartItems.pop(cartItems[index]);
+
+              }
+          })
          }
       }
     });
@@ -351,7 +444,7 @@ window.onload = () => {
     this.entity['page'] = 0;
     TableSelectApi.getInstance().getCollections(entity.btnvalue);
     TableService.getInstance().loadCollections();
-    CartItemsApi.getInstance().getCartItems();
+   // CartItemsApi.getInstance().getCartItems();
   
  };
 

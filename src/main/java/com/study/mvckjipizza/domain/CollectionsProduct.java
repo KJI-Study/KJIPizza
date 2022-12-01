@@ -16,7 +16,7 @@ public class CollectionsProduct {
     private String pdt_name;
     private int pdt_price;
     private String save_name;
-
+    private int cartegory_id;
 
     public ProductListRespDto toDto() {
         return ProductListRespDto.builder()
@@ -24,6 +24,7 @@ public class CollectionsProduct {
                 .productName(pdt_name)
                 .productPrice(pdt_price)
                 .Img(save_name)
+                .productCategory(cartegory_id)
                 .build();
     }
 }

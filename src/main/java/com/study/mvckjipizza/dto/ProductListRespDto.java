@@ -10,4 +10,5 @@ public class ProductListRespDto {
     private String productName;
     private int productPrice;
     private String Img;
+    private int productCategory;
 }

@@ -54,10 +54,10 @@ class CartItemsApi {
         
         
         responseData.forEach((product,index) => {
-            if(pdtChecked[index] == true){
+        if(pdtChecked[index] == true){
             if(product.cartegoryId == 2){
                 cartMain.innerHTML += `
-                <div class="cart-item">
+                <div class="cart-item" value="${product.pdtId}">
                 <div class="cart-item-dtl">
                     <div class="cart-item-name">${product.pdtName}</div>
                     <div class="cart-item-option">${product.cartOptions[0].optionName}
@@ -74,7 +74,7 @@ class CartItemsApi {
                 `;
             } else {
                 cartMain.innerHTML += `
-                <div class="cart-item">
+                <div class="cart-item" value="${product.pdtId}" >
                 <div class="cart-item-dtl">
                     <div class="cart-item-name">${product.pdtName}</div>
                     <div class="cart-item-option"></div>
@@ -89,12 +89,23 @@ class CartItemsApi {
             }
         }
 
-            const itemList = document.querySelectorAll(".cart-item");
-            const plusbtn = document.querySelectorAll(".cart-plus-btn");
-            const miusbtn = document.querySelectorAll(".cart-minus-btn");
-            const numbersum = document.querySelectorAll(".numbertext");
-            const deletebtn = document.querySelectorAll(".cart-remove-btn")
+        const itemList = document.querySelectorAll(".cart-item");
+        const plusbtn = document.querySelectorAll(".cart-plus-btn");
+        const miusbtn = document.querySelectorAll(".cart-minus-btn");
+        const numbersum = document.querySelectorAll(".numbertext");
+        const deletebtn = document.querySelectorAll(".cart-remove-btn")
 
+        for(var i = 0; i<itemList.length; i++){
+            for(var k = 0; k<responseData.length; k++){
+                if(pdtChecked[k] == false && pdtChecked2[k] == false){
+                   if(itemList[i].value == selectPdtId[k]){
+                     numbersum[i].value++;
+                     pdtChecked2[k] = true;
+                   }
+                }
+            }
+        }
+    
             var result = 0;
             
             console.log(responseData.length);
@@ -128,7 +139,13 @@ class CartItemsApi {
                })
                deletebtn.forEach((button, index) => {
                 button.onclick = () => {
-                    DeleteApi.getInstance().deleteCart(responseData[index].pdtId);
+                     
+                    const delCart = {
+                        pdtId : responseData[index].pdtId,
+                        tableId : tableNumber
+                    }
+
+                    DeleteApi.getInstance().deleteCart(delCart);
                     console.log(responseData[index].cartId)
                 }
             })
@@ -147,12 +164,12 @@ class DeleteApi {
     return this.#instance;
     }
     
-    deleteCart(pdtId){
+    deleteCart(delCart){
         $.ajax({
             async: false,
             type: "delete",
-            url: "/api/products/cart/deleteitem/" + pdtId,
-            data:  JSON.stringify(pdtId),
+            url: "/api/products/cart/deleteitem",
+            data:  JSON.stringify(delCart),
             contentType: "application/json",
             dataType: "json",
             success: (response) => {
