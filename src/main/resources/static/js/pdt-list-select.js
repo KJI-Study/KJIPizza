@@ -202,17 +202,6 @@ class load {
                 pdtDeleteApi.getInstance().deleteProduct();
             }
         })
-
-
-
-
-
-
-
-
-
-
-
     }
 }
 

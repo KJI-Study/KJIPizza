@@ -2,9 +2,10 @@ const categoryButtons = document.querySelectorAll(".category");
 const mainContainer = document.querySelectorAll(".main-container");
 const url = location.href;
 const tableNumber = url.substring(url.lastIndexOf("/") + 1 );
+const cartMain = document.querySelector(".cart-main");
 
 const cartItems = new Array(); // true false 
-const cartItems2 = new Array() // 중복 된것들 넣는 배열.
+const stockList = new Array();
 
 document.querySelector(".order-detail-btn").onclick = () => {
   location.href = "/order/" + tableNumber;
@@ -291,16 +292,19 @@ class TableService {
 
           let emptyFlag = true;
 
-          for(let [index,selectPdtItems]  of cartItems.entries()) {
-            if(JSON.stringify(selectPdtItems) === JSON.stringify(cartpush)){
+          for(let i = 0; i<cartItems.length; i++) {
+            if(JSON.stringify(cartItems[i]) == JSON.stringify(cartpush)){
                 emptyFlag = false;
-                cartItems2.push(cartpush);
+                stockList[i] += 1;
+                console.log(cartItems);
+                console.log(stockList);
                 break;
             }
           }
 
            if(emptyFlag){
-            cartItems.push(cartpush); 
+            cartItems.push(cartpush);
+            stockList.push(1); 
             console.log(cartItems);
             //아마도 메소드로 빼야할듯..?
             if(cartpush.pdtDtlCartegory == 2){
@@ -315,7 +319,7 @@ class TableService {
                 <div class="cart-item-price">${responseData[index].productPrice + response.data[cartpush.pdtDtlSize].optionPrice + response.data[cartpush.pdtDtlCrust].optionPrice + response.data[cartpush.pdtDtlTopping].optionPrice}</div>
             </div>
             <button type="button" class="cart-minus-btn">-</button>
-            <input type="text" class="numbertext" value=1 >
+            <input type="text" class="numbertext" value=1>
             <button type="button" class="cart-plus-btn">+</button>
             <button type="button" class="cart-remove-btn">삭제</button>
             </div>
@@ -347,10 +351,8 @@ class TableService {
           var result = 0;
 
 
-          for(var i = 0; i<itemList.length; i++){
-            if(JSON.stringify(cartItems2[i]) === JSON.stringify(cartpush)){
-
-            }
+          for(var i =0; i<stockList.length; i++){
+            numbersum[i].value = stockList[i];
           }
 
 
