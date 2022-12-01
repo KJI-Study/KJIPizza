@@ -1,8 +1,7 @@
 package com.study.mvckjipizza.dto;
 
 
-import com.study.mvckjipizza.domain.Cart;
-import com.study.mvckjipizza.domain.CartDtl;
+
 import com.study.mvckjipizza.domain.Option;
 import lombok.AllArgsConstructor;
 import lombok.Data;
