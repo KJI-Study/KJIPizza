@@ -10,5 +10,5 @@ public interface ProductService {
 
     public List<ProductListRespDto> getProductList(String category) throws Exception;
     public List<OptionListRespDto> getOptionList() throws Exception;
-    public void saveSales(SalesDto salesDto) throws Exception;
+//    public void saveSales(SalesDto salesDto) throws Exception;
 }

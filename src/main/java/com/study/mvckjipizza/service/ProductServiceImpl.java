@@ -45,12 +45,12 @@ public class ProductServiceImpl implements ProductService {
         return optionList;
     }
 
-    @Override
-    public void saveSales(SalesDto salesDto) throws Exception {
-        Sales sales = salesDto.toEntity();
-
-        if(productRepository.saveSales(sales) == 0) {
-            throw new CustomInternalServerErrorException("결제중 문제 발생");
-        }
-    }
+//    @Override
+//    public void saveSales(SalesDto salesDto) throws Exception {
+//        Sales sales = salesDto.toEntity();
+//
+//        if(productRepository.saveSales(sales) == 0) {
+//            throw new CustomInternalServerErrorException("결제중 문제 발생");
+//        }
+//    }
 }
