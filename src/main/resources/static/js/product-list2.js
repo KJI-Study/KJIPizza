@@ -4,7 +4,7 @@ const url = location.href;
 const tableNumber = url.substring(url.lastIndexOf("/") + 1 );
 
 const cartItems = new Array(); // true false 
-
+const cartItems2 = new Array() // 중복 된것들 넣는 배열.
 
 document.querySelector(".order-detail-btn").onclick = () => {
   location.href = "/order/" + tableNumber;
@@ -255,7 +255,7 @@ class TableService {
           document.querySelector(".modal-container").classList.add("hidden");
         };
         
-         document.querySelector(".modal-cart-btn").onclick = () => {
+        document.querySelector(".modal-cart-btn").onclick = () => {
          document.querySelector(".modal-container").classList.add("hidden");
          document.querySelectorAll(".product-select")[index].classList.add("goCart");
 
@@ -291,16 +291,17 @@ class TableService {
 
           let emptyFlag = true;
 
-          for(let selectPdtItems of cartItems) {
+          for(let [index,selectPdtItems]  of cartItems.entries()) {
             if(JSON.stringify(selectPdtItems) === JSON.stringify(cartpush)){
-                emptyFlag = false;  
+                emptyFlag = false;
+                cartItems2.push(cartpush);
                 break;
             }
           }
+
            if(emptyFlag){
             cartItems.push(cartpush); 
             console.log(cartItems);
-
             //아마도 메소드로 빼야할듯..?
             if(cartpush.pdtDtlCartegory == 2){
             cartMain.innerHTML += `
@@ -314,7 +315,7 @@ class TableService {
                 <div class="cart-item-price">${responseData[index].productPrice + response.data[cartpush.pdtDtlSize].optionPrice + response.data[cartpush.pdtDtlCrust].optionPrice + response.data[cartpush.pdtDtlTopping].optionPrice}</div>
             </div>
             <button type="button" class="cart-minus-btn">-</button>
-            <input type="text" class="numbertext" value=1>
+            <input type="text" class="numbertext" value=1 >
             <button type="button" class="cart-plus-btn">+</button>
             <button type="button" class="cart-remove-btn">삭제</button>
             </div>
@@ -344,6 +345,14 @@ class TableService {
           const deletebtn = document.querySelectorAll(".cart-remove-btn");
           const firstPrice = document.querySelectorAll(".cart-item-price");
           var result = 0;
+
+
+          for(var i = 0; i<itemList.length; i++){
+            if(JSON.stringify(cartItems2[i]) === JSON.stringify(cartpush)){
+
+            }
+          }
+
 
           for(var i = 0; i<firstPrice.length; i++){
               result += (firstPrice[i].innerText * 1);   
