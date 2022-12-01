@@ -3,7 +3,7 @@ package com.study.mvckjipizza.api;
 
 import com.study.mvckjipizza.dto.CMRespDto;
 
-import com.study.mvckjipizza.dto.CartItemsRespDto;
+//import com.study.mvckjipizza.dto.CartItemsRespDto;
 import com.study.mvckjipizza.dto.SalesDto;
 
 import com.study.mvckjipizza.service.CartService;
