@@ -3,6 +3,8 @@ const mainContainer = document.querySelectorAll(".main-container");
 const url = location.href;
 const tableNumber = url.substring(url.lastIndexOf("/") + 1 );
 const goCartButton = document.querySelector(".bag-btn");
+const resultsum = document.querySelector(".total-price");
+
 
 
 document.querySelector(".order-detail-btn").onclick = () => {
@@ -99,7 +101,7 @@ class Cart {
                 ${items.productOptionList[1].optionName}
                 ${items.productOptionList[2].optionName}
                 </div>
-                <div class="cart-item-price">${items.productPrice}</div>
+                <div class="cart-item-price">${items.productPrice + items.productOptionList[0].optionPrice + items.productOptionList[1].optionPrice + items.productOptionList[2].optionPrice}</div>
             </div>
             <button type="button" class="cart-minus-btn">-</button>
             <input type="text" class="numbertext" value=1>
@@ -127,13 +129,66 @@ class Cart {
     })
     Cart.getInstance().deleteProduct();
 
+    Cart.getInstance().miusProduct();
+    Cart.getInstance().plusProduct();
+
+   
+    //누르자마자 가격 띄우기 완료.
+    const btnText = document.querySelectorAll(".numbertext");
+    const firstPrice = document.querySelectorAll(".cart-item-price");
+
+    var result = 0;
+
+    for(var i = 0; i<this.stockList.length; i++){
+      btnText[i].value = this.stockList[i];
+    }
+
+
+    for(var i = 0; i<btnText.length; i++){
+      result += (firstPrice[i].innerText * btnText[i].value);    
+    }
+
+    resultsum.value = result;
+
   }
 
   miusProduct() {
+    const minusbtn = document.querySelectorAll(".cart-minus-btn");
+    const btnText = document.querySelectorAll(".numbertext");
+    const firstPrice = document.querySelectorAll(".cart-item-price");
+    var result = 0;
+    minusbtn.forEach((button,index) => {
+      button.onclick = () => {
+        btnText[index].value--;
 
+        result = resultsum.value;
+
+        result -= (firstPrice[index].innerText * 1);   
+      
+        resultsum.value = result;
+
+        
+      }
+    })
   }
   plusProduct() { 
-  
+    const plusbtn = document.querySelectorAll(".cart-plus-btn");
+    const btnText = document.querySelectorAll(".numbertext");
+    const firstPrice = document.querySelectorAll(".cart-item-price");
+    var result = 0;
+
+    plusbtn.forEach((button,index) => {
+      button.onclick = () => {
+        btnText[index].value++;
+
+        result = 0;
+
+        for(var i = 0; i<plusbtn.length; i++){
+          result += (firstPrice[i].innerText * btnText[i].value);    
+        }
+        resultsum.value = result;
+      }
+    })
   }
   //재률
   clearList() {
@@ -411,6 +466,8 @@ class TableService {
         };
       
         document.querySelector(".modal-cart-btn").onclick = () => {
+          document.querySelector(".modal-container").classList.add("hidden");
+          document.querySelectorAll(".product-select")[index].classList.add("goCart");
           let product = new Product(responseData[index].productId, responseData[index].productName, responseData[index].productPrice);
 
           if(entity.page + 1 == 2) {
