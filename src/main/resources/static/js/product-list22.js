@@ -3,7 +3,6 @@ const mainContainer = document.querySelectorAll(".main-container");
 const url = location.href;
 const tableNumber = url.substring(url.lastIndexOf("/") + 1 );
 const goCartButton = document.querySelector(".bag-btn");
-const deletebtn = document.querySelectorAll(".cart-remove-btn");
 
 
 document.querySelector(".order-detail-btn").onclick = () => {
@@ -126,6 +125,7 @@ class Cart {
         }
       }
     })
+    Cart.getInstance().deleteProduct();
 
   }
 
@@ -137,20 +137,27 @@ class Cart {
   }
   //재률
   clearList() {
-    deletebtn.forEach((button, index) => {
-      button.onclick = () => {
-        console.log(index);
-        console.log(cartList.indexOf(cartList[index]));
-        if(index == cartList.indexOf(cartList[index])) {
-          cartList.splice(index,1);
-        }
-        console.log(cartList);
-      }
-    });
+    
   }
 
-  deleteProduct() {
-
+  deleteProduct() {  
+  const deletebtn = document.querySelectorAll(".cart-remove-btn");
+    
+    deletebtn.forEach((button, index) => {
+      button.onclick = () => {
+        console.log(button);
+        console.log(index);
+        console.log(this.cartList.indexOf(this.cartList[index]));
+        if(index == this.cartList.indexOf(this.cartList[index])) {
+          this.cartList.splice(index, 1);
+          this.stockList.splice(index, 1);
+        }
+        console.log(this.cartList);
+        Cart.getInstance().createCartList();
+        Cart.getInstance().sumCartItems();
+      }
+    });
+    
   }
 
   sumCartItems() {
@@ -220,6 +227,7 @@ function clear() {
 //장바구니 열었을때 목록 만들어주는것.
 goCartButton.onclick = () => {
   Cart.getInstance().createCartList();
+  
 }
 
 
