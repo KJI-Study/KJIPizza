@@ -307,23 +307,24 @@ class TableService {
             stockList.push(1); 
             console.log(cartItems);
             //아마도 메소드로 빼야할듯..?
+
             if(cartpush.pdtDtlCartegory == 2){
             cartMain.innerHTML += `
-            <div class="cart-item" value="">
-            <div class="cart-item-dtl">
-                <div class="cart-item-name">${responseData[index].productName}</div>
-                <div class="cart-item-option">${response.data[cartpush.pdtDtlSize].optionName}
-                ${response.data[cartpush.pdtDtlCrust].optionName}
-                ${response.data[cartpush.pdtDtlTopping].optionName}
-                </div>
-                <div class="cart-item-price">${responseData[index].productPrice + response.data[cartpush.pdtDtlSize].optionPrice + response.data[cartpush.pdtDtlCrust].optionPrice + response.data[cartpush.pdtDtlTopping].optionPrice}</div>
-            </div>
-            <button type="button" class="cart-minus-btn">-</button>
-            <input type="text" class="numbertext" value=1>
-            <button type="button" class="cart-plus-btn">+</button>
-            <button type="button" class="cart-remove-btn">삭제</button>
-            </div>
-            `;
+              <div class="cart-item" value="">
+              <div class="cart-item-dtl">
+                  <div class="cart-item-name">${responseData[index].productName}</div>
+                  <div class="cart-item-option">${response.data[cartpush.pdtDtlSize].optionName}
+                  ${response.data[cartpush.pdtDtlCrust].optionName}
+                  ${response.data[cartpush.pdtDtlTopping].optionName}
+                  </div>
+                  <div class="cart-item-price">${responseData[index].productPrice + response.data[cartpush.pdtDtlSize].optionPrice + response.data[cartpush.pdtDtlCrust].optionPrice + response.data[cartpush.pdtDtlTopping].optionPrice}</div>
+              </div>
+              <button type="button" class="cart-minus-btn">-</button>
+              <input type="text" class="numbertext" value=1>
+              <button type="button" class="cart-plus-btn">+</button>
+              <button type="button" class="cart-remove-btn">삭제</button>
+              </div>
+              `;
             }else {
               cartMain.innerHTML += `
               <div class="cart-item" value="">
@@ -364,7 +365,8 @@ class TableService {
 
            plusbtn.forEach((button, index) => {
            button.onclick = () =>{
-              numbersum[index].value++;
+            
+            numbersum[index].value++;
               
               result = 0;
 
