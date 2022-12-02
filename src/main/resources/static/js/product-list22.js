@@ -4,8 +4,6 @@ const url = location.href;
 const tableNumber = url.substring(url.lastIndexOf("/") + 1 );
 const goCartButton = document.querySelector(".bag-btn");
 
-const cartItems = new Array(); // true false 
-const cartItems2 = new Array() // 중복 된것들 넣는 배열.
 
 document.querySelector(".order-detail-btn").onclick = () => {
   location.href = "/order/" + tableNumber;
@@ -43,6 +41,7 @@ class Product {
   productName = null;
   productPrice = null;
   productOptionList = null;
+  
 
   constructor(productId, productName, productPrice) {
     this.productId = productId;
@@ -50,6 +49,7 @@ class Product {
     this.productPrice = productPrice;
     this.productOptionList = new Array();
   }
+
 }
 
 
@@ -72,9 +72,8 @@ class Cart {
 
   addProduct(product) {
     for(let i = 0; i < this.cartList.length; i++) {
-      if(JSON.stringify(this.cartList[i]) == JSON.stringify(product)) {
+      if(JSON.stringify(this.cartList[i]) == JSON.stringify(product)) {   
         this.stockList[i] += 1;
-        
         console.log(this.cartList);
         console.log(this.stockList);
         return;
@@ -88,12 +87,59 @@ class Cart {
     console.log(this.stockList);
   }
 
-  removeProduct() {
-
+  createCartList() {
+    cartMain.innerHTML = "";
+    this.cartList.forEach(items => {
+        if(items.productOptionList.length > 1){
+          cartMain.innerHTML += `
+            <div class="cart-item" value="">
+            <div class="cart-item-dtl">
+                <div class="cart-item-name">${items.productName}</div>
+                <div class="cart-item-option">${items.productOptionList[0].optionName}
+                ${items.productOptionList[1].optionName}
+                ${items.productOptionList[2].optionName}
+                </div>
+                <div class="cart-item-price">${items.productPrice}</div>
+            </div>
+            <button type="button" class="cart-minus-btn">-</button>
+            <input type="text" class="numbertext" value=1>
+            <button type="button" class="cart-plus-btn">+</button>
+            <button type="button" class="cart-remove-btn">삭제</button>
+            </div>
+          `;
+        }else{
+        if(items.productOptionList.length > 1){
+            cartMain.innerHTML += `
+              <div class="cart-item" value="">
+              <div class="cart-item-dtl">
+                  <div class="cart-item-name">${items.productName}</div>
+                  <div class="cart-item-option"></div>
+                  <div class="cart-item-price">${items.productPrice}</div>
+              </div>
+              <button type="button" class="cart-minus-btn">-</button>
+              <input type="text" class="numbertext" value=1>
+              <button type="button" class="cart-plus-btn">+</button>
+              <button type="button" class="cart-remove-btn">삭제</button>
+              </div>
+            `;
+        }
+      }
+    })
   }
 
+  miusProduct() {
+
+  }
+  plusProduct() { 
+  
+  }
+  //재률
   clearList() {
     
+  }
+
+  deleteProduct() {
+
   }
 
   sumCartItems() {
@@ -160,6 +206,11 @@ function clear() {
     categoryButtons[i].style.color = "black";
   }
 }
+//장바구니 열었을때 목록 만들어주는것.
+goCartButton.onclick = () => {
+  Cart.getInstance().createCartList();
+}
+
 
 class TableService {
   static #instatnce = null;
@@ -353,10 +404,10 @@ class TableService {
                 if(data.optionId == option) {
                   let productOption = new ProductOption(data.optionId, data.optionName, data.optionPrice);
                   product.productOptionList.push(productOption);
+                  console.log(product.productOptionList);
                 }
               })
             });
-
             Cart.getInstance().addProduct(product);
           }else {
             Cart.getInstance().addProduct(product);
