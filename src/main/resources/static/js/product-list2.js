@@ -389,7 +389,13 @@ class TableService {
              })
             deletebtn.forEach((button, index) => {
               button.onclick = () => {
-                cartItems.pop(cartItems[index]);
+                console.log(index);
+                console.log(cartItems.indexOf(cartItems[index]));
+                if(index == cartItems.indexOf(cartItems[index])) {
+                  cartItems.splice(index,1);
+                }
+                console.log(cartItems);
+                
 
               }
           })

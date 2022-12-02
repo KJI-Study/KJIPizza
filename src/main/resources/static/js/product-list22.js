@@ -3,6 +3,7 @@ const mainContainer = document.querySelectorAll(".main-container");
 const url = location.href;
 const tableNumber = url.substring(url.lastIndexOf("/") + 1 );
 const goCartButton = document.querySelector(".bag-btn");
+const deletebtn = document.querySelectorAll(".cart-remove-btn");
 
 const cartItems = new Array(); // true false 
 const cartItems2 = new Array() // 중복 된것들 넣는 배열.
@@ -89,6 +90,16 @@ class Cart {
   }
 
   removeProduct() {
+    deletebtn.forEach((button, index) => {
+      button.onclick = () => {
+        console.log(index);
+        console.log(cartList.indexOf(cartList[index]));
+        if(index == cartList.indexOf(cartList[index])) {
+          cartList.splice(index,1);
+        }
+        console.log(cartList);
+      }
+    });
 
   }
 
