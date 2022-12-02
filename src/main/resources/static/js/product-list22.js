@@ -111,7 +111,6 @@ class Cart {
             </div>
           `;
         }else{
-        if(items.productOptionList.length > 1){
             cartMain.innerHTML += `
               <div class="cart-item" value="">
               <div class="cart-item-dtl">
@@ -125,8 +124,7 @@ class Cart {
               <button type="button" class="cart-remove-btn">삭제</button>
               </div>
             `;
-        }
-      }
+          }
     })
     Cart.getInstance().deleteProduct();
     Cart.getInstance().clearList();
