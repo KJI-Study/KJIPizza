@@ -4,6 +4,7 @@ const url = location.href;
 const tableNumber = url.substring(url.lastIndexOf("/") + 1 );
 const goCartButton = document.querySelector(".bag-btn");
 const resultsum = document.querySelector(".total-price");
+const clearbtn = document.querySelector(".cart-clear");
 
 
 
@@ -128,6 +129,7 @@ class Cart {
       }
     })
     Cart.getInstance().deleteProduct();
+    Cart.getInstance().clearList();
 
     Cart.getInstance().miusProduct();
     Cart.getInstance().plusProduct();
@@ -192,6 +194,12 @@ class Cart {
   }
   //재률
   clearList() {
+  clearbtn.onclick = () => {
+    this.cartList.splice(0, this.cartList.length);
+    this.stockList.splice(0, this.stockList.length);
+    Cart.getInstance().createCartList();
+    Cart.getInstance().sumCartItems();
+  }
     
   }
 
@@ -200,14 +208,12 @@ class Cart {
     
     deletebtn.forEach((button, index) => {
       button.onclick = () => {
-        console.log(button);
-        console.log(index);
         console.log(this.cartList.indexOf(this.cartList[index]));
         if(index == this.cartList.indexOf(this.cartList[index])) {
           this.cartList.splice(index, 1);
           this.stockList.splice(index, 1);
         }
-        console.log(this.cartList);
+
         Cart.getInstance().createCartList();
         Cart.getInstance().sumCartItems();
       }
