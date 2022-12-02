@@ -2,6 +2,7 @@ const categoryButtons = document.querySelectorAll(".category");
 const mainContainer = document.querySelectorAll(".main-container");
 const url = location.href;
 const tableNumber = url.substring(url.lastIndexOf("/") + 1 );
+const goCartButton = document.querySelector(".bag-btn");
 
 const cartItems = new Array(); // true false 
 const cartItems2 = new Array() // 중복 된것들 넣는 배열.
@@ -93,6 +94,16 @@ class Cart {
 
   clearList() {
     
+  }
+
+  sumCartItems() {
+    const add = function(stockList) {
+      return stockList.reduce((a,b) => a + b, 0);
+    };
+    var sum = add(this.stockList);
+    goCartButton.innerHTML = `
+      <i class="fa-solid fa-check"></i> 장바구니${sum}
+    `;
   }
 
 
@@ -347,7 +358,10 @@ class TableService {
             });
 
             Cart.getInstance().addProduct(product);
+          }else {
+            Cart.getInstance().addProduct(product);
           }
+          Cart.getInstance().sumCartItems();
         }
       }
     });
