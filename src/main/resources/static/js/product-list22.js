@@ -3,9 +3,13 @@ const mainContainer = document.querySelectorAll(".main-container");
 const url = location.href;
 const tableNumber = url.substring(url.lastIndexOf("/") + 1 );
 const goCartButton = document.querySelector(".bag-btn");
+<<<<<<< HEAD
 const resultsum = document.querySelector(".total-price");
 
 
+=======
+const deletebtn = document.querySelectorAll(".cart-remove-btn");
+>>>>>>> origin/main
 
 
 document.querySelector(".order-detail-btn").onclick = () => {
@@ -128,6 +132,7 @@ class Cart {
         }
       }
     })
+
     Cart.getInstance().miusProduct();
     Cart.getInstance().plusProduct();
 
@@ -191,7 +196,16 @@ class Cart {
   }
   //재률
   clearList() {
-    
+    deletebtn.forEach((button, index) => {
+      button.onclick = () => {
+        console.log(index);
+        console.log(cartList.indexOf(cartList[index]));
+        if(index == cartList.indexOf(cartList[index])) {
+          cartList.splice(index,1);
+        }
+        console.log(cartList);
+      }
+    });
   }
 
   deleteProduct() {
