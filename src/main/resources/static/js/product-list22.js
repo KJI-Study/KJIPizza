@@ -3,13 +3,8 @@ const mainContainer = document.querySelectorAll(".main-container");
 const url = location.href;
 const tableNumber = url.substring(url.lastIndexOf("/") + 1 );
 const goCartButton = document.querySelector(".bag-btn");
-<<<<<<< HEAD
 const resultsum = document.querySelector(".total-price");
 
-
-=======
-const deletebtn = document.querySelectorAll(".cart-remove-btn");
->>>>>>> origin/main
 
 
 document.querySelector(".order-detail-btn").onclick = () => {
