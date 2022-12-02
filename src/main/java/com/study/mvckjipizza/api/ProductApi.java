@@ -24,6 +24,13 @@ public class ProductApi {
         return ResponseEntity.ok(new CMRespDto<>("Successfully",productService.getOptionList()));
     }
 
+    @PostMapping("/cartlist/order/{tableId}")
+    public ResponseEntity<?> postItems(@PathVariable int tableId) throws Exception {
+
+        productService.postCartList(tableId);
+
+        return ResponseEntity.ok(new CMRespDto<>("Successfully", true));
+    }
 //    @PostMapping("/products/cart")
 //    public ResponseEntity<?> addCartId(@RequestBody CartReqDto cartRespDto) throws Exception {
 //

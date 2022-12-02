@@ -1,7 +1,6 @@
 package com.study.mvckjipizza.dto;
 
 
-import com.study.mvckjipizza.domain.Option;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,11 +13,6 @@ import java.util.Map;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class OrderOptionRespDto {
-
-    private int orderDtlId;
-
-    private List<Map<String, Object>> orderOptions;
-
+public class OrderItemsRespDto {
+    private List<Map<String, Object>> OrderItemList;
 }

@@ -5,7 +5,7 @@ const tableNumber = url.substring(url.lastIndexOf("/") + 1 );
 const goCartButton = document.querySelector(".bag-btn");
 const resultsum = document.querySelector(".total-price");
 const clearbtn = document.querySelector(".cart-clear");
-
+const postOrder = document.querySelector(".order-btn");
 
 
 document.querySelector(".order-detail-btn").onclick = () => {
@@ -229,6 +229,24 @@ class Cart {
     `;
   }
 
+  CartItemsOrder() {
+
+    $.ajax({
+      async:false,
+      type: "post",
+      url: "/api/cartlist/order/" + tableNumber,
+      data: JSON.stringify(cartList),
+      contentType: "application/json",
+      dataType: "json",
+      success:(response) => {
+        console.log(response);
+      },
+      error:(error) => {
+        console.log(error);
+      }
+    })
+
+  }
 
 }
 
@@ -286,7 +304,10 @@ function clear() {
 //장바구니 열었을때 목록 만들어주는것.
 goCartButton.onclick = () => {
   Cart.getInstance().createCartList();
-  
+}
+
+postOrder.onclick = () => {
+  Cart.getInstance().CartItemsOrder();
 }
 
 
