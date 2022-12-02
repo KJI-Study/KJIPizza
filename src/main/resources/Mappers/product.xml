@@ -29,6 +29,31 @@
             option_mst om
     </select>
 
+    <!--    <resultMap id="CartItemsList" type="com.study.mvckjipizza.domain.Option">-->
+    <!--        <result property="option_name" column="option_name"></result>-->
+    <!--        <result property="option_price" column="option_price"></result>-->
+
+    <!--    </resultMap>-->
+
+
+
+
+
+
+    <!--    <resultMap id="cartListMap" type="com.study.mvckjipizza.domain.CartItems">-->
+    <!--        <result property="table_id" column="table_id"></result>-->
+    <!--        <result property="id" column="id"></result>-->
+    <!--        <result property="cart_id" column="cart_id"></result>-->
+    <!--        <result property="pdt_name" column="pdt_name"></result>-->
+    <!--        <result property="pdt_price" column="pdt_price"></result>-->
+    <!--        <result property="category_id" column="category_id"></result>-->
+    <!--        <result property="save_name" column="save_name"></result>-->
+    <!--        <result property="origin_name" column="origin_name"></result>-->
+
+    <!--        <collection property="cart_options" javaType="list" resultMap="CartItemsList"></collection>-->
+    <!--    </resultMap>-->
+
+
 <!--    <insert id="addCartList" parameterType="com.study.mvckjipizza.domain.Cart" useGeneratedKeys="true" keyProperty="id">-->
 <!--        insert into-->
 <!--            cart_mst (table_id, pdt_id, create_date, update_date)-->
@@ -39,6 +64,7 @@
 <!--            now()-->
 <!--        )-->
 <!--    </insert>-->
+
 
 <!--    <insert id="addCartDtls" parameterType="list">-->
 <!--        insert into-->
@@ -56,24 +82,6 @@
 
 <!--    </insert>-->
 
-<!--    <resultMap id="CartItemsList" type="com.study.mvckjipizza.domain.Option">-->
-<!--        <result property="option_name" column="option_name"></result>-->
-<!--        <result property="option_price" column="option_price"></result>-->
-
-<!--    </resultMap>-->
-
-<!--    <resultMap id="cartListMap" type="com.study.mvckjipizza.domain.CartItems">-->
-<!--        <result property="table_id" column="table_id"></result>-->
-<!--        <result property="id" column="id"></result>-->
-<!--        <result property="cart_id" column="cart_id"></result>-->
-<!--        <result property="pdt_name" column="pdt_name"></result>-->
-<!--        <result property="pdt_price" column="pdt_price"></result>-->
-<!--        <result property="category_id" column="category_id"></result>-->
-<!--        <result property="save_name" column="save_name"></result>-->
-<!--        <result property="origin_name" column="origin_name"></result>-->
-
-<!--        <collection property="cart_options" javaType="list" resultMap="CartItemsList"></collection>-->
-<!--    </resultMap>-->
 
 <!--    <select id="getCartItemsList" resultMap="cartListMap">-->
 <!--        SELECT-->

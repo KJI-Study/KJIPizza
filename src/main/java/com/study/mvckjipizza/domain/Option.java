@@ -14,7 +14,6 @@ public class Option {
     private int id;
     private String option_name;
     private int option_price;
-    private int cart_id;
 
     public OptionListRespDto toDto() {
         return OptionListRespDto.builder()

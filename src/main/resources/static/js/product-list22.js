@@ -147,7 +147,6 @@ class Cart {
     }
 
     resultsum.value = result;
-
   }
 
   miusProduct() {
@@ -190,7 +189,10 @@ class Cart {
   }
   //재률
   clearList() {
+
     
+    Cart.getInstance().createCartList();
+    Cart.getInstance().sumCartItems();
   }
 
   deleteProduct() {  

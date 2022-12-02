@@ -17,6 +17,7 @@ package com.study.mvckjipizza.domain;
 //@Data
 //@Builder
 //public class CartItems {
+
 //    private int table_id;
 //    private int cart_id;
 //    private String pdt_name;
