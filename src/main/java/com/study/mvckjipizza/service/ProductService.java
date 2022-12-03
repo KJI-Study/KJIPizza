@@ -1,5 +1,6 @@
 package com.study.mvckjipizza.service;
 
+import com.study.mvckjipizza.domain.OrderDtl;
 import com.study.mvckjipizza.dto.OrderOptionReqDto;
 import com.study.mvckjipizza.dto.ProductListRespDto;
 import com.study.mvckjipizza.dto.OptionListRespDto;
@@ -12,6 +13,6 @@ public interface ProductService {
     public List<ProductListRespDto> getProductList(String category) throws Exception;
     public List<OptionListRespDto> getOptionList() throws Exception;
 
-    public void postCartList(OrderOptionReqDto orderOptionReqDto) throws Exception;
+    public void postCartList (List<OrderOptionReqDto> orderOptionReqDto) throws Exception;
 //    public void saveSales(SalesDto salesDto) throws Exception;
 }

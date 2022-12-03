@@ -34,13 +34,7 @@ public class ProductApi {
 
         System.out.println(orderOptionReqDto);
 
-
-
-        for(OrderOptionReqDto data : orderOptionReqDto){
-            System.out.println(data.getProductId());
-        }
-
-       // productService.postCartList(orderOptionReqDto);
+        productService.postCartList(orderOptionReqDto);
 
         return ResponseEntity.ok(new CMRespDto<>("Successfully", true));
     }

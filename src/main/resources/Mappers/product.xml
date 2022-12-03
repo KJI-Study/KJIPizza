@@ -53,6 +53,31 @@
     <!--        <collection property="cart_options" javaType="list" resultMap="CartItemsList"></collection>-->
     <!--    </resultMap>-->
 
+    <insert id="postTable" parameterType="com.study.mvckjipizza.domain.Order" useGeneratedKeys="true" keyProperty="id">
+        insert into
+            order_mst
+        values(
+            0,
+            #{table_id},
+            now(),
+            now()
+        )
+    </insert>
+
+    <insert id="postOrderDtl" parameterType="list">
+        insert into
+            order_dtl
+        values
+        <foreach collection="list" item="list" separator=",">
+        (
+            0,
+            #{list.order_id},
+            #{list.pdt_id},
+            now(),
+            now()
+        )
+        </foreach>
+    </insert>
 
 <!--    <insert id="addCartList" parameterType="com.study.mvckjipizza.domain.Cart" useGeneratedKeys="true" keyProperty="id">-->
 <!--        insert into-->

@@ -29,7 +29,6 @@ public class OrderOptionReqDto {
     private List <Map<String, Object>> productOptionList;
 
 
-
     public Order toOrderEntity() {
         return Order.builder()
                 .table_id(tableNumber)
