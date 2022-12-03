@@ -1,7 +1,6 @@
 package com.study.mvckjipizza.dto;
 
 
-import com.study.mvckjipizza.domain.Option;
 import com.study.mvckjipizza.domain.Order;
 import com.study.mvckjipizza.domain.OrderDtl;
 import com.study.mvckjipizza.domain.OrderOption;
@@ -27,10 +26,9 @@ public class OrderOptionReqDto {
     private int dtlId; // option의 dtl_id가 될 것.  (option테이블의  order_dtl_id가 돼야함)
     private int productId;
 
+    private List <Map<String, Object>> productOptionList;
 
-    private List<OrderOption> productOptionList;
 
-    private int optionId;
 
     public Order toOrderEntity() {
         return Order.builder()
@@ -45,9 +43,8 @@ public class OrderOptionReqDto {
         return orderDtls;
     }
 
-    public List<OrderOption> toOrderOption() {
+    public List<OrderOption> toOrderOption(int dtlId){
         List<OrderOption> orderOptions = new ArrayList<>();
-        orderOptions.add(OrderOption.builder().orderDtl_id(dtlId).option_id(optionId).build());
 
         return orderOptions;
     }

@@ -1,6 +1,7 @@
 package com.study.mvckjipizza.api;
 
 
+import com.study.mvckjipizza.domain.Order;
 import com.study.mvckjipizza.dto.CMRespDto;
 import com.study.mvckjipizza.dto.OrderOptionReqDto;
 import com.study.mvckjipizza.service.ProductService;
@@ -32,6 +33,8 @@ public class ProductApi {
     public ResponseEntity<?> postItems(@PathVariable int tableNumber, @RequestBody List<OrderOptionReqDto> orderOptionReqDto) throws Exception {
 
         System.out.println(orderOptionReqDto);
+
+
 
         for(OrderOptionReqDto data : orderOptionReqDto){
             System.out.println(data.getProductId());
