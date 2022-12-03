@@ -44,9 +44,9 @@ public class OrderOptionReqDto {
 
     public List<OrderOption> toOrderOption(int dtlId){
         List<OrderOption> orderOptions = new ArrayList<>();
-        productOptionList.forEach(item ->{
-            orderOptions.add(OrderOption.builder().order_dtl_id(dtlId).option_id(optionId).build());
-        });
+        for(Map<String,Object> data : productOptionList){
+            orderOptions.add(OrderOption.builder().order_dtl_id(dtlId).option_id((Integer) data.get("optionId")).build());
+        }
         return orderOptions;
     }
 }
