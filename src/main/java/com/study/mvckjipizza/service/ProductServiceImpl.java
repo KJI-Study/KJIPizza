@@ -51,22 +51,21 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void postCartList(List<OrderOptionReqDto> orderOptionReqDto) throws Exception {
 
-        Order order = null;
+        Order order = new Order();
         System.out.println(orderOptionReqDto);
-
         for(int i = 0; i<orderOptionReqDto.size(); i++) {
            order = orderOptionReqDto.get(i).toOrderEntity();
            productRepository.postTable(order);
-
            if(i == 0){
                break;
            }
         }
-        System.out.println(order);
         //OrderDtl 드가는부분
+        Order finalOrder = order;
         orderOptionReqDto.forEach(item -> {
+            System.out.println(finalOrder);
             try {
-                productRepository.postOrderDtl(item.toOrderList(order.getId())));
+                productRepository.postOrderDtl(item.toOrderList(finalOrder.getId()));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -75,7 +74,7 @@ public class ProductServiceImpl implements ProductService {
         //System.out.println(orderDtls);
         //세번째 order_option
         //if()
-      //  productRepository.postOrderOption(orderOptionReqDto.toOrderOption(orderDtls.()));
+       //  productRepository.postOrderOption(orderOptionReqDto.toOrderOption(orderDtls.()));
     }
 
 //    @Override
