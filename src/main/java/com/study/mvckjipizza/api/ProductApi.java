@@ -2,6 +2,7 @@ package com.study.mvckjipizza.api;
 
 
 import com.study.mvckjipizza.dto.CMRespDto;
+import com.study.mvckjipizza.dto.OrderOptionReqDto;
 import com.study.mvckjipizza.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class ProductApi {
     }
 
     @PostMapping("/cartlist/order/{tableId}")
-    public ResponseEntity<?> postItems(@PathVariable int tableId) throws Exception {
+    public ResponseEntity<?> postItems(@PathVariable int tableId, @RequestBody OrderOptionReqDto orderOptionReqDto) throws Exception {
 
         productService.postCartList(tableId);
 
