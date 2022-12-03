@@ -31,9 +31,7 @@ public class ProductApi {
 
     @PostMapping("/cartlist/order/{tableNumber}")
     public ResponseEntity<?> postItems(@PathVariable int tableNumber, @RequestBody List<OrderOptionReqDto> orderOptionReqDto) throws Exception {
-
-        System.out.println(orderOptionReqDto);
-
+        ;
         productService.postCartList(orderOptionReqDto);
 
         return ResponseEntity.ok(new CMRespDto<>("Successfully", true));

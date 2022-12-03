@@ -44,6 +44,7 @@ class Product {
   productName = null;
   productPrice = null;
   productOptionList = null;
+  tableNumber = tableNumber;
   
 
   constructor(productId, productName, productPrice) {

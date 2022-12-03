@@ -13,9 +13,9 @@ public interface ProductRepository {
 
     public List<Option> getOptionList() throws Exception;
 
-    public int postTable(Order order) throws Exception;
+    public void postTable(Order order) throws Exception;
 
-    public int postOrderDtl(List<OrderDtl> orderDtlList) throws Exception;
+    public void postOrderDtl(List<OrderDtl> orderDtl) throws Exception;
 
     public int postOrderOption(List<OrderOption> optionList) throws Exception;
 

@@ -50,31 +50,27 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void postCartList(List<OrderOptionReqDto> orderOptionReqDto) throws Exception {
-        OrderOptionReqDto ootd = new OrderOptionReqDto();
 
-        Order order = ootd.toOrderEntity();
+        Order order = null;
+        System.out.println(orderOptionReqDto);
 
-        System.out.println(order);
+        for(int i = 0; i<orderOptionReqDto.size(); i++) {
+           order = orderOptionReqDto.get(i).toOrderEntity();
+           productRepository.postTable(order);
 
-
-       // 첫번째 order_mst
-        if(productRepository.postTable(order) == 0){
-            throw new CustomInternalServerErrorException("장바구니 결제 실패");
+           if(i == 0){
+               break;
+           }
         }
-
-        //두번째 order_dtl
-
-        productRepository.postOrderDtl(ootd.toOrderList(order.getId()));
-
-
-//        List<OrderDtl> orderDtls = new ArrayList<OrderDtl>();
-//
-//        orderOptionReqDto.toOrderList(order.getId()).forEach(item -> {
-//            orderDtls.add(OrderDtl.builder()
-//                    .order_id(order.getId())
-//                    .pdt_id(orderOptionReqDto.getProductId())
-//                    .build());
-//        });
+        System.out.println(order);
+        //OrderDtl 드가는부분
+        orderOptionReqDto.forEach(item -> {
+            try {
+                productRepository.postOrderDtl(item.toOrderList(order.getId())));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         //System.out.println(orderDtls);
         //세번째 order_option
