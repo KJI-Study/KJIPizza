@@ -1,7 +1,10 @@
 package com.study.mvckjipizza.service;
 
+import com.study.mvckjipizza.domain.Order;
+import com.study.mvckjipizza.domain.OrderDtl;
 import com.study.mvckjipizza.domain.Sales;
 import com.study.mvckjipizza.dto.OptionListRespDto;
+import com.study.mvckjipizza.dto.OrderOptionReqDto;
 import com.study.mvckjipizza.dto.ProductListRespDto;
 import com.study.mvckjipizza.dto.SalesDto;
 import com.study.mvckjipizza.excetpion.CustomInternalServerErrorException;
@@ -43,6 +46,35 @@ public class ProductServiceImpl implements ProductService {
             optionList.add(optionProduct.toDto());
         });
         return optionList;
+    }
+
+    @Override
+    public void postCartList(OrderOptionReqDto orderOptionReqDto) throws Exception {
+        Order order = orderOptionReqDto.toOrderEntity();
+        System.out.println(order);
+
+
+       // 첫번째 order_mst
+//        if(productRepository.postTable(order) == 0){
+//            throw new CustomInternalServerErrorException("장바구니 결제 실패");
+//        }
+
+        //두번째 order_dtl
+      //  productRepository.postOrderDtl(orderOptionReqDto.toOrderList(order.getId()));
+
+        List<OrderDtl> orderDtls = new ArrayList<OrderDtl>();
+
+        orderOptionReqDto.toOrderList(order.getId()).forEach(item -> {
+            orderDtls.add(OrderDtl.builder()
+                    .order_id(order.getId())
+                    .pdt_id(orderOptionReqDto.getProductId())
+                    .build());
+        });
+
+        System.out.println(orderDtls);
+        //세번째 order_option
+        //if()
+      //  productRepository.postOrderOption(orderOptionReqDto.toOrderOption(orderDtls.()));
     }
 
 //    @Override

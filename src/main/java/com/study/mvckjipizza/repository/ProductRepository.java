@@ -13,6 +13,12 @@ public interface ProductRepository {
 
     public List<Option> getOptionList() throws Exception;
 
+    public int postTable(Order order) throws Exception;
+
+    public int postOrderDtl(List<OrderDtl> orderDtlList) throws Exception;
+
+    public int postOrderOption(List<OrderOption> optionList) throws Exception;
+
 //    public int addCartList(Cart cart) throws Exception;
 //    public int addCartDtls(List<CartDtl> list) throws Exception;
 //
@@ -21,7 +27,7 @@ public interface ProductRepository {
 //    public List<CartItems> getPayItems(int tableId) throws Exception;
 //
 //    public int deleteCart(Cart cart) throws Exception;
-    public int delCartList(int tableId) throws Exception;
+//    public int delCartList(int tableId) throws Exception;
 //    public int delselect(int cartId) throws Exception;
 
     public int saveSales(int cartId) throws Exception ;

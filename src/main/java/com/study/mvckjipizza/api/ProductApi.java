@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -25,10 +28,16 @@ public class ProductApi {
         return ResponseEntity.ok(new CMRespDto<>("Successfully",productService.getOptionList()));
     }
 
-    @PostMapping("/cartlist/order/{tableId}")
-    public ResponseEntity<?> postItems(@PathVariable int tableId, @RequestBody OrderOptionReqDto orderOptionReqDto) throws Exception {
+    @PostMapping("/cartlist/order/{tableNumber}")
+    public ResponseEntity<?> postItems(@PathVariable int tableNumber, @RequestBody List<OrderOptionReqDto> orderOptionReqDto) throws Exception {
 
-        productService.postCartList(tableId);
+        System.out.println(orderOptionReqDto);
+
+        for(OrderOptionReqDto data : orderOptionReqDto){
+            System.out.println(data.getProductId());
+        }
+
+       // productService.postCartList(orderOptionReqDto);
 
         return ResponseEntity.ok(new CMRespDto<>("Successfully", true));
     }

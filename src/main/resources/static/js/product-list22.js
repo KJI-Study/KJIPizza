@@ -231,17 +231,19 @@ class Cart {
 
   CartItemsOrder() {
 
+    console.log(this.cartList);
     $.ajax({
       async:false,
       type: "post",
       url: "/api/cartlist/order/" + tableNumber,
-      data: JSON.stringify(cartList),
+      data: JSON.stringify(this.cartList),
       contentType: "application/json",
       dataType: "json",
       success:(response) => {
         console.log(response);
       },
       error:(error) => {
+        console.log(this.cartList);
         console.log(error);
       }
     })
