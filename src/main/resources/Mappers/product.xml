@@ -64,7 +64,7 @@
         )
     </insert>
 
-    <insert id="postOrderDtl" parameterType="list">
+    <insert id="postOrderDtl" parameterType="com.study.mvckjipizza.domain.OrderDtl" useGeneratedKeys="true" keyProperty="id">
         insert into
             order_dtl
         values
@@ -77,9 +77,28 @@
             now()
         )
         </foreach>
+
     </insert>
 
-<!--    <insert id="addCartList" parameterType="com.study.mvckjipizza.domain.Cart" useGeneratedKeys="true" keyProperty="id">-->
+    <insert id="postOrderOption" parameterType="list">
+        insert into
+            order_option
+        values
+        <foreach collection="list" item="list" separator=",">
+            (
+            0,
+            #{list.order_dtl_id},
+            #{list.option_id},
+            now(),
+            now()
+            )
+        </foreach>
+
+    </insert>
+
+
+
+    <!--    <insert id="addCartList" parameterType="com.study.mvckjipizza.domain.Cart" useGeneratedKeys="true" keyProperty="id">-->
 <!--        insert into-->
 <!--            cart_mst (table_id, pdt_id, create_date, update_date)-->
 <!--        values(-->

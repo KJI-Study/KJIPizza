@@ -26,6 +26,7 @@ public class OrderOptionReqDto {
     private int dtlId; // option의 dtl_id가 될 것.  (option테이블의  order_dtl_id가 돼야함)
     private int productId;
 
+    private int optionId;
     private List <Map<String, Object>> productOptionList;
 
     public Order toOrderEntity() {
@@ -43,7 +44,9 @@ public class OrderOptionReqDto {
 
     public List<OrderOption> toOrderOption(int dtlId){
         List<OrderOption> orderOptions = new ArrayList<>();
-
+        productOptionList.forEach(item ->{
+            orderOptions.add(OrderOption.builder().order_dtl_id(dtlId).option_id(optionId).build());
+        });
         return orderOptions;
     }
 }

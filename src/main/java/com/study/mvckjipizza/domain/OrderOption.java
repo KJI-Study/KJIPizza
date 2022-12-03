@@ -16,7 +16,7 @@ import java.util.List;
 public class OrderOption {
 
     private int id;
-    private int orderDtl_id;
+    private int order_dtl_id;
     private int option_id;
 
 //    public OrderOptionRespDto toDto() {

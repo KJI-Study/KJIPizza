@@ -52,6 +52,8 @@ public class ProductServiceImpl implements ProductService {
     public void postCartList(List<OrderOptionReqDto> orderOptionReqDto) throws Exception {
 
         Order order = new Order();
+
+
         System.out.println(orderOptionReqDto);
         for(int i = 0; i<orderOptionReqDto.size(); i++) {
            order = orderOptionReqDto.get(i).toOrderEntity();
@@ -60,12 +62,25 @@ public class ProductServiceImpl implements ProductService {
                break;
            }
         }
+
         //OrderDtl 드가는부분
         Order finalOrder = order;
+
         orderOptionReqDto.forEach(item -> {
-            System.out.println(finalOrder);
             try {
                 productRepository.postOrderDtl(item.toOrderList(finalOrder.getId()));
+                for(int i = 0; i<item.toOrderList(finalOrder.getId()).size(); i++) {
+                    if(item.getProductOptionList().size() > 0) {
+                        OrderDtl orderDtl = item.toOrderList(finalOrder.getId()).get(i);
+                        System.out.println(orderDtl);
+                        productRepository.postOrderOption(item.toOrderOption(orderDtl.getId()));
+                    }
+                }
+
+                //System.out.println(orderDtl);
+//                if(item.getProductOptionList().size() > 0) {
+//                    productRepository.postOrderOption(item.toOrderOption());
+//                }
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
