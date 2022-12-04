@@ -2,6 +2,7 @@ package com.study.mvckjipizza.service;
 
 import com.study.mvckjipizza.domain.Order;
 import com.study.mvckjipizza.domain.OrderDtl;
+import com.study.mvckjipizza.domain.OrderOption;
 import com.study.mvckjipizza.domain.Sales;
 import com.study.mvckjipizza.dto.OptionListRespDto;
 import com.study.mvckjipizza.dto.OrderOptionReqDto;
@@ -52,44 +53,41 @@ public class ProductServiceImpl implements ProductService {
     public void postCartList(List<OrderOptionReqDto> orderOptionReqDto) throws Exception {
 
         Order order = new Order();
-
-
+        List<OrderDtl> orderDtl = new ArrayList<OrderDtl>();
+        List<OrderOption> orderOption = new ArrayList<OrderOption>();
         System.out.println(orderOptionReqDto);
         for(int i = 0; i<orderOptionReqDto.size(); i++) {
-           order = orderOptionReqDto.get(i).toOrderEntity();
-           productRepository.postTable(order);
-           if(i == 0){
-               break;
-           }
+            if(i == 0){
+                order = orderOptionReqDto.get(i).toOrderEntity();
+                productRepository.postTable(order);
+            }
+           orderDtl = orderOptionReqDto.get(i).toOrderList(order.getId());
+           productRepository.postOrderDtl(orderDtl);
+           System.out.println(orderDtl);
+            if(orderOptionReqDto.get(i).getProductOptionList().size() > 0){
+                productRepository.postOrderOption(orderOptionReqDto.get(i).toOrderOption(orderDtl.get(i).getId()));
+//                orderOption = orderOptionReqDto.get(i).toOrderOption(orderDtl.get(i).getId());
+//                productRepository.postOrderOption(orderOption);
+            }
         }
 
         //OrderDtl 드가는부분
         Order finalOrder = order;
 
-        orderOptionReqDto.forEach(item -> {
-            try {
-                productRepository.postOrderDtl(item.toOrderList(finalOrder.getId()));
-                for(int i = 0; i<item.toOrderList(finalOrder.getId()).size(); i++) {
-                    if(item.getProductOptionList().size() > 0) {
-                        OrderDtl orderDtl = item.toOrderList(finalOrder.getId()).get(i);
-                        System.out.println(orderDtl);
-                        productRepository.postOrderOption(item.toOrderOption(orderDtl.getId()));
-                    }
-                }
-
-                //System.out.println(orderDtl);
-//                if(item.getProductOptionList().size() > 0) {
-//                    productRepository.postOrderOption(item.toOrderOption());
+//        orderOptionReqDto.forEach(item -> {
+//
+//            try {
+//                productRepository.postOrderDtl(item.toOrderList(finalOrder.getId()));
+//                for(int i = 0; i<item.toOrderList(finalOrder.getId()).size(); i++) {
+//                    if(item.getProductOptionList().size() > 0) {
+//                        OrderDtl orderDtl = item.toOrderList(finalOrder.getId()).get(i);
+//                        productRepository.postOrderOption(item.toOrderOption(orderDtl.getId()));
+//                    }
 //                }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        });
-
-        //System.out.println(orderDtls);
-        //세번째 order_option
-        //if()
-       //  productRepository.postOrderOption(orderOptionReqDto.toOrderOption(orderDtls.()));
+//            } catch (Exception e) {
+//                throw new RuntimeException(e);
+//            }
+//        });
     }
 
 //    @Override

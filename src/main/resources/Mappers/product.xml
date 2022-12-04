@@ -67,10 +67,10 @@
     <insert id="postOrderDtl" parameterType="com.study.mvckjipizza.domain.OrderDtl" useGeneratedKeys="true" keyProperty="id">
         insert into
             order_dtl
+        (order_id , pdt_id, create_date, update_date)
         values
         <foreach collection="list" item="list" separator=",">
         (
-            0,
             #{list.order_id},
             #{list.pdt_id},
             now(),
@@ -80,7 +80,7 @@
 
     </insert>
 
-    <insert id="postOrderOption" parameterType="list">
+    <insert id="postOrderOption" parameterType="com.study.mvckjipizza.domain.OrderOption">
         insert into
             order_option
         values

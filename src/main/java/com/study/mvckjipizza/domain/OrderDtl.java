@@ -15,4 +15,5 @@ public class OrderDtl {
     private int id;
     private int order_id;
     private int pdt_id;
+
 }

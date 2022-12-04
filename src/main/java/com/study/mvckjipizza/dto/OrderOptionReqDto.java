@@ -20,10 +20,11 @@ import java.util.Map;
 
 public class OrderOptionReqDto {
 
-    private int mstId; // dtl 의 order_id가 될 것. (dtl테이블의 order_id가 돼야함)
+    private int orderMstId;
+     // dtl 의 order_id가 될 것. (dtl테이블의 order_id가 돼야함)
     private int tableNumber;
 
-    private int dtlId; // option의 dtl_id가 될 것.  (option테이블의  order_dtl_id가 돼야함)
+     // option의 dtl_id가 될 것.  (option테이블의  order_dtl_id가 돼야함)
     private int productId;
 
     private int optionId;
@@ -37,16 +38,25 @@ public class OrderOptionReqDto {
 
     public List<OrderDtl> toOrderList(int mstId) {
         List<OrderDtl> orderDtls = new ArrayList<OrderDtl>();
-        orderDtls.add(OrderDtl.builder().order_id(mstId).pdt_id(productId).build());
+
+        orderDtls.add(OrderDtl.builder()
+
+                .order_id(mstId)
+                .pdt_id(productId)
+                .build());
 
         return orderDtls;
     }
 
     public List<OrderOption> toOrderOption(int dtlId){
         List<OrderOption> orderOptions = new ArrayList<>();
+
         for(Map<String,Object> data : productOptionList){
-            orderOptions.add(OrderOption.builder().order_dtl_id(dtlId).option_id((Integer) data.get("optionId")).build());
+            orderOptions.add(OrderOption.builder()
+                    .order_dtl_id(dtlId)
+                    .option_id((Integer)data.get("optionId")).build());
         }
+
         return orderOptions;
     }
 }
