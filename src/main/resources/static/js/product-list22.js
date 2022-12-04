@@ -230,26 +230,26 @@ class Cart {
     `;
   }
 
-  CartItemsOrder() {
+  // CartItemsOrder() {
 
-    console.log(this.cartList);
-    $.ajax({
-      async:false,
-      type: "post",
-      url: "/api/cartlist/order/" + tableNumber,
-      data: JSON.stringify(this.cartList),
-      contentType: "application/json",
-      dataType: "json",
-      success:(response) => {
-        console.log(response);
-      },
-      error:(error) => {
-        console.log(this.cartList);
-        console.log(error);
-      }
-    })
+  //   console.log(this.cartList);
+  //   $.ajax({
+  //     async:false,
+  //     type: "post",
+  //     url: "/api/cartlist/order/" + tableNumber,
+  //     data: JSON.stringify(this.cartList),
+  //     contentType: "application/json",
+  //     dataType: "json",
+  //     success:(response) => {
+  //       console.log(response);
+  //     },
+  //     error:(error) => {
+  //       console.log(this.cartList);
+  //       console.log(error);
+  //     }
+  //   })
 
-  }
+  // }
 
 }
 
@@ -309,9 +309,9 @@ goCartButton.onclick = () => {
   Cart.getInstance().createCartList();
 }
 
-postOrder.onclick = () => {
-  Cart.getInstance().CartItemsOrder();
-}
+// postOrder.onclick = () => {
+//   Cart.getInstance().CartItemsOrder();
+// }
 
 
 class TableService {
