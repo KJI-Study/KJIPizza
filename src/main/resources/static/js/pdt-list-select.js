@@ -55,6 +55,7 @@ class pdtUpdateApi{
 
     updateProduct(formData) {
 
+
         $.ajax({
            async : false,
            type: "put",
@@ -66,6 +67,7 @@ class pdtUpdateApi{
            dataType: "json",
            success: (response) => {
                console.log(response.data);
+
                alert("제품 수정 완료");
                
            },

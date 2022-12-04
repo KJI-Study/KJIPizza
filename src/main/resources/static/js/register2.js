@@ -147,9 +147,9 @@ class RegisterEventService{
 
     init(){
 
-        this.#nameInputObj.disabled = true;
-        this.#priceInputObj.disabled = true;
-        this.#registButtonObj.disabled = true;
+        // this.#nameInputObj.disabled = true;
+        // this.#priceInputObj.disabled = true;
+        // this.#registButtonObj.disabled = true;
 
     }
 
@@ -163,10 +163,13 @@ class RegisterEventService{
         }
     }    
 
+    
+    // this.#nameInputObj(this.#categorySelectObj.value);
+
     addNameInputEvent(){
         this.#nameInputObj.onkeyup = () => {
             if(this.#nameInputObj.value.length != 0) {
-                this.#priceInputObj.disabled = false;
+                this.#priceInputObj.disabled =false;
             }else{
                 this.#priceInputObj.disabled = true;
             }
@@ -184,6 +187,7 @@ class RegisterEventService{
          }
     
       }
+
     addRegistButtonEvent() {
 
         const filesInput = document.querySelector(".file-input");
