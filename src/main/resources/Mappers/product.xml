@@ -64,7 +64,7 @@
         )
     </insert>
 
-    <insert id="postOrderDtl" parameterType="com.study.mvckjipizza.domain.OrderDtl" useGeneratedKeys="true" keyProperty="id">
+    <insert id="postOrderDtl" parameterType="list" useGeneratedKeys="true" keyProperty="id">
         insert into
             order_dtl
         (order_id , pdt_id, create_date, update_date)
@@ -80,7 +80,7 @@
 
     </insert>
 
-    <insert id="postOrderOption" parameterType="com.study.mvckjipizza.domain.OrderOption">
+    <insert id="postOrderOption" parameterType="list">
         insert into
             order_option
         values

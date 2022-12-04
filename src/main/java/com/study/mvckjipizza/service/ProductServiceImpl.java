@@ -54,6 +54,8 @@ public class ProductServiceImpl implements ProductService {
 
         Order order = new Order();
         List<OrderDtl> orderDtl = new ArrayList<OrderDtl>();
+
+
         List<OrderOption> orderOption = new ArrayList<OrderOption>();
         System.out.println(orderOptionReqDto);
         for(int i = 0; i<orderOptionReqDto.size(); i++) {
@@ -63,16 +65,20 @@ public class ProductServiceImpl implements ProductService {
             }
            orderDtl = orderOptionReqDto.get(i).toOrderList(order.getId());
            productRepository.postOrderDtl(orderDtl);
+
+           int result = order.getId();
+
            System.out.println(orderDtl);
+
             if(orderOptionReqDto.get(i).getProductOptionList().size() > 0){
-                productRepository.postOrderOption(orderOptionReqDto.get(i).toOrderOption(orderDtl.get(i).getId()));
+                productRepository.postOrderOption(orderOptionReqDto.get(i).toOrderOption(result));
 //                orderOption = orderOptionReqDto.get(i).toOrderOption(orderDtl.get(i).getId());
 //                productRepository.postOrderOption(orderOption);
             }
         }
 
         //OrderDtl 드가는부분
-        Order finalOrder = order;
+     //   Order finalOrder = order;
 
 //        orderOptionReqDto.forEach(item -> {
 //
