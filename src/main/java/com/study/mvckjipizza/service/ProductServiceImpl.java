@@ -3,12 +3,9 @@ package com.study.mvckjipizza.service;
 import com.study.mvckjipizza.domain.Order;
 import com.study.mvckjipizza.domain.OrderDtl;
 import com.study.mvckjipizza.domain.OrderOption;
-import com.study.mvckjipizza.domain.Sales;
 import com.study.mvckjipizza.dto.OptionListRespDto;
 import com.study.mvckjipizza.dto.OrderOptionReqDto;
 import com.study.mvckjipizza.dto.ProductListRespDto;
-import com.study.mvckjipizza.dto.SalesDto;
-import com.study.mvckjipizza.excetpion.CustomInternalServerErrorException;
 import com.study.mvckjipizza.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 @RequiredArgsConstructor
@@ -65,13 +63,16 @@ public class ProductServiceImpl implements ProductService {
             }
            orderDtl = orderOptionReqDto.get(i).toOrderList(order.getId());
            productRepository.postOrderDtl(orderDtl);
+           AtomicInteger result = new AtomicInteger();
+           orderDtl.forEach(item ->{
+               result.set(item.getId());
+               System.out.println(result.get());
+           });
 
-           int result = order.getId();
-
-           System.out.println(orderDtl);
+           System.out.println(result.get());
 
             if(orderOptionReqDto.get(i).getProductOptionList().size() > 0){
-                productRepository.postOrderOption(orderOptionReqDto.get(i).toOrderOption(result));
+               productRepository.postOrderOption(orderOptionReqDto.get(i).toOrderOption(result.get()));
 //                orderOption = orderOptionReqDto.get(i).toOrderOption(orderDtl.get(i).getId());
 //                productRepository.postOrderOption(orderOption);
             }
