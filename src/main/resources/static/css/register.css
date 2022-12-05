@@ -179,3 +179,11 @@ input[type="number"] {
 .pdt-dtl-list td:nth-child(7) {
     width: 8%;
 }
+
+
+.admin-table{
+    border-color:blue;
+    width:100%;
+    height:100%;
+    text-align:center;
+}

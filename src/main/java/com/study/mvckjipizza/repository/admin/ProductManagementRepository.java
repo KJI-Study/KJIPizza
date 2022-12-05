@@ -1,6 +1,8 @@
 package com.study.mvckjipizza.repository.admin;
 
+import com.study.mvckjipizza.domain.PaymentItems;
 import com.study.mvckjipizza.domain.ProductCategory;
+import com.study.mvckjipizza.domain.SalesItems;
 import com.study.mvckjipizza.domain.amdin.Product;
 import com.study.mvckjipizza.domain.amdin.SelectProduct;
 import org.apache.ibatis.annotations.Mapper;
@@ -23,4 +25,6 @@ public interface ProductManagementRepository {
     public int updateProduct(Product product)throws Exception;
 
     public int deleteProduct(Product product) throws Exception;
+
+    public List<SalesItems> getSalesItems() throws Exception;
 }

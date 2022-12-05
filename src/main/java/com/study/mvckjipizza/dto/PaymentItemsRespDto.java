@@ -20,6 +20,7 @@ public class PaymentItemsRespDto {
     private int cartegoryId;
     private String origin_name;
     private String save_name;
+    private int stock;
     private List<Map<String, Object>> pdtOptions;
 }
 

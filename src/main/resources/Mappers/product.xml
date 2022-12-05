@@ -35,11 +35,6 @@
 
         </resultMap>
 
-
-
-
-
-
         <resultMap id="paymentMap" type="com.study.mvckjipizza.domain.PaymentItems">
             <result property="order_id" column="table_id"></result>
             <result property="cart_id" column="cart_id"></result>

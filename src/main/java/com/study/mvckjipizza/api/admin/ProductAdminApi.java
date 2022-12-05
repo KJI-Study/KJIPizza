@@ -60,4 +60,13 @@ public class ProductAdminApi {
     public ResponseEntity<?> getProductList(@PathVariable int categoryName) throws Exception {
         return ResponseEntity.ok().body(new CMRespDto<>("Get successfully", productManagementService.getProductListSelect(categoryName)));
     }
+
+
+    @GetMapping("/sales")
+    public ResponseEntity<?> getSales() throws Exception {
+
+
+
+        return ResponseEntity.ok().body(new CMRespDto<>("Get successfully",  productManagementService.getAllSales()));
+    }
 }

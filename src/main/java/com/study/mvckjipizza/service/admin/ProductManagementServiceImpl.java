@@ -1,7 +1,10 @@
 package com.study.mvckjipizza.service.admin;
 
+import com.study.mvckjipizza.domain.PaymentItems;
+import com.study.mvckjipizza.domain.SalesItems;
 import com.study.mvckjipizza.domain.amdin.Product;
 import com.study.mvckjipizza.dto.CategoryResponseDto;
+import com.study.mvckjipizza.dto.PaymentItemsRespDto;
 import com.study.mvckjipizza.dto.admin.ProductListSelectRespDto;
 import com.study.mvckjipizza.dto.admin.ProductRegisterRespDto;
 import com.study.mvckjipizza.excetpion.CustomInternalServerErrorException;
@@ -199,5 +202,19 @@ public class ProductManagementServiceImpl implements ProductManagementService {
             list.add(pdtMst.toDto());
         });
         return list;
+    }
+
+    @Override
+    public List<PaymentItemsRespDto> getAllSales() throws Exception {
+
+        List<PaymentItemsRespDto> paymentItemsRespDtos = new ArrayList<PaymentItemsRespDto>();
+
+        List<SalesItems> salesItems = productManagementRepository.getSalesItems();
+
+        salesItems.forEach(cartItem -> {
+            paymentItemsRespDtos.add(cartItem.toSales());
+        });
+
+        return paymentItemsRespDtos;
     }
 }

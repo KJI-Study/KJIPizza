@@ -1,6 +1,7 @@
 package com.study.mvckjipizza.service.admin;
 
 import com.study.mvckjipizza.dto.CategoryResponseDto;
+import com.study.mvckjipizza.dto.PaymentItemsRespDto;
 import com.study.mvckjipizza.dto.admin.ProductListSelectRespDto;
 import com.study.mvckjipizza.dto.admin.ProductRegisterRespDto;
 
@@ -18,5 +19,8 @@ public interface ProductManagementService {
 
     //재률이가 한거
     public List<ProductListSelectRespDto> getProductListSelect(int categoryName) throws Exception;
+
+    public List<PaymentItemsRespDto> getAllSales () throws Exception;
+
 
 }

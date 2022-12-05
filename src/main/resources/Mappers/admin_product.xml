@@ -9,7 +9,15 @@
         <result property="category_name" column="category_name"></result>
 
     </resultMap>
-    <select id="getCategoryList" resultMap="product_category" >
+
+    <resultMap id="salesMap" type="com.study.mvckjipizza.domain.SalesItems">
+        <result property="pdt_name" column="pdt_name"></result>
+        <result property="pdt_price" column="pdt_price"></result>
+        <result property="stock" column="stock"></result>
+    </resultMap>
+
+
+    <select id="getCategoryList" resultMap="product_category">
         select
         id,
         category_name
@@ -55,7 +63,6 @@
             pdt_mst
         where
             id = #{id}
-
     </delete>
 <!--    <insert id="registerImgFiles" parameterType="com.study.mvckjipizza.domain.amdin.Product">-->
 <!--        Insert into-->
@@ -86,6 +93,14 @@
             pcm.id = #{categoryName}
     </select>
 
-
-
+    <select id="getSalesItems" resultMap="salesMap">
+        SELECT
+            pm.pdt_name,
+            COUNT(pm.pdt_name) as stock,
+            pm.pdt_price
+        FROM
+            order_dtl od
+            LEFT OUTER JOIN pdt_mst pm ON(od.pdt_id = pm.id)
+        GROUP BY od.pdt_id
+    </select>
 </mapper>
