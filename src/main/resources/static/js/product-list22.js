@@ -6,13 +6,11 @@ const goCartButton = document.querySelector(".bag-btn");
 const resultsum = document.querySelector(".total-price");
 const clearbtn = document.querySelector(".cart-clear");
 const postOrder = document.querySelector(".order-btn");
+const goPayButton = document.querySelector(".order-detail-btn");
 
-
-document.querySelector(".order-detail-btn").onclick = () => {
+goPayButton.onclick = () => {
   location.href = "/order/" + tableNumber;
 }
-
-
 
 var entity = {
   btnvalue: "salad",

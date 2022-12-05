@@ -19,6 +19,10 @@ public interface ProductRepository {
 
     public int postOrderOption(List<OrderOption> optionList) throws Exception;
 
+    public Order getOrderNumber(int tableNumber) throws Exception;
+
+    public List<PaymentItems> getPayItems(int orderMstId) throws Exception;
+
 //    public int addCartList(Cart cart) throws Exception;
 //    public int addCartDtls(List<CartDtl> list) throws Exception;
 //

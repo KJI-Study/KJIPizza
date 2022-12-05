@@ -29,29 +29,28 @@
             option_mst om
     </select>
 
-    <!--    <resultMap id="CartItemsList" type="com.study.mvckjipizza.domain.Option">-->
-    <!--        <result property="option_name" column="option_name"></result>-->
-    <!--        <result property="option_price" column="option_price"></result>-->
+        <resultMap id="PayItemList" type="com.study.mvckjipizza.domain.Option">
+            <result property="option_name" column="option_name"></result>
+            <result property="option_price" column="option_price"></result>
 
-    <!--    </resultMap>-->
-
-
+        </resultMap>
 
 
 
 
-    <!--    <resultMap id="cartListMap" type="com.study.mvckjipizza.domain.CartItems">-->
-    <!--        <result property="table_id" column="table_id"></result>-->
-    <!--        <result property="id" column="id"></result>-->
-    <!--        <result property="cart_id" column="cart_id"></result>-->
-    <!--        <result property="pdt_name" column="pdt_name"></result>-->
-    <!--        <result property="pdt_price" column="pdt_price"></result>-->
-    <!--        <result property="category_id" column="category_id"></result>-->
-    <!--        <result property="save_name" column="save_name"></result>-->
-    <!--        <result property="origin_name" column="origin_name"></result>-->
 
-    <!--        <collection property="cart_options" javaType="list" resultMap="CartItemsList"></collection>-->
-    <!--    </resultMap>-->
+
+        <resultMap id="paymentMap" type="com.study.mvckjipizza.domain.PaymentItems">
+            <result property="order_id" column="table_id"></result>
+            <result property="cart_id" column="cart_id"></result>
+            <result property="pdt_name" column="pdt_name"></result>
+            <result property="pdt_price" column="pdt_price"></result>
+            <result property="category_id" column="category_id"></result>
+            <result property="save_name" column="save_name"></result>
+            <result property="origin_name" column="origin_name"></result>
+
+            <collection property="pdt_options" javaType="list" resultMap="PayItemList"></collection>
+        </resultMap>
 
     <insert id="postTable" parameterType="com.study.mvckjipizza.domain.Order" useGeneratedKeys="true" keyProperty="id">
         insert into
@@ -95,6 +94,42 @@
         </foreach>
 
     </insert>
+
+    <select id="getOrderNumber" resultType="com.study.mvckjipizza.domain.Order">
+        SELECT
+            *
+        FROM
+            order_mst
+        WHERE
+            order_mst.table_id = #{table_id}
+        ORDER BY
+            id
+        desc
+            LIMIT 1
+
+    </select>
+
+    <select id="getPayItems" resultMap="paymentMap">
+        SELECT
+            om.id,
+            om.table_id,
+            pm.pdt_name,
+            pm.pdt_price,
+            pm.category_id,
+            pm.save_name,
+            pm.origin_name,
+            opm.option_name,
+            opm.option_price
+        FROM
+            order_mst om
+            LEFT OUTER JOIN order_dtl od ON(od.order_id = om.id)
+            LEFT OUTER JOIN order_option oo ON(oo.order_dtl_id = od.id)
+            LEFT OUTER JOIN pdt_mst pm ON(pm.id = od.pdt_id)
+            LEFT OUTER JOIN option_mst opm on(opm.id = oo.option_id)
+        WHERE
+            om.id = #{order_id}
+
+    </select>
 
 
 
