@@ -3,8 +3,10 @@ package com.study.mvckjipizza.service;
 import com.study.mvckjipizza.domain.Order;
 import com.study.mvckjipizza.domain.OrderDtl;
 import com.study.mvckjipizza.domain.OrderOption;
+import com.study.mvckjipizza.domain.PaymentItems;
 import com.study.mvckjipizza.dto.OptionListRespDto;
 import com.study.mvckjipizza.dto.OrderOptionReqDto;
+import com.study.mvckjipizza.dto.PaymentItemsRespDto;
 import com.study.mvckjipizza.dto.ProductListRespDto;
 import com.study.mvckjipizza.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -47,6 +49,7 @@ public class ProductServiceImpl implements ProductService {
         return optionList;
     }
 
+
     @Override
     public void postCartList(List<OrderOptionReqDto> orderOptionReqDto) throws Exception {
 
@@ -56,30 +59,32 @@ public class ProductServiceImpl implements ProductService {
 
         List<OrderOption> orderOption = new ArrayList<OrderOption>();
         System.out.println(orderOptionReqDto);
-        for(int i = 0; i<orderOptionReqDto.size(); i++) {
-            if(i == 0){
+        for (int i = 0; i < orderOptionReqDto.size(); i++) {
+            if (i == 0) {
                 order = orderOptionReqDto.get(i).toOrderEntity();
                 productRepository.postTable(order);
             }
-           orderDtl = orderOptionReqDto.get(i).toOrderList(order.getId());
-           productRepository.postOrderDtl(orderDtl);
-           AtomicInteger result = new AtomicInteger();
-           orderDtl.forEach(item ->{
-               result.set(item.getId());
-               System.out.println(result.get());
-           });
+            orderDtl = orderOptionReqDto.get(i).toOrderList(order.getId());
+            productRepository.postOrderDtl(orderDtl);
+            AtomicInteger result = new AtomicInteger();
+            orderDtl.forEach(item -> {
+                result.set(item.getId());
+                System.out.println(result.get());
+            });
 
-           System.out.println(result.get());
+            System.out.println(result.get());
 
-            if(orderOptionReqDto.get(i).getProductOptionList().size() > 0){
-               productRepository.postOrderOption(orderOptionReqDto.get(i).toOrderOption(result.get()));
+            if (orderOptionReqDto.get(i).getProductOptionList().size() > 0) {
+                productRepository.postOrderOption(orderOptionReqDto.get(i).toOrderOption(result.get()));
 //                orderOption = orderOptionReqDto.get(i).toOrderOption(orderDtl.get(i).getId());
 //                productRepository.postOrderOption(orderOption);
             }
+
         }
 
+
         //OrderDtl 드가는부분
-     //   Order finalOrder = order;
+        //   Order finalOrder = order;
 
 //        orderOptionReqDto.forEach(item -> {
 //
@@ -97,7 +102,25 @@ public class ProductServiceImpl implements ProductService {
 //        });
     }
 
+    @Override
+    public OrderOptionReqDto getOrderId(int tableNumber) throws Exception {
+
+        return productRepository.getOrderNumber(tableNumber).toDto();
+    }
+
 //    @Override
+//    public List<PaymentItemsRespDto> getPayItems(int orderMstId) throws Exception {
+//        List<PaymentItemsRespDto> paymentItemsRespDtos = new ArrayList<PaymentItemsRespDto>();
+//
+//        List<PaymentItems> paymentItems = productRepository.getPayItems(orderMstId);
+//
+//        paymentItems.forEach(cartItem -> {
+//            paymentItemsRespDtos.add(cartItem.toDto());
+//        });
+//
+//        return paymentItemsRespDtos;
+//    }
+    //    @Override
 //    public void saveSales(SalesDto salesDto) throws Exception {
 //        Sales sales = salesDto.toEntity();
 //
@@ -105,4 +128,5 @@ public class ProductServiceImpl implements ProductService {
 //            throw new CustomInternalServerErrorException("결제중 문제 발생");
 //        }
 //    }
+
 }

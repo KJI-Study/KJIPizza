@@ -36,6 +36,22 @@ public class ProductApi {
 
         return ResponseEntity.ok(new CMRespDto<>("Successfully", true));
     }
+
+    @GetMapping("/products/pay/order/{tableNumber}")
+
+        public ResponseEntity<?> getOrderId(@PathVariable int tableNumber) throws Exception {
+
+            return ResponseEntity.ok().body(new CMRespDto<>("Get Successfully", productService.getOrderId(tableNumber)));
+
+    }
+
+//    @GetMapping("/products/pay/item/{orderMstId}" )
+//    public ResponseEntity<?> getPayItems(@PathVariable int orderMstId) throws Exception {
+//
+//        return ResponseEntity.ok().body(new CMRespDto<>("Get Successfully", productService.getPayItems(orderMstId)));
+//    }
+
+
 //    @PostMapping("/products/cart")
 //    public ResponseEntity<?> addCartId(@RequestBody CartReqDto cartRespDto) throws Exception {
 //
@@ -69,10 +85,7 @@ public class ProductApi {
 //
 //        return ResponseEntity.ok().body(new CMRespDto<>("Get Successfully", true));
 //    }
-//    @GetMapping("/products/pay/item/{tableId}" )
-//    public ResponseEntity<?> getPayItems(@PathVariable int tableId) throws Exception {
-//        return ResponseEntity.ok().body(new CMRespDto<>("Get Successfully", cartService.getPayItems(tableId)));
-//    }
+
 
 
 }
