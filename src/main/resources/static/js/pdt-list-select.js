@@ -16,31 +16,48 @@ var deletepdt = {
 }
 
 
-pdtCategoryListSelect.onchange = () => {
-            
-    pdtCategoryList.forEach(category => {
-        console.log(category);
-        if(category.value == pdtCategoryListSelect.value) {
+class ListloadApi {
 
-        let responseData = null;
-
-        $.ajax({
-            async: false,
-            type: "get",
-            url: "/api/admin/productlist/" + category.value,
-            dataType: "json",
-            success: (response) => {
-                responseData = response.data;
-                load.getInstance().loadpdtList(responseData);
-            },
-            error: (error) => {
-                console.log(error);
-                }
-            });
-
-            return responseData;
+    static #instance = null;
+    
+    static getInstance() {
+        if(this.#instance == null){
+            this.#instance = new ListloadApi();
         }
-    });
+        return this.#instance;
+    }
+
+    listload() {
+
+        pdtCategoryList.forEach(category => {
+            console.log(category);
+            if(category.value == pdtCategoryListSelect.value) {
+    
+            let responseData = null;
+    
+            $.ajax({
+                async: false,
+                type: "get",
+                url: "/api/admin/productlist/" + category.value,
+                dataType: "json",
+                success: (response) => {
+                    responseData = response.data;
+                    load.getInstance().loadpdtList(responseData);
+                },
+                error: (error) => {
+                    console.log(error);
+                    }
+                });
+    
+                return responseData;
+            }
+        });
+    }
+    
+}
+
+pdtCategoryListSelect.onchange = () => {
+    ListloadApi.getInstance().listload();
 }
 
 class pdtUpdateApi{
@@ -67,7 +84,7 @@ class pdtUpdateApi{
            dataType: "json",
            success: (response) => {
                console.log(response.data);
-
+               ListloadApi.getInstance().listload();
                alert("제품 수정 완료");
                
            },
@@ -104,6 +121,7 @@ class pdtDeleteApi{
             dataType: "json",
             success: (response) => {
                 alert("제품 삭제 완료");
+                ListloadApi.getInstance().listload();
             },
 
             error: (error) => {
