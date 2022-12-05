@@ -75,7 +75,7 @@ class pdtUpdateApi{
 
         $.ajax({
            async : false,
-           type: "put",
+           type: "post",
            url: "/api/admin/product/update",
            enctype: "multipart/form-data",
            contentType: false,
@@ -91,6 +91,7 @@ class pdtUpdateApi{
 
            error : (error) => {
                console.log(error);
+               
                let entries = formData.entries();
                for (const pair of entries) {
                console.log(pair[0]+ ', ' + pair[1]); 
@@ -163,7 +164,7 @@ class load {
         reader.onload = function  () {
             imgContainer.src = reader.result ;
         }; 
-        formData.append("files", filesInput.files[0]);
+        formData.append("file", filesInput.files[0]);
     }
     
     pdtMstSelect.innerHTML = "";
@@ -200,8 +201,12 @@ class load {
             button.onclick = () => {
                 
                 const formData = new FormData();
+                console.log("-----<여기>-----")
+                console.log(filesInput.files[0]);
 
-                formData.append("files", filesInput.files[0]);
+                if(filesInput.files[0] != null && filesInput.files[0] != undefined){
+                    formData.append("file", filesInput.files[0]);
+                }
 
                 formData.append("id" , responseData[index].pdtId);
 
@@ -211,6 +216,7 @@ class load {
 
                 formData.append("price", priceInputObj.value);
 
+              
                 pdtUpdateApi.getInstance().updateProduct(formData);
                 
             }

@@ -18,39 +18,35 @@
     </select>
 
 
-    <insert id="saveProduct" parameterType="java.util.List">
+    <insert id="saveProduct" parameterType="com.study.mvckjipizza.domain.amdin.Product">
         Insert into
             pdt_mst
         values
-        <foreach collection="list" item="img" separator=",">
-           (
+        (
             0,
-            #{img.category_id},
-            #{img.pdt_name},
-            #{img.pdt_price},
-            #{img.origin_name},
-            #{img.save_name},
+            #{category_id},
+            #{pdt_name},
+            #{pdt_price},
+            #{origin_name},
+            #{save_name},
             now(),
             now()
-            )
-        </foreach>
+        )
     </insert>
 
-    <update id="updateProduct" parameterType="java.util.List">
+    <update id="updateProduct" parameterType="com.study.mvckjipizza.domain.amdin.Product">
         update
             pdt_mst
         set
-        <foreach collection="list" item="img" separator=",">
-            category_id = #{img.category_id},
-            pdt_name = #{img.pdt_name},
-            pdt_price = #{img.pdt_price},
-            origin_name = #{img.origin_name},
-            save_name = #{img.save_name},
-            create_date = now(),
+            <if test="category_id != null"> category_id = #{category_id},</if>
+            <if test="pdt_name != null"> pdt_name = #{pdt_name},</if>
+            <if test="pdt_price != null"> pdt_price = #{pdt_price},</if>
+            <if test="origin_name != null"> origin_name = #{origin_name},</if>
+            <if test="save_name != null"> save_name = #{save_name},</if>
             update_date = now()
-            where
-            id = #{img.id}
-        </foreach>
+        where
+            id = #{id}
+
     </update>
 
     <delete id="deleteProduct" parameterType="com.study.mvckjipizza.domain.amdin.Product">

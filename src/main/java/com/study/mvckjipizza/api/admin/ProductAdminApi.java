@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -24,10 +27,11 @@ public class ProductAdminApi {
         return ResponseEntity.created(null).body(new CMRespDto<>("Register Successfully",true));
     }
 
-    @PutMapping("/product/update")
+    @PostMapping("/product/update")
 
     public ResponseEntity<?> registerUpdate (ProductRegisterRespDto productRegisterRespDto) throws Exception {
         //responsebody json으로 받으려고 쓰는객첸데, formdata여서 필요가없다!
+
 
         productManagementService.updateRegister(productRegisterRespDto);
 

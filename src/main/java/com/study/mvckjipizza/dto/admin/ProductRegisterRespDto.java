@@ -16,12 +16,14 @@ import java.util.List;
 
 public class ProductRegisterRespDto {
 
-    private List<MultipartFile> files;
+
+    private MultipartFile file;
 
     private int id;
     private int category;
     private String name;
     private int price;
     private String img;
+
 
 }

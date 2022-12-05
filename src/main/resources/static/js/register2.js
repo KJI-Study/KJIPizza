@@ -111,6 +111,7 @@ class PdtRegisterApi{
 
             error : (error) => {
                 console.log(error);
+                alert(error.responseJSON.data.error);
                 let entries = formData.entries();
                 for (const pair of entries) {
                 console.log(pair[0]+ ', ' + pair[1]); 
@@ -211,7 +212,7 @@ class RegisterEventService{
             reader.onload = function  () {
                 imgContainer.src = reader.result ;
             }; 
-            formData.append("files", filesInput.files[0]);
+            formData.append("file", filesInput.files[0]);
         }
 
         this.#registButtonObj.onclick = () => {
@@ -220,10 +221,8 @@ class RegisterEventService{
 
             formData.append("name", this.#nameInputObj.value);
 
-
             formData.append("price", this.#priceInputObj.value);
 
-          
              PdtRegisterApi.getInstance().createProductRequest(formData);
                     }
                 }

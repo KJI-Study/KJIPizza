@@ -73,8 +73,6 @@ public class ProductServiceImpl implements ProductService {
 
             if(orderOptionReqDto.get(i).getProductOptionList().size() > 0){
                productRepository.postOrderOption(orderOptionReqDto.get(i).toOrderOption(result.get()));
-//                orderOption = orderOptionReqDto.get(i).toOrderOption(orderDtl.get(i).getId());
-//                productRepository.postOrderOption(orderOption);
             }
         }
 

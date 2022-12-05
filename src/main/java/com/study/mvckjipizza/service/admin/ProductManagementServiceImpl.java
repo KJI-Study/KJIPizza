@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.File;
@@ -39,71 +40,69 @@ public class ProductManagementServiceImpl implements ProductManagementService {
     }
 
     @Override
-    public void registerProduct(ProductRegisterRespDto productRegisterRespDto )throws Exception {
+    public void registerProduct(ProductRegisterRespDto productRegisterRespDto)throws Exception {
 
-        if(productRegisterRespDto.getFiles() == null) {
+        if(productRegisterRespDto.getFile() == null) {
             Map<String, String> errorMap = new HashMap<String, String>();
             errorMap.put("error", "이미지를 선택하지 않았습니다.");
             throw new CustomValidationException("Img Error", errorMap);
         }
 
-        List<Product> products = new ArrayList<Product>();
 
-        productRegisterRespDto.getFiles().forEach(file -> {
-            Resource resource = resourceLoader.getResource("classpath:static/upload/product");
-            String targetFilePath  = null;
-            String srcFilePath = null;
+        Resource resource = resourceLoader.getResource("classpath:static/upload/product");
+        String targetFilePath  = null;
+        String srcFilePath = null;
 
-            System.out.println(productRegisterRespDto.getFiles());
+        MultipartFile file = productRegisterRespDto.getFile();
 
-            try{
-                //해당경로에 이폴더가 존재하냐
-                if(!resource.exists()) {
-                    String targetTempPath = resourceLoader.getResource("classpath:static").getURI().toString();
-                    String srcTempPath = resourceLoader.getResource("classpath:static").getURI().toString();
-                    targetTempPath = targetTempPath.substring(targetTempPath.indexOf("/") + 1);
-                    srcTempPath = srcTempPath.substring(srcTempPath.indexOf("/") + 1, srcTempPath.indexOf("target")) + "/src/main/resources/static";
+        try{
+            //해당경로에 이폴더가 존재하냐
+            if(!resource.exists()) {
+                String targetTempPath = resourceLoader.getResource("classpath:static").getURI().toString();
+                String srcTempPath = resourceLoader.getResource("classpath:static").getURI().toString();
+                targetTempPath = targetTempPath.substring(targetTempPath.indexOf("/") + 1);
+                srcTempPath = srcTempPath.substring(srcTempPath.indexOf("/") + 1, srcTempPath.indexOf("target")) + "/src/main/resources/static";
 
-                    System.out.println(targetTempPath);
-                    System.out.println(srcTempPath);
-                    File f = new File(targetTempPath + "/upload/product");
-                    f.mkdirs();
-                    f = new File(srcTempPath + "/upload/product");
-                    f.mkdirs();
-                }
-
-                targetFilePath = resource.getURI().toString().substring(resource.getURI().toString().indexOf("/") + 1);
-                srcFilePath = resource.getURI().toString().substring(resource.getURI().toString().indexOf("/") + 1, resource.getURI().toString().indexOf("target")) + "/src/main/resources/static/upload/product";
-                System.out.println(targetFilePath);
-                System.out.println(srcFilePath);
-
-            } catch (IOException e){
-                throw new RuntimeException(e);
+                System.out.println(targetTempPath);
+                System.out.println(srcTempPath);
+                File f = new File(targetTempPath + "/upload/product");
+                f.mkdirs();
+                f = new File(srcTempPath + "/upload/product");
+                f.mkdirs();
             }
 
-            String originName = file.getOriginalFilename();
-            String extension = originName.substring(originName.lastIndexOf("."));
-            String saveName = UUID.randomUUID().toString().replace("-","") + extension;
-            Path targetPath = Paths.get(targetFilePath + "/" + saveName);
-            Path srcPath = Paths.get(srcFilePath + "/" + saveName);
+            targetFilePath = resource.getURI().toString().substring(resource.getURI().toString().indexOf("/") + 1);
+            srcFilePath = resource.getURI().toString().substring(resource.getURI().toString().indexOf("/") + 1, resource.getURI().toString().indexOf("target")) + "/src/main/resources/static/upload/product";
+            System.out.println(targetFilePath);
+            System.out.println(srcFilePath);
 
-            try {
-                Files.write(targetPath, file.getBytes());
-                Files.write(srcPath, file.getBytes());
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
 
-            } catch (IOException e) {
-                throw new CustomInternalServerErrorException(e.getMessage());
-            }
+        String originName = file.getOriginalFilename();
+        String extension = originName.substring(originName.lastIndexOf("."));
+        String saveName = UUID.randomUUID().toString().replace("-","") + extension;
+        Path targetPath = Paths.get(targetFilePath + "/" + saveName);
+        Path srcPath = Paths.get(srcFilePath + "/" + saveName);
 
-            products.add(Product.builder()
-                    .category_id(productRegisterRespDto.getCategory())
-                    .pdt_name(productRegisterRespDto.getName())
-                    .pdt_price(productRegisterRespDto.getPrice())
-                    .origin_name(originName)
-                    .save_name(saveName)
-                    .build());
-        });
-        productManagementRepository.saveProduct(products);
+        try {
+            Files.write(targetPath, file.getBytes());
+            Files.write(srcPath, file.getBytes());
+
+        } catch (IOException e) {
+            throw new CustomInternalServerErrorException(e.getMessage());
+        }
+
+        Product product = Product.builder()
+                .category_id(productRegisterRespDto.getCategory())
+                .pdt_name(productRegisterRespDto.getName())
+                .pdt_price(productRegisterRespDto.getPrice())
+                .origin_name(originName)
+                .save_name(saveName)
+                .build();
+
+        productManagementRepository.saveProduct(product);
     }
 
     @Override
@@ -111,21 +110,25 @@ public class ProductManagementServiceImpl implements ProductManagementService {
 
         System.out.println(productRegisterRespDto);
 
-        if(productRegisterRespDto.getFiles() == null) {
-            Map<String, String> errorMap = new HashMap<String, String>();
-            errorMap.put("error", "이미지를 선택하지 않았습니다.");
-            throw new CustomValidationException("Img Error", errorMap);
-        }
 
-        List<Product> products = new ArrayList<Product>();
+//        if(productRegisterRespDto.getFile() == null) {
+//            Map<String, String> errorMap = new HashMap<String, String>();
+//            errorMap.put("error", "이미지를 선택하지 않았습니다.");
+//            throw new CustomValidationException("Img Error", errorMap);
+//        }
 
-        productRegisterRespDto.getFiles().forEach(file -> {
-            Resource resource = resourceLoader.getResource("classpath:static/upload/product");
-            String targetFilePath  = null;
-            String srcFilePath = null;
+        Resource resource = resourceLoader.getResource("classpath:static/upload/product");
+        String targetFilePath  = null;
+        String srcFilePath = null;
 
-            System.out.println(productRegisterRespDto.getFiles());
+        System.out.println(productRegisterRespDto.getFile());
 
+        MultipartFile file = productRegisterRespDto.getFile();
+
+        String originName = null;
+        String saveName = null;
+
+        if(file != null) {
             try{
                 //해당경로에 이폴더가 존재하냐
                 if(!resource.exists()) {
@@ -150,10 +153,9 @@ public class ProductManagementServiceImpl implements ProductManagementService {
             } catch (IOException e){
                 throw new RuntimeException(e);
             }
-
-            String originName = file.getOriginalFilename();
+            originName = file.getOriginalFilename();
             String extension = originName.substring(originName.lastIndexOf("."));
-            String saveName = UUID.randomUUID().toString().replace("-","") + extension;
+            saveName = UUID.randomUUID().toString().replace("-","") + extension;
             Path targetPath = Paths.get(targetFilePath + "/" + saveName);
             Path srcPath = Paths.get(srcFilePath + "/" + saveName);
 
@@ -164,17 +166,19 @@ public class ProductManagementServiceImpl implements ProductManagementService {
             } catch (IOException e) {
                 throw new CustomInternalServerErrorException(e.getMessage());
             }
+        }
 
-            products.add(Product.builder()
-                    .id(productRegisterRespDto.getId())
-                    .category_id(productRegisterRespDto.getCategory())
-                    .pdt_name(productRegisterRespDto.getName())
-                    .pdt_price(productRegisterRespDto.getPrice())
-                    .origin_name(originName)
-                    .save_name(saveName)
-                    .build());
-        });
-        productManagementRepository.updateProduct(products);
+
+        Product product = Product.builder()
+                .id(productRegisterRespDto.getId())
+                .category_id(productRegisterRespDto.getCategory())
+                .pdt_name(productRegisterRespDto.getName())
+                .pdt_price(productRegisterRespDto.getPrice())
+                .origin_name(originName)
+                .save_name(saveName)
+                .build();
+
+        productManagementRepository.updateProduct(product);
     }
 
     @Override
