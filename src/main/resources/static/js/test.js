@@ -40,6 +40,8 @@ class SalesService{
     }
 
     getSalesProduct(responseData) {
+        const allresult = document.querySelector(".Allresult");
+        var resultsum = 0;
         
         responseData.forEach(item => {
             create.innerHTML += `
@@ -50,10 +52,14 @@ class SalesService{
                 </tr>
         `;
         });
+
+        for(var i = 0; i<responseData.length; i++){
+            resultsum += (responseData[i].stock * responseData[i].pdtPrice);
+        }
+        allresult.innerHTML = `${resultsum}`
     }
+
 }
-
-
 
 window.onload = () => {
     Sales.getInstance().getSale();
