@@ -41,15 +41,15 @@ public class ProductApi {
 
         public ResponseEntity<?> getOrderId(@PathVariable int tableNumber) throws Exception {
 
-            return ResponseEntity.ok().body(new CMRespDto<>("Get Successfully", productService.getOrderId(tableNumber)));
+        return ResponseEntity.ok().body(new CMRespDto<>("Get Successfully", productService.getOrderId(tableNumber)));
 
     }
 
-//    @GetMapping("/products/pay/item/{orderMstId}" )
-//    public ResponseEntity<?> getPayItems(@PathVariable int orderMstId) throws Exception {
-//
-//        return ResponseEntity.ok().body(new CMRespDto<>("Get Successfully", productService.getPayItems(orderMstId)));
-//    }
+    @GetMapping("/products/pay/item/{orderMstId}")
+    public ResponseEntity<?> getPayItems(@PathVariable int orderMstId) throws Exception {
+
+        return ResponseEntity.ok().body(new CMRespDto<>("Get Successfully", productService.getPayItems(orderMstId)));
+    }
 
 
 //    @PostMapping("/products/cart")

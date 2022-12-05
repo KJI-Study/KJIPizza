@@ -125,7 +125,7 @@
             LEFT OUTER JOIN order_dtl od ON(od.order_id = om.id)
             LEFT OUTER JOIN order_option oo ON(oo.order_dtl_id = od.id)
             LEFT OUTER JOIN pdt_mst pm ON(pm.id = od.pdt_id)
-            LEFT OUTER JOIN option_mst opm(opm.id = oo.option_id)
+            LEFT OUTER JOIN option_mst opm on(opm.id = oo.option_id)
         WHERE
             om.id = #{order_id}
 

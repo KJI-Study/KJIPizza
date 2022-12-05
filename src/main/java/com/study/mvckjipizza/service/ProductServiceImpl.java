@@ -105,21 +105,23 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public OrderOptionReqDto getOrderId(int tableNumber) throws Exception {
 
+        System.out.println(productRepository.getOrderNumber(tableNumber).toDto());
+
         return productRepository.getOrderNumber(tableNumber).toDto();
     }
 
-//    @Override
-//    public List<PaymentItemsRespDto> getPayItems(int orderMstId) throws Exception {
-//        List<PaymentItemsRespDto> paymentItemsRespDtos = new ArrayList<PaymentItemsRespDto>();
-//
-//        List<PaymentItems> paymentItems = productRepository.getPayItems(orderMstId);
-//
-//        paymentItems.forEach(cartItem -> {
-//            paymentItemsRespDtos.add(cartItem.toDto());
-//        });
-//
-//        return paymentItemsRespDtos;
-//    }
+    @Override
+    public List<PaymentItemsRespDto> getPayItems(int orderMstId) throws Exception {
+        List<PaymentItemsRespDto> paymentItemsRespDtos = new ArrayList<PaymentItemsRespDto>();
+
+        List<PaymentItems> paymentItems = productRepository.getPayItems(orderMstId);
+
+        paymentItems.forEach(cartItem -> {
+            paymentItemsRespDtos.add(cartItem.toDto());
+        });
+
+        return paymentItemsRespDtos;
+    }
     //    @Override
 //    public void saveSales(SalesDto salesDto) throws Exception {
 //        Sales sales = salesDto.toEntity();

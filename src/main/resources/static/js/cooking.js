@@ -1,32 +1,32 @@
-// const goPayButton = document.querySelector(".order-detail-btn");
 const centerBox = document.querySelector(".center-box");
-
-//tableNumber 선언해줘야함
 const url = location.href;
 const tableNumber = url.substring(url.lastIndexOf("/") + 1 );
+//tableNumber 선언해줘야함
 
 
 class PayItemsApi{
+
     static #instance = null;
 
     static getInstance(){
         if (this.#instance == null) {
             this.#instance = new PayItemsApi();
-    }
+        }
         return this.#instance;
     }
 
-    constructor(){
-        this.getOrderId();
-        // this.getPayItems();
-    }
-
     getOrderId() {
+
+        let orderIdData = null;
+
         $.ajax({
             async : false,
             type : "get",
             url : "/api/products/pay/order/" + tableNumber,
             success : (response) => {
+                console.log(response.data);
+                orderIdData = response.data;
+                this.getPayItems(orderIdData.orderMstId);
             },
             error : (error) => {
                 console.log(error);
@@ -34,27 +34,28 @@ class PayItemsApi{
         });
     }
 
-    // getPayItems(){
+    getPayItems(orderIdData){
+        console.log(orderIdData);
 
-    //         centerBox.innerHTML = "";
+            centerBox.innerHTML = "";
 
-    //         let responseData = null;
+            let responseData = null;
 
-    //     $.ajax({
-    //         async: false,
-    //         type: "get",
-    //         url: "/api/products/pay/item/" + PayItemsApi.getOrderId().response.data.orderMstId,
-    //         contentType: "json",
-    //         success: (response) => {
-    //             responseData = response.data;
-    //             console.log(responseData);
-    //         },
-    //         error: (error) => {
-    //             console.log(error);
-    //         }
-    //     });
-
-    //     console.log(responseData);
+        $.ajax({
+            async: false,
+            type: "get",
+            url: "/api/products/pay/item/" + orderIdData,
+            contentType: "json",
+            success: (response) => {
+                responseData = response.data;
+                console.log(responseData);
+            },
+            error: (error) => {
+                console.log(error);
+            }
+        });
+        console.log(responseData);
+    }
 
         // responseData.forEach(product => {
         //     if(product.cartegoryId == 2){
@@ -90,12 +91,10 @@ class PayItemsApi{
     // }
 }
 
-
-document.querySelector(".exit-button").onclick = () => {
-    location.href ="/table/" + tableNumber;
-    
-
-}
 window.onload = () => {
-    new PayItemsApi;
+    PayItemsApi.getInstance().getOrderId();
 }
+
+// document.querySelector(".exit-button").onclick = () => {
+//     location.href = "/table/" + tableNumber;
+// }

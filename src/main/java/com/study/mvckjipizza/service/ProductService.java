@@ -14,6 +14,6 @@ public interface ProductService {
 
     public OrderOptionReqDto getOrderId(int tableNumber) throws Exception;
 
-//    public List<PaymentItemsRespDto> getPayItems(int orderMstId) throws Exception;
+   public List<PaymentItemsRespDto> getPayItems(int orderMstId) throws Exception;
 
 }
