@@ -155,16 +155,19 @@ class Cart {
     const btnText = document.querySelectorAll(".numbertext");
     const firstPrice = document.querySelectorAll(".cart-item-price");
     var result = 0;
+    
     minusbtn.forEach((button,index) => {
       button.onclick = () => {
+        if(btnText[index].value > 1 ) {
         btnText[index].value--;
+        this.stockList[index]--;
 
         result = resultsum.value;
 
         result -= (firstPrice[index].innerText * 1);   
       
         resultsum.value = result;
-
+        }
         
       }
     })
@@ -178,6 +181,7 @@ class Cart {
     plusbtn.forEach((button,index) => {
       button.onclick = () => {
         btnText[index].value++;
+        this.stockList[index]++;
 
         result = 0;
 
@@ -205,7 +209,6 @@ class Cart {
     
     deletebtn.forEach((button, index) => {
       button.onclick = () => {
-        console.log(this.cartList.indexOf(this.cartList[index]));
         if(index == this.cartList.indexOf(this.cartList[index])) {
           this.cartList.splice(index, 1);
           this.stockList.splice(index, 1);
@@ -370,8 +373,6 @@ class TableService {
     const modalProduct = document.querySelector(".modal-container");
 
     const responseData = TableSelectApi.getInstance().getCollections(entity.btnvalue);
-    
-    console.log(responseData);
     
     collectionProducts.forEach((button, index) => {
       button.onclick = () => {

@@ -1,32 +1,35 @@
-*{
+* {
     box-sizing: border-box;
 }
 
-ul{
+ul {
     list-style: none;
 }
 
-li{
+li {
     float: left;
     margin: 60px 80px 0px 30px;
 }
-.title{
+.title {
     font-size: 50px;
 }
-.name{
+
+.name {
     margin-top: 20px;
+    text-align: center;
 }
 
-.number{
+.number {
     padding: 50px;
     font-size: 30px;
 }
-.numberone{
+.numberone {
     width: 117px;
     height: 138px;
     font-size: 30px;
 }
-button{
+
+button {
     color: white;
     background-color:  rgb(243, 61, 61);
     border: none;
