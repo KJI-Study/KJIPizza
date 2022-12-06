@@ -29,10 +29,11 @@ public class OrderOptionReqDto {
     private int stockValue;
     private int optionId;
     private List <Map<String, Object>> productOptionList;
-
+    private int amount;
     public Order toOrderEntity() {
         return Order.builder()
                 .table_id(tableNumber)
+                .amount(amount)
                 .build();
     }
 

@@ -5,6 +5,7 @@ import com.study.mvckjipizza.domain.SalesItems;
 import com.study.mvckjipizza.domain.amdin.Product;
 import com.study.mvckjipizza.dto.CategoryResponseDto;
 import com.study.mvckjipizza.dto.PaymentItemsRespDto;
+import com.study.mvckjipizza.dto.SalesDto;
 import com.study.mvckjipizza.dto.admin.ProductListSelectRespDto;
 import com.study.mvckjipizza.dto.admin.ProductRegisterRespDto;
 import com.study.mvckjipizza.excetpion.CustomInternalServerErrorException;
@@ -216,5 +217,11 @@ public class ProductManagementServiceImpl implements ProductManagementService {
         });
 
         return paymentItemsRespDtos;
+    }
+
+    @Override
+    public SalesDto getTotalSales() throws Exception {
+
+        return productManagementRepository.getSales().toDto();
     }
 }
