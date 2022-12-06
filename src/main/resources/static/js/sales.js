@@ -63,6 +63,9 @@ class SalesService{
         const allresult = document.querySelectorAll(".Allresult");
         var resultsum = 0;
         var result2sum = 0;
+        var result3sum = 0;
+        var result4sum = 0;
+        var result5sum = 0;
         const indexPrice = document.querySelectorAll(".price");
         responseData.forEach(item => {
             if(item.cartegoryId == 2){
@@ -86,14 +89,58 @@ class SalesService{
         });
 
         for(var i = 0; i<responseData.length; i++){
-            if(responseData[i].cartegoryId == 2){
+            if(responseData[i].cartegoryId == 1){
                 resultsum += responseData[i].pdtPrice * responseData[i].stock;
-            }else {
+            }else if(responseData[i].cartegoryId == 2){
                 result2sum += responseData[i].pdtPrice * responseData[i].stock;
+            }else if(responseData[i].cartegoryId == 3){
+                result3sum += responseData[i].pdtPrice * responseData[i].stock;
+            }else if(responseData[i].cartegoryId == 4){
+                result4sum += responseData[i].pdtPrice * responseData[i].stock;
+            }else if(responseData[i].cartegoryId == 5){
+                result5sum += responseData[i].pdtPrice * responseData[i].stock;
             }
         }
-        allresult[0].innerHTML = `${resultsum}`;
-        allresult[1].innerHTML = `${result2sum}`;
+        allresult[0].innerHTML = `${result2sum}`;
+        allresult[1].innerHTML = `${resultsum + result2sum + result3sum + result4sum + result5sum}`;
+
+        console.log(resultsum);
+        console.log(result2sum);
+        console.log(result3sum);
+        console.log(result4sum);
+        console.log(result5sum);
+        let pieChartData = {
+            labels: ['피자', '샐러드', '스파게티', '파스타/라이스', '음료', '기타'],
+            datasets: [{
+            data: [result2sum, resultsum, result3sum, result4sum, result5sum, 6000],
+            backgroundColor: ['rgb(255, 99, 132)', 'rgb(255, 159, 64)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)']
+            }],
+            PointStyle: 'circle',
+            pointRadius: 1
+            };
+            
+            let ctx = document.getElementById('pieChart').getContext('2d');
+                
+            window.pieChart = new Chart(ctx, {
+                type: 'pie',
+                data: pieChartData,
+                options: {
+                    responsive: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                usePointStyle: true
+                            },
+                            position: 'right'
+                        }
+                    }
+                }   
+            });
+    }
+
+    salesChart() {
+        
+        
     }
 
 }
@@ -102,4 +149,5 @@ class SalesService{
 window.onload = () => {
     Sales.getInstance().getSale();
     Sales.getInstance().getTotalSales();
+    
 }
