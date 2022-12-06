@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-    <link rel="stylesheet" href="/static/css/register.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>    <link rel="stylesheet" href="/static/css/register.css">
     <link rel="stylesheet" href="/static/css/sales.css">
     <title>Document</title>
 </head>
@@ -21,29 +21,8 @@
                 <h2 class="total-sales"></h2>
             </div>
             <div class="sales-ratio-container">
-                <table class="sales-ratio-table">
-                    <th colspan="2" class="ratio-table-title">
-                        상품별 매출 비율
-                    </th>
-                    <tbody>
-                        <tr>
-                            <th>피자</th>
-                            <td>40%</td>
-                        </tr>
-                        <tr>
-                            <th>샐러드</th>
-                            <td>13%</td>
-                        </tr>
-                        <tr>
-                            <th>스파게티</th>
-                            <td>21%</td>
-                        </tr>
-                        <tr>
-                            <th>파스타/라이스</th>
-                            <td>8%</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <canvas id="pieChart" style="width:400px; height:160px;"></canvas>
+                <div id="legend-div" class="legend-div"></div>
             </div>
         </div>
         <table class="admin-table" border="1" >
