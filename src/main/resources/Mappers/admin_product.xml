@@ -10,11 +10,19 @@
 
     </resultMap>
 
-    <resultMap id="salesMap" type="com.study.mvckjipizza.domain.SalesItems">
+    <resultMap id="PayItemList" type="com.study.mvckjipizza.domain.Option">
+        <result property="option_name" column="option_name"></result>
+        <result property="option_price" column="option_price"></result>
+    </resultMap>
+
+    <resultMap id="salesMap" type="com.study.mvckjipizza.domain.PaymentItems">
         <result property="pdt_name" column="pdt_name"></result>
         <result property="pdt_price" column="pdt_price"></result>
+
         <result property="stock" column="stock"></result>
+        <collection property="pdt_options" javaType="list" resultMap="PayItemList"></collection>
     </resultMap>
+
 
 
     <select id="getCategoryList" resultMap="product_category">
@@ -97,10 +105,12 @@
         SELECT
             pm.pdt_name,
             COUNT(pm.pdt_name) as stock,
-            pm.pdt_price
+            pm.pdt_price,
+            oop.option_id
         FROM
             order_dtl od
             LEFT OUTER JOIN pdt_mst pm ON(od.pdt_id = pm.id)
+            LEFT OUTER JOIN order_option oop ON(od.id = oop.order_dtl_id)
         GROUP BY od.pdt_id
     </select>
 </mapper>

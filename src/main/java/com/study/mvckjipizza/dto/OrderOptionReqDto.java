@@ -26,7 +26,7 @@ public class OrderOptionReqDto {
 
      // option의 dtl_id가 될 것.  (option테이블의  order_dtl_id가 돼야함)
     private int productId;
-
+    private int stockValue;
     private int optionId;
     private List <Map<String, Object>> productOptionList;
 
@@ -40,9 +40,9 @@ public class OrderOptionReqDto {
         List<OrderDtl> orderDtls = new ArrayList<OrderDtl>();
 
         orderDtls.add(OrderDtl.builder()
-
                 .order_id(mstId)
                 .pdt_id(productId)
+                .stock(stockValue)
                 .build());
 
         return orderDtls;

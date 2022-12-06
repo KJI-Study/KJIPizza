@@ -52,7 +52,7 @@ class SalesService{
                 </tr>
         `;
         });
-
+        
         for(var i = 0; i<responseData.length; i++){
             resultsum += (responseData[i].stock * responseData[i].pdtPrice);
         }
