@@ -46,6 +46,7 @@ class Sales {
                 console.log(error);
             }
         });
+        return responseData;
     }
 }
 
@@ -66,9 +67,8 @@ class SalesService{
         var result3sum = 0;
         var result4sum = 0;
         var result5sum = 0;
+
         const indexPrice = document.querySelectorAll(".price");
-
-
 
         responseData.forEach(item => {
             if(item.cartegoryId == 2){
@@ -106,10 +106,19 @@ class SalesService{
             }
         }
 
+
+        const totalAmount = Sales.getInstance().getTotalSales();
+        const optionsPrice = document.querySelector(".additional-option");
+        const optionsAmount = totalAmount.totalSales - result2sum - (resultsum + result3sum + result4sum + result5sum);
+        console.log("---여기---");
+        console.log(optionsAmount);
+
         allresult[0].innerHTML = `${result2sum}`;
 
-        allresult[1].innerHTML = `${resultsum + result3sum + result4sum + result5sum}`;
+        allresult[1].innerHTML = `${resultsum + optionsAmount + result3sum + result4sum + result5sum}`;
 
+        optionsPrice.innerHTML = `${optionsAmount}`;
+        
         console.log(resultsum);
         console.log(result2sum);
         console.log(result3sum);
