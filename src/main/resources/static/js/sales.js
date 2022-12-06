@@ -1,4 +1,5 @@
 const create = document.querySelectorAll(".create-sale");
+const totSales = document.querySelector(".total-sales");
 
 class Sales {
     static #instance = null;
@@ -26,6 +27,25 @@ class Sales {
                 console.log(error);
             }
         })
+    }
+
+    getTotalSales() {
+        let responseData = null;
+
+        $.ajax({
+            async: false,
+            type: "get",
+            url: "/api/admin/totalSales",
+            dataType: "json",
+            success: (response) => {
+                console.log(response.data);
+                responseData = response.data;
+                totSales.innerHTML = `₩${responseData.totalSales}`;
+            },
+            error : (error) => {
+                console.log(error);
+            }
+        });
     }
 }
 
@@ -81,4 +101,5 @@ class SalesService{
 
 window.onload = () => {
     Sales.getInstance().getSale();
+    Sales.getInstance().getTotalSales();
 }

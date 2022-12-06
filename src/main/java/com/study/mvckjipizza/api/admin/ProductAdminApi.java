@@ -61,12 +61,15 @@ public class ProductAdminApi {
         return ResponseEntity.ok().body(new CMRespDto<>("Get successfully", productManagementService.getProductListSelect(categoryName)));
     }
 
-
     @GetMapping("/sales")
     public ResponseEntity<?> getSales() throws Exception {
 
-
-
         return ResponseEntity.ok().body(new CMRespDto<>("Get successfully",  productManagementService.getAllSales()));
+    }
+
+    @GetMapping("/totalSales")
+    public ResponseEntity<?> getTotalSales() throws Exception {
+
+        return ResponseEntity.ok().body(new CMRespDto<>("Get successfully", productManagementService.getTotalSales()));
     }
 }

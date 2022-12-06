@@ -2,6 +2,7 @@ package com.study.mvckjipizza.repository.admin;
 
 import com.study.mvckjipizza.domain.PaymentItems;
 import com.study.mvckjipizza.domain.ProductCategory;
+import com.study.mvckjipizza.domain.Sales;
 import com.study.mvckjipizza.domain.SalesItems;
 import com.study.mvckjipizza.domain.amdin.Product;
 import com.study.mvckjipizza.domain.amdin.SelectProduct;
@@ -17,7 +18,7 @@ public interface ProductManagementRepository {
 
 
     public List<ProductCategory> getCategoryList() throws Exception;
-    //재률이가한거
+
     public List<SelectProduct> getProductListSelect(int categoryName) throws Exception;
 
     public int saveProduct(Product product)throws Exception;
@@ -27,4 +28,6 @@ public interface ProductManagementRepository {
     public int deleteProduct(Product product) throws Exception;
 
     public List<PaymentItems> getSalesItems() throws Exception;
+
+    public Sales getSales() throws Exception;
 }

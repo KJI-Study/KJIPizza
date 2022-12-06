@@ -109,13 +109,18 @@
             COUNT(pm.pdt_name) as stock,
             pm.pdt_price,
             oop.option_id,
-            pm.category_id,
-            ms.amount
+            pm.category_id
         FROM
-            order_mst ms,
             order_dtl od
             LEFT OUTER JOIN pdt_mst pm ON(od.pdt_id = pm.id)
             LEFT OUTER JOIN order_option oop ON(od.id = oop.order_dtl_id)
         GROUP BY od.pdt_id
+    </select>
+
+    <select id="getSales" resultType="com.study.mvckjipizza.domain.Sales">
+        select
+            sum(amount) as total_sales
+        from
+            order_mst
     </select>
 </mapper>
