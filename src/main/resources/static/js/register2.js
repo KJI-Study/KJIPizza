@@ -86,6 +86,7 @@ class PdtRegisterApi{
 
             error : (error) => {
                 console.log(error);
+                alert(error.responseJSON.data.error);
                 let entries = formData.entries();
                 for (const pair of entries) {
                 console.log(pair[0]+ ', ' + pair[1]); 

@@ -1,0 +1,52 @@
+.sales-container {
+    display: flex;
+    justify-content: center;
+}
+
+.total-sales-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 50%;
+}
+
+.total-sales-container h2 {
+    font-size: 25px;
+}
+
+.total-sales-container h2:nth-child(1) {
+    font-size: 30px;
+    border-bottom: 2px solid rgb(0, 0, 0)
+}
+
+.sales-ratio-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.sales-ratio-table {
+    width: 300px;
+}
+
+.ratio-table-title {
+    font-size: 17px;
+    border-bottom: 1px solid rgb(0, 0, 0);
+    
+}
+
+.sales-ratio-table td {
+    padding-top: 5px;
+    text-align: end;
+}
+
+
+.admin-table {
+    border-color:blue;
+    width:100%;
+    height:100%;
+    text-align:center;
+}

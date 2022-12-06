@@ -43,15 +43,16 @@ class Product {
   productPrice = null;
   productOptionList = null;
   tableNumber = tableNumber;
+  stockValue = null;
   
 
   constructor(productId, productName, productPrice) {
     this.productId = productId;
     this.productName = productName;
     this.productPrice = productPrice;
+    this.stockValue = 1;
     this.productOptionList = new Array();
   }
-
 }
 
 
@@ -74,12 +75,33 @@ class Cart {
 
   addProduct(product) {
     for(let i = 0; i < this.cartList.length; i++) {
-      if(JSON.stringify(this.cartList[i]) == JSON.stringify(product)) {   
-        this.stockList[i] += 1;
+      //if(JSON.stringify(this.cartList[i]) == JSON.stringify(product)) {   
+        if(this.cartList[i].productOptionList.length == 0 && product.productOptionList.length == 0){
+        if((this.cartList[i].productId == product.productId) && (this.cartList[i].productName == product.productName) && (this.cartList[i].productPrice == product.productPrice)) {
+          this.stockList[i] += 1;
+          this.cartList[i].stockValue++;
+          console.log(this.cartList);
+          return;
+        }
+      }
+        if(this.cartList[i].productOptionList.length > 0 || product.productOptionList.length > 0 )
+           {
+            if((this.cartList[i].productId == product.productId) && (this.cartList[i].productName == product.productName) && (this.cartList[i].productPrice == product.productPrice)) {
+              if(this.cartList[i].productOptionList[0].optionId == product.productOptionList[0].optionId && this.cartList[i].productOptionList[1].optionId == product.productOptionList[1].optionId
+                && this.cartList[i].productOptionList[2].optionId == product.productOptionList[2].optionId){
+                  this.stockList[i] += 1;
+                  this.cartList[i].stockValue++;
+                  console.log(this.cartList);
+                  return;
+            }
+          }
+        }
+       // this.stockList[i] += 1;
+       // this.cartList[i].stockValue++;
         console.log(this.cartList);
         console.log(this.stockList);
-        return;
-      }
+       //return;
+     // }
     }
     
     this.cartList.push(product);
@@ -148,6 +170,7 @@ class Cart {
     }
 
     resultsum.value = result;
+
   }
 
   miusProduct() {
@@ -168,10 +191,10 @@ class Cart {
       
         resultsum.value = result;
         }
-        
       }
     })
   }
+  
   plusProduct() { 
     const plusbtn = document.querySelectorAll(".cart-plus-btn");
     const btnText = document.querySelectorAll(".numbertext");
@@ -495,8 +518,10 @@ class TableService {
         document.querySelector(".modal-cart-btn").onclick = () => {
           document.querySelector(".modal-container").classList.add("hidden");
           document.querySelectorAll(".product-select")[index].classList.add("goCart");
+          
           let product = new Product(responseData[index].productId, responseData[index].productName, responseData[index].productPrice);
-
+          console.log("여기");
+          console.log(product);
           if(entity.page + 1 == 2) {
             let formData = new FormData(document.querySelector(".option-form"));
 

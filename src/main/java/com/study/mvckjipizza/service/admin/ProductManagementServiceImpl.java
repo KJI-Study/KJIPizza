@@ -209,10 +209,10 @@ public class ProductManagementServiceImpl implements ProductManagementService {
 
         List<PaymentItemsRespDto> paymentItemsRespDtos = new ArrayList<PaymentItemsRespDto>();
 
-        List<SalesItems> salesItems = productManagementRepository.getSalesItems();
+        List<PaymentItems> paymentItems = productManagementRepository.getSalesItems();
 
-        salesItems.forEach(cartItem -> {
-            paymentItemsRespDtos.add(cartItem.toSales());
+        paymentItems.forEach(cartItem -> {
+            paymentItemsRespDtos.add(cartItem.toDto());
         });
 
         return paymentItemsRespDtos;

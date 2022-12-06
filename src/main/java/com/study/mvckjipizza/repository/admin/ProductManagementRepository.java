@@ -26,5 +26,5 @@ public interface ProductManagementRepository {
 
     public int deleteProduct(Product product) throws Exception;
 
-    public List<SalesItems> getSalesItems() throws Exception;
+    public List<PaymentItems> getSalesItems() throws Exception;
 }
