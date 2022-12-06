@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <link rel="stylesheet" href="/static/css/register.css">
+    <link rel="stylesheet" href="/static/css/sales.css">
     <title>Document</title>
 </head>
 <body>
@@ -14,9 +15,40 @@
         <a href="/admin/sales" class="sales-management-link">매출 관리</a>
     </div>
     <div id="container">
+        <div class="sales-container">
+            <div class="total-sales-container">
+                <h2>총 매출</h2>
+                <h2 class="total-sales">132,558,000원</h2>
+            </div>
+            <div class="sales-ratio-container">
+                <table class="sales-ratio-table">
+                    <th colspan="2" class="ratio-table-title">
+                        상품별 매출 비율
+                    </th>
+                    <tbody>
+                        <tr>
+                            <th>피자</th>
+                            <td>40%</td>
+                        </tr>
+                        <tr>
+                            <th>샐러드</th>
+                            <td>13%</td>
+                        </tr>
+                        <tr>
+                            <th>스파게티</th>
+                            <td>21%</td>
+                        </tr>
+                        <tr>
+                            <th>파스타/라이스</th>
+                            <td>8%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <table class="admin-table" border="1" >
             <tr bgcolor="blue" align ="center">
-            <p><td colspan = "3" span style="color:white">오늘의 수입/지출</td></p>
+            <p><td colspan = "3" span style="color:white">상품별 매출(PIZZA)</td></p>
             </tr>
             <tr align = "center" bgcolor="skybule">
             <td>상품명</td>
@@ -35,8 +67,31 @@
             <td colspan="2" class="Allresult">1,000,000</td>
             </tr>
         </table>
-        </body>
-        </html>
+        <table class="admin-table" border="1" >
+            <tr bgcolor="blue" align ="center">
+            <p><td colspan = "3" span style="color:white">상품별 매출(그 외)</td></p>
+            </tr>
+            <tr align = "center" bgcolor="skybule">
+            <td>상품명</td>
+            <td>stock</td>
+            <td>수입</td>
+            </tr>
+            <tr>
+            <tbody class="create-sale">
+                <tr>
+                    <td>추가 옵션</td>
+                    <td>-</td>
+                    <td class="additional-option">0</td>
+                    </tr>
+            </tbody>
+            <tr>
+            <td rowspan="3" align = "center" bgcolor="skyblue">총계</td>
+            <td colspan="2">수입</td>
+            </tr>
+            <tr>
+            <td colspan="2" class="Allresult">1,000,000</td>
+            </tr>
+        </table>
     </div>
      <script src="/static/js/test.js"></script>
 </body>
