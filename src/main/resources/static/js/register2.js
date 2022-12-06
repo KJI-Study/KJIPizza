@@ -80,6 +80,7 @@ class PdtRegisterApi{
             dataType: "json",
             success: (response) => {
                 console.log(response.data);
+                //CommonApi.getInstance().getCategoryList();
                 alert("제품 등록 완료");
             },
 
@@ -101,7 +102,8 @@ class PdtRegisterApi{
             type: "post",
             url: "/api/admin/product/register",
             enctype: "multipart/form-data",
-            contentType: false,
+            contentT
+            ype: false,
             processData: false,
             data: formData,
             dataType: "json",

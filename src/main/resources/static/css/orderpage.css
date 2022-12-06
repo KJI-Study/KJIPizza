@@ -94,6 +94,8 @@ body {
     margin-top: 40px;
     margin-left: 20px;
 
+    height: 250px;
+    width: 200px;
    
     
 }
@@ -157,8 +159,8 @@ body {
     width: 160px;
     height: 40px;
 
-    color: white;
-    background-color: brown;
+    color: brown;
+    background-color: whitesmoke;
     border: none;
     border-radius: 5px;
 
@@ -167,19 +169,19 @@ body {
     
 }
 .cooking{
+        
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-
-    margin-top: 10px;
+    
     margin-left: 20px;
     width: 160px;
     height: 40px;
 
-    color: brown;
-    background-color: whitesmoke;
+    color: white;
+    background-color: brown;
     border: none;
     border-radius: 5px;
 

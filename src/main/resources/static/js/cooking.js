@@ -55,46 +55,44 @@ class PayItemsApi{
             }
         });
         console.log(responseData);
-    }
+    
 
-        // responseData.forEach(product => {
-        //     if(product.cartegoryId == 2){
-        //     centerBox.innerHTML += `
-        //     <div class="mini-box">
-        //         <div class="product-images">
-        //             <img src="/static/upload/product/${product.save_name}">
-        //             <div class="product-detail">
-        //                 <div class="product-name"><strong>${product.pdtName}</strong></div>
-        //                 <div class="product-size">${product.cartOptions[0].optionName} ${product.cartOptions[1].optionName} ${product.cartOptions[2].optionName}</div>
-        //                 <button type="button" class="product-write">상품명 작성</button>
-        //                 <button type="button" class="cooking">조리중</button>
-        //             </div>
-        //         </div>
-        //     </div> 
-        //     `;
-        //     }
-        //     else {
-        //         centerBox.innerHTML += `
-        //     <div class="mini-box">
-        //         <div class="product-images">
-        //             <img src="/static/upload/product/${product.save_name}">
-        //             <div class="product-detail">
-        //                 <div class="product-name"><strong>${product.pdtName}</strong></div>
-        //                 <button type="button" class="product-write">상품명 작성</button>
-        //                 <button type="button" class="cooking">조리중</button>
-        //             </div>
-        //         </div>
-        //     </div> 
-        //     `;
-        //     }
-        // });
-    // }
+        responseData.forEach(product => {
+            if(product.cartegoryId == 2){
+            centerBox.innerHTML += `
+            <div class="mini-box">
+                <div class="product-images">
+                    <img src="/static/upload/product/${product.save_name}">
+                    <div class="product-detail">
+                        <div class="product-name"><strong>${product.pdtName}</strong></div>
+                        <div class="product-size">${product.pdtOptions[0].optionName} ${product.pdtOptions[1].optionName} ${product.pdtOptions[2].optionName}</div>
+                        <button type="button" class="cooking">조리중</button>
+                    </div>
+                </div>
+            </div> 
+            `;
+            }
+            else {
+                centerBox.innerHTML += `
+            <div class="mini-box">
+                <div class="product-images">
+                    <img src="/static/upload/product/${product.save_name}">
+                    <div class="product-detail">
+                        <div class="product-name"><strong>${product.pdtName}</strong></div>
+                        <button type="button" class="cooking">조리중</button>
+                    </div>
+                </div>
+            </div> 
+            `;
+            }
+        });
+    }
 }
 
 window.onload = () => {
     PayItemsApi.getInstance().getOrderId();
 }
 
-// document.querySelector(".exit-button").onclick = () => {
-//     location.href = "/table/" + tableNumber;
-// }
+document.querySelector(".exit-button").onclick = () => {
+    location.href = "/table/" + tableNumber;
+}
