@@ -67,6 +67,9 @@ class SalesService{
         var result4sum = 0;
         var result5sum = 0;
         const indexPrice = document.querySelectorAll(".price");
+
+
+
         responseData.forEach(item => {
             if(item.cartegoryId == 2){
             create[0].innerHTML += `
@@ -86,6 +89,7 @@ class SalesService{
                 </tr>
             `;
             }
+
         });
 
         for(var i = 0; i<responseData.length; i++){
@@ -101,8 +105,10 @@ class SalesService{
                 result5sum += responseData[i].pdtPrice * responseData[i].stock;
             }
         }
+
         allresult[0].innerHTML = `${result2sum}`;
-        allresult[1].innerHTML = `${resultsum + result2sum + result3sum + result4sum + result5sum}`;
+
+        allresult[1].innerHTML = `${resultsum + result3sum + result4sum + result5sum}`;
 
         console.log(resultsum);
         console.log(result2sum);
