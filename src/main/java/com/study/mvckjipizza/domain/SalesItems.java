@@ -22,7 +22,7 @@ public class SalesItems {
         return PaymentItemsRespDto.builder()
                 .pdtName(pdt_name)
                 .pdtPrice(pdt_price)
-        .stock(stock)
+                .stock(stock)
                 .build();
     }
 }

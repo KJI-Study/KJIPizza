@@ -33,7 +33,7 @@ class PayItemsApi{
             }
         });
     }
-
+    
     getPayItems(orderIdData){
         console.log(orderIdData);
 
