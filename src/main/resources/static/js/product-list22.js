@@ -44,7 +44,6 @@ class Product {
   productOptionList = null;
   tableNumber = tableNumber;
   stockValue = null;
-  
 
   constructor(productId, productName, productPrice) {
     this.productId = productId;
@@ -91,6 +90,7 @@ class Cart {
                 && this.cartList[i].productOptionList[2].optionId == product.productOptionList[2].optionId){
                   this.stockList[i] += 1;
                   this.cartList[i].stockValue++;
+                  
                   console.log(this.cartList);
                   return;
             }
@@ -164,13 +164,10 @@ class Cart {
       btnText[i].value = this.stockList[i];
     }
 
-
     for(var i = 0; i<btnText.length; i++){
       result += (firstPrice[i].innerText * btnText[i].value);    
     }
-
     resultsum.value = result;
-
   }
 
   miusProduct() {
@@ -194,7 +191,7 @@ class Cart {
       }
     })
   }
-  
+
   plusProduct() { 
     const plusbtn = document.querySelectorAll(".cart-plus-btn");
     const btnText = document.querySelectorAll(".numbertext");
@@ -518,8 +515,9 @@ class TableService {
         document.querySelector(".modal-cart-btn").onclick = () => {
           document.querySelector(".modal-container").classList.add("hidden");
           document.querySelectorAll(".product-select")[index].classList.add("goCart");
-          
+
           let product = new Product(responseData[index].productId, responseData[index].productName, responseData[index].productPrice);
+
           console.log("여기");
           console.log(product);
           if(entity.page + 1 == 2) {

@@ -1,4 +1,4 @@
-const create = document.querySelector(".create-sale");
+const create = document.querySelectorAll(".create-sale");
 
 class Sales {
     static #instance = null;
@@ -40,23 +40,40 @@ class SalesService{
     }
 
     getSalesProduct(responseData) {
-        const allresult = document.querySelector(".Allresult");
+        const allresult = document.querySelectorAll(".Allresult");
         var resultsum = 0;
-        
+        var result2sum = 0;
+        const indexPrice = document.querySelectorAll(".price");
         responseData.forEach(item => {
-            create.innerHTML += `
+            if(item.cartegoryId == 2){
+            create[0].innerHTML += `
+                <tr>
+                <td>${item.pdtName}</td>
+                <td>${item.stock}</td>
+                <td class="price">${item.pdtPrice * item.stock}</td>
+                </tr>
+         `;
+            }
+            else{
+                create[1].innerHTML += `
                 <tr>
                 <td>${item.pdtName}</td>
                 <td>${item.stock}</td>
                 <td>${item.pdtPrice * item.stock}</td>
                 </tr>
-        `;
+            `;
+            }
         });
-        
+
         for(var i = 0; i<responseData.length; i++){
-            resultsum += (responseData[i].stock * responseData[i].pdtPrice);
+            if(responseData[i].cartegoryId == 2){
+                resultsum += responseData[i].pdtPrice * responseData[i].stock;
+            }else {
+                result2sum += responseData[i].pdtPrice * responseData[i].stock;
+            }
         }
-        allresult.innerHTML = `${resultsum}`
+        allresult[0].innerHTML = `${resultsum}`;
+        allresult[1].innerHTML = `${result2sum}`;
     }
 
 }
