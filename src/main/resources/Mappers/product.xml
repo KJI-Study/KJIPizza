@@ -61,12 +61,13 @@
     <insert id="postOrderDtl" parameterType="list" useGeneratedKeys="true" keyProperty="id">
         insert into
             order_dtl
-        (order_id , pdt_id, create_date, update_date)
+        (order_id , pdt_id, stock, create_date, update_date)
         values
         <foreach collection="list" item="list" separator=",">
         (
             #{list.order_id},
             #{list.pdt_id},
+            #{list.stock},
             now(),
             now()
         )
@@ -101,7 +102,6 @@
             id
         desc
             LIMIT 1
-
     </select>
 
     <select id="getPayItems" resultMap="paymentMap">
@@ -123,7 +123,6 @@
             LEFT OUTER JOIN option_mst opm on(opm.id = oo.option_id)
         WHERE
             om.id = #{order_id}
-
     </select>
 
 

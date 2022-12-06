@@ -28,6 +28,7 @@ public class PaymentItems {
     private String origin_name;
     private String save_name;
 
+    private int stock;
     public PaymentItemsRespDto toDto() {
         List<Map<String, Object>> pdtOption = new ArrayList<Map<String, Object>>();
         pdt_options.forEach(option -> {
@@ -47,6 +48,7 @@ public class PaymentItems {
                 .origin_name(origin_name)
                 .save_name(save_name)
                 .pdtOptions(pdtOption)
+                .stock(stock)
                 .build();
     }
 }
