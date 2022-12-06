@@ -102,14 +102,13 @@ class PdtRegisterApi{
             type: "post",
             url: "/api/admin/product/register",
             enctype: "multipart/form-data",
-            contentT
-            ype: false,
+            contentType: false,
             processData: false,
             data: formData,
             dataType: "json",
             success: (response) => {
                 console.log(response.data);
-                alert("제품 등록 완료");
+                alert("제품 수정 완료");
             },
 
             error : (error) => {

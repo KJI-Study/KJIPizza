@@ -33,6 +33,7 @@ class ImportApi {
                     dataType: "json",
                     success:(response) => {
                         console.log(response);
+                        this.updateAmount();
                     },
                     error:(error) => {
                         console.log(Cart.getInstance().cartList);
@@ -47,10 +48,63 @@ class ImportApi {
     
     }
 
+    updateAmount() {
+        const price = document.querySelector(".total-price").value;
+
+        $.ajax({
+            async: false,
+            type: "put",
+            url: "/api/amount/pay",
+            contentType: "application/json",
+            data: JSON.stringify(price),
+            dataType: "json",
+            success: (response) => {
+                console.log(response);
+            },
+            error: (error) => {
+                console.log(error);
+            }
+        });
+    
+    }
 }
 
+
+class Test{
+    static #instance = null;
+    
+    static getInstance() {
+        if(this.#instance == null){
+            this.#instance = new Test();
+        }
+        return this.#instance;
+    }
+
+    test(){
+        const price = document.querySelector(".total-price").value;
+        
+        $.ajax({
+            async:false,
+            type: "post",
+            url: "/api/cartlist/order/" + tableNumber,
+            data: JSON.stringify(Cart.getInstance().cartList),
+            contentType: "application/json",
+            dataType: "json",
+            success:(response) => {
+                console.log(response);
+
+            },
+            error:(error) => {
+                console.log(Cart.getInstance().cartList);
+                console.log(error);
+            }
+        });
+    }
+}
+
+
 document.querySelector(".order-btn").onclick = () => {
-    new ImportApi;
+    Test.getInstance().test();
 }
 
 

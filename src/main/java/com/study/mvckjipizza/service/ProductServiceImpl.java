@@ -73,30 +73,12 @@ public class ProductServiceImpl implements ProductService {
             });
 
             System.out.println(result.get());
+            System.out.println(order);
 
             if (orderOptionReqDto.get(i).getProductOptionList().size() > 0) {
                 productRepository.postOrderOption(orderOptionReqDto.get(i).toOrderOption(result.get()));
 
             }
-
-
-            //OrderDtl 드가는부분
-            //   Order finalOrder = order;
-
-//        orderOptionReqDto.forEach(item -> {
-//
-//            try {
-//                productRepository.postOrderDtl(item.toOrderList(finalOrder.getId()));
-//                for(int i = 0; i<item.toOrderList(finalOrder.getId()).size(); i++) {
-//                    if(item.getProductOptionList().size() > 0) {
-//                        OrderDtl orderDtl = item.toOrderList(finalOrder.getId()).get(i);
-//                        productRepository.postOrderOption(item.toOrderOption(orderDtl.getId()));
-//                    }
-//                }
-//            } catch (Exception e) {
-//                throw new RuntimeException(e);
-//            }
-//        });
         }
     }
 
@@ -120,13 +102,6 @@ public class ProductServiceImpl implements ProductService {
 
         return paymentItemsRespDtos;
     }
-    //    @Override
-//    public void saveSales(SalesDto salesDto) throws Exception {
-//        Sales sales = salesDto.toEntity();
-//
-//        if(productRepository.saveSales(sales) == 0) {
-//            throw new CustomInternalServerErrorException("결제중 문제 발생");
-//        }
-//    }
+
 
 }

@@ -3,7 +3,6 @@ const mainContainer = document.querySelectorAll(".main-container");
 const url = location.href;
 const tableNumber = url.substring(url.lastIndexOf("/") + 1 );
 const goCartButton = document.querySelector(".bag-btn");
-const resultsum = document.querySelector(".total-price");
 const clearbtn = document.querySelector(".cart-clear");
 const postOrder = document.querySelector(".order-btn");
 const goPayButton = document.querySelector(".order-detail-btn");
@@ -44,12 +43,15 @@ class Product {
   productOptionList = null;
   tableNumber = tableNumber;
   stockValue = null;
+  amount = null;
 
-  constructor(productId, productName, productPrice) {
+
+  constructor(productId, productName, productPrice, amount) {
     this.productId = productId;
     this.productName = productName;
     this.productPrice = productPrice;
     this.stockValue = 1;
+    this.amount = amount;
     this.productOptionList = new Array();
   }
 }
@@ -67,9 +69,11 @@ class Cart {
   cartList = null;
   stockList = null;
 
+
   constructor() {
     this.cartList = new Array();
     this.stockList = new Array();
+  
   }
 
   addProduct(product) {
@@ -112,6 +116,7 @@ class Cart {
   }
 
   createCartList() {
+    const resultsum = document.querySelector(".total-price");
     cartMain.innerHTML = "";
     this.cartList.forEach(items => {
         if(items.productOptionList.length > 1){
@@ -168,9 +173,16 @@ class Cart {
       result += (firstPrice[i].innerText * btnText[i].value);    
     }
     resultsum.value = result;
+
+    for(var i = 0; i<this.cartList.length; i++){
+      this.cartList[0].amount = resultsum.value;
+    }
+
+    console.log(this.cartList);
   }
 
   miusProduct() {
+    const resultsum = document.querySelector(".total-price");
     const minusbtn = document.querySelectorAll(".cart-minus-btn");
     const btnText = document.querySelectorAll(".numbertext");
     const firstPrice = document.querySelectorAll(".cart-item-price");
@@ -193,6 +205,7 @@ class Cart {
   }
 
   plusProduct() { 
+    const resultsum = document.querySelector(".total-price");
     const plusbtn = document.querySelectorAll(".cart-plus-btn");
     const btnText = document.querySelectorAll(".numbertext");
     const firstPrice = document.querySelectorAll(".cart-item-price");
@@ -209,6 +222,7 @@ class Cart {
           result += (firstPrice[i].innerText * btnText[i].value);    
         }
         resultsum.value = result;
+        
       }
     })
   }
@@ -515,11 +529,11 @@ class TableService {
         document.querySelector(".modal-cart-btn").onclick = () => {
           document.querySelector(".modal-container").classList.add("hidden");
           document.querySelectorAll(".product-select")[index].classList.add("goCart");
+          
+          const resultsum = document.querySelector(".total-price");
 
-          let product = new Product(responseData[index].productId, responseData[index].productName, responseData[index].productPrice);
+          let product = new Product(responseData[index].productId, responseData[index].productName, responseData[index].productPrice , resultsum.value);
 
-          console.log("여기");
-          console.log(product);
           if(entity.page + 1 == 2) {
             let formData = new FormData(document.querySelector(".option-form"));
 

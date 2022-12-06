@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class Order {
     private int id;
     private int table_id;
-
+    private int amount;
     public OrderOptionReqDto toDto() {
         return OrderOptionReqDto.builder()
                 .orderMstId(id)

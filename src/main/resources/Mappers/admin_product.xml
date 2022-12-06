@@ -21,6 +21,7 @@
 
         <result property="stock" column="stock"></result>
         <result property="category_id" column="category_id"></result>
+
         <collection property="pdt_options" javaType="list" resultMap="PayItemList"></collection>
     </resultMap>
 
@@ -108,8 +109,10 @@
             COUNT(pm.pdt_name) as stock,
             pm.pdt_price,
             oop.option_id,
-            pm.category_id
+            pm.category_id,
+            ms.amount
         FROM
+            order_mst ms,
             order_dtl od
             LEFT OUTER JOIN pdt_mst pm ON(od.pdt_id = pm.id)
             LEFT OUTER JOIN order_option oop ON(od.id = oop.order_dtl_id)

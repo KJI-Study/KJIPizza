@@ -78,6 +78,7 @@ class SalesService{
 
 }
 
+
 window.onload = () => {
     Sales.getInstance().getSale();
 }
