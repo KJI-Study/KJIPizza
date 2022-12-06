@@ -1,3 +1,4 @@
+
 class PdtRegisterMst{ //앞에 #을 붙이는건 private이라는뜻
     #category;
     #name;
@@ -30,6 +31,7 @@ class PdtRegisterMst{ //앞에 #을 붙이는건 private이라는뜻
     }
 }
 
+
 class CommonApi {
 
     getCategoryList(){
@@ -56,6 +58,8 @@ class CommonApi {
     }
 }
 
+
+
 class PdtRegisterApi{
 
     static #instance = null;
@@ -67,7 +71,9 @@ class PdtRegisterApi{
     }
 
 
+
     createProductRequest(formData){
+       
 
         $.ajax({
             async : false,
@@ -80,8 +86,10 @@ class PdtRegisterApi{
             dataType: "json",
             success: (response) => {
                 console.log(response.data);
-                //CommonApi.getInstance().getCategoryList();
                 alert("제품 등록 완료");
+                window.location.href=window.location.href;
+                
+                            
             },
 
             error : (error) => {
@@ -102,13 +110,13 @@ class PdtRegisterApi{
             type: "post",
             url: "/api/admin/product/register",
             enctype: "multipart/form-data",
-            contentT
-            ype: false,
+            contentType: false,
             processData: false,
             data: formData,
             dataType: "json",
             success: (response) => {
                 console.log(response.data);
+
                 alert("제품 등록 완료");
             },
 
@@ -124,6 +132,7 @@ class PdtRegisterApi{
     }       
 
 }
+
 
 
 class RegisterEventService{
@@ -168,7 +177,7 @@ class RegisterEventService{
     }    
 
     
-    // this.#nameInputObj(this.#categorySelectObj.value);
+    
 
     addNameInputEvent(){
         this.#nameInputObj.onkeyup = () => {
@@ -284,3 +293,4 @@ class RegisterService{
 window.onload = () => {
     RegisterService.getInstance().getCategoryList();
 }
+
