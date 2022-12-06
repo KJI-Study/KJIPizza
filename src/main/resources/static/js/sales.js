@@ -1,5 +1,6 @@
 const create = document.querySelectorAll(".create-sale");
 const totSales = document.querySelector(".total-sales");
+const optionSales = document.querySelector(".additional-option");
 
 class Sales {
     static #instance = null;
@@ -46,8 +47,52 @@ class Sales {
                 console.log(error);
             }
         });
+        
+        responseData.forEach(item => {
+            if(item.cartegoryId == 2){
+            create[0].innerHTML += `
+            <tr>
+            <td>추가 옵션</td>
+            <td>-</td>
+            ${responseData.totalSales}</td>
+            </tr>
+         `;
+            }
+            else{
+                create[1].innerHTML += `
+                <tr>
+                <td>${item.pdtName}</td>
+                <td>${item.stock}</td>
+                <td>${item.pdtPrice * item.stock}</td>
+                </tr>
+            `;
+            }
+        });
     }
+    
 }
+
+    // getOptionSales(){
+    //     let responseData = null;
+
+    //     $.ajax({
+    //         async: false,
+    //         type: "get",
+    //         url: "/api/admin/optionSales",
+    //         dataType: "json",
+    //         success: (response) => {
+    //             console.log(response.data);
+    //             responseData = response.data;
+    //             optionSales.innerHTML = ``
+    //         },
+
+    //         error: (error) =>{
+    //             console.log(error);
+    //         }
+    //     })
+
+    // }
+
 
 class SalesService{
     static #instance = null;
@@ -102,4 +147,5 @@ class SalesService{
 window.onload = () => {
     Sales.getInstance().getSale();
     Sales.getInstance().getTotalSales();
+    Sales.getInstance().getOptionSales();
 }
