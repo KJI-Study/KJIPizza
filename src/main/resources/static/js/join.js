@@ -17,9 +17,7 @@ joinButton.onclick = () => {
         data: JSON.stringify(admin),
         dataType: "json",
         success: (response, textStatus ,request) => {
-            console.log(response);
-            alert("회원가입 요청 성공");
-            
+            alert("회원가입 요청 성공"); 
             const successURI = request.getResponseHeader("Location");
             location.replace(successURI + "?email=" + response.data);
         },

@@ -30,7 +30,6 @@ class ListloadApi {
     listload() {
 
         pdtCategoryList.forEach(category => {
-            console.log(category);
             if(category.value == pdtCategoryListSelect.value) {
     
             let responseData = null;
@@ -83,12 +82,9 @@ class pdtUpdateApi{
            data: formData,
            dataType: "json",
            success: (response) => {
-               console.log(response.data);
                ListloadApi.getInstance().listload();
                alert("제품 수정 완료");
-               
            },
-
            error : (error) => {
                console.log(error);
                
@@ -201,8 +197,6 @@ class load {
             button.onclick = () => {
                 
                 const formData = new FormData();
-                console.log("-----<여기>-----")
-                console.log(filesInput.files[0]);
 
                 if(filesInput.files[0] != null && filesInput.files[0] != undefined){
                     formData.append("file", filesInput.files[0]);

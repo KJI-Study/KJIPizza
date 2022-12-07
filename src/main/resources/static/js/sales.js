@@ -20,7 +20,6 @@ class Sales {
             url: "/api/admin/sales",
             dataType: "json",
             success: (response) => {
-                console.log(response.data);
                 responseData = response.data;
                 SalesService.getInstance().getSalesProduct(responseData);
             },
@@ -39,7 +38,6 @@ class Sales {
             url: "/api/admin/totalSales",
             dataType: "json",
             success: (response) => {
-                console.log(response.data);
                 responseData = response.data;
                 totSales.innerHTML = `₩${responseData.totalSales}`;
             },
@@ -114,8 +112,6 @@ class SalesService{
         const totalAmount = Sales.getInstance().getTotalSales();
         const optionsPrice = document.querySelector(".additional-option");
         const optionsAmount = totalAmount.totalSales - result2sum - (resultsum + result3sum + result4sum + result5sum);
-        console.log("---여기---");
-        console.log(optionsAmount);
 
         allresult[0].innerHTML = `${result2sum}`;
 
@@ -123,11 +119,6 @@ class SalesService{
 
         optionsPrice.innerHTML = `${optionsAmount}`;
         
-        console.log(resultsum);
-        console.log(result2sum);
-        console.log(result3sum);
-        console.log(result4sum);
-        console.log(result5sum);
         let pieChartData = {
             labels: ['피자', '샐러드', '스파게티', '파스타/라이스', '음료', '기타'],
             datasets: [{
