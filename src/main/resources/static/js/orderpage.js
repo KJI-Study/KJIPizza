@@ -31,14 +31,14 @@ class ImportApi {
                     contentType: "application/json",
                     dataType: "json",
                     success:(response) => {
-                        this.updateAmount();
+
                     },
                     error:(error) => {
                         console.log(Cart.getInstance().cartList);
                         console.log(error);
                     }
                 });
-                location.href("/order/" + tableNumber);
+                location.href = "/order/" + tableNumber ;
             } else {
                 console.log("결제 실패")
             }
