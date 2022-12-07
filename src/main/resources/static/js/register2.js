@@ -85,13 +85,9 @@ class PdtRegisterApi{
             data: formData,
             dataType: "json",
             success: (response) => {
-                console.log(response.data);
                 alert("제품 등록 완료");
-                window.location.href=window.location.href;
-                
-                            
+                window.location.href=window.location.href;            
             },
-
             error : (error) => {
                 console.log(error);
                 alert(error.responseJSON.data.error);
@@ -115,10 +111,7 @@ class PdtRegisterApi{
             data: formData,
             dataType: "json",
             success: (response) => {
-                console.log(response.data);
-
                 alert("제품 수정 완료");
-
             },
 
             error : (error) => {
@@ -284,8 +277,6 @@ class RegisterService{
             productCategory.innerHTML += `
             <option value="${category.id}">${category.name}</option>
             `;
-
-            console.log(category);
         })
             
     }

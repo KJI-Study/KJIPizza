@@ -24,7 +24,6 @@ class PayItemsApi{
             type : "get",
             url : "/api/products/pay/order/" + tableNumber,
             success : (response) => {
-                console.log(response.data);
                 orderIdData = response.data;
                 this.getPayItems(orderIdData.orderMstId);
             },
@@ -35,7 +34,6 @@ class PayItemsApi{
     }
     
     getPayItems(orderIdData){
-        console.log(orderIdData);
 
             centerBox.innerHTML = "";
 
@@ -48,14 +46,11 @@ class PayItemsApi{
             contentType: "json",
             success: (response) => {
                 responseData = response.data;
-                console.log(responseData);
             },
             error: (error) => {
                 console.log(error);
             }
         });
-        console.log(responseData);
-    
 
         responseData.forEach(product => {
             if(product.cartegoryId == 2){

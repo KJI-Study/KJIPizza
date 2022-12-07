@@ -1,6 +1,6 @@
 const create = document.querySelectorAll(".create-sale");
 const totSales = document.querySelector(".total-sales");
-const optionSales = document.querySelector(".additional-option");
+
 
 class Sales {
     static #instance = null;
@@ -20,7 +20,6 @@ class Sales {
             url: "/api/admin/sales",
             dataType: "json",
             success: (response) => {
-                console.log(response.data);
                 responseData = response.data;
                 SalesService.getInstance().getSalesProduct(responseData);
             },
@@ -46,12 +45,11 @@ class Sales {
                 console.log(error);
             }
         });
+        
         return responseData;
-
     }
     
 }
-
 class SalesService{
     static #instance = null;
 
@@ -111,9 +109,9 @@ class SalesService{
         const optionsPrice = document.querySelector(".additional-option");
         const optionsAmount = totalAmount.totalSales - result2sum - (resultsum + result3sum + result4sum + result5sum);
 
-        allresult[0].innerHTML = `${Number(result2sum).toLocaleString()}`;
+        allresult[0].innerHTML = `₩${Number(result2sum).toLocaleString()}`;
 
-        allresult[1].innerHTML = `${Number(resultsum + optionsAmount + result3sum + result4sum + result5sum).toLocaleString()}`;
+        allresult[1].innerHTML = `₩${Number(resultsum + optionsAmount + result3sum + result4sum + result5sum).toLocaleString()}`;
 
         optionsPrice.innerHTML = `${Number(optionsAmount).toLocaleString()}`;
         
@@ -157,5 +155,4 @@ class SalesService{
 window.onload = () => {
     Sales.getInstance().getSale();
     Sales.getInstance().getTotalSales();
-
 }
