@@ -1,6 +1,6 @@
 const create = document.querySelectorAll(".create-sale");
 const totSales = document.querySelector(".total-sales");
-const optionSales = document.querySelector(".additional-option");
+
 
 class Sales {
     static #instance = null;
@@ -47,51 +47,11 @@ class Sales {
                 console.log(error);
             }
         });
-        
-        responseData.forEach(item => {
-            if(item.cartegoryId == 2){
-            create[0].innerHTML += `
-            <tr>
-            <td>추가 옵션</td>
-            <td>-</td>
-            ${responseData.totalSales}</td>
-            </tr>
-         `;
-            }
-            else{
-                create[1].innerHTML += `
-                <tr>
-                <td>${item.pdtName}</td>
-                <td>${item.stock}</td>
-                <td>${item.pdtPrice * item.stock}</td>
-                </tr>
-            `;
-            }
-        });
     }
     
 }
 
-    // getOptionSales(){
-    //     let responseData = null;
 
-    //     $.ajax({
-    //         async: false,
-    //         type: "get",
-    //         url: "/api/admin/optionSales",
-    //         dataType: "json",
-    //         success: (response) => {
-    //             console.log(response.data);
-    //             responseData = response.data;
-    //             optionSales.innerHTML = ``
-    //         },
-
-    //         error: (error) =>{
-    //             console.log(error);
-    //         }
-    //     })
-
-    // }
 
 
 class SalesService{
@@ -111,7 +71,9 @@ class SalesService{
         var result3sum = 0;
         var result4sum = 0;
         var result5sum = 0;
+
         const indexPrice = document.querySelectorAll(".price");
+
         responseData.forEach(item => {
             if(item.cartegoryId == 2){
             create[0].innerHTML += `
@@ -131,6 +93,7 @@ class SalesService{
                 </tr>
             `;
             }
+
         });
 
         for(var i = 0; i<responseData.length; i++){
@@ -146,9 +109,20 @@ class SalesService{
                 result5sum += responseData[i].pdtPrice * responseData[i].stock;
             }
         }
-        allresult[0].innerHTML = `${result2sum}`;
-        allresult[1].innerHTML = `${resultsum + result2sum + result3sum + result4sum + result5sum}`;
 
+
+        const totalAmount = Sales.getInstance().getTotalSales();
+        const optionsPrice = document.querySelector(".additional-option");
+        const optionsAmount = totalAmount.totalSales - result2sum - (resultsum + result3sum + result4sum + result5sum);
+        console.log("---여기---");
+        console.log(optionsAmount);
+
+        allresult[0].innerHTML = `${result2sum}`;
+
+        allresult[1].innerHTML = `${resultsum + optionsAmount + result3sum + result4sum + result5sum}`;
+
+        optionsPrice.innerHTML = `${optionsAmount}`;
+        
         console.log(resultsum);
         console.log(result2sum);
         console.log(result3sum);
@@ -194,6 +168,5 @@ class SalesService{
 window.onload = () => {
     Sales.getInstance().getSale();
     Sales.getInstance().getTotalSales();
-    Sales.getInstance().getOptionSales();
-
+   
 }

@@ -105,15 +105,13 @@
 
     <select id="getSalesItems" resultMap="salesMap">
         SELECT
-            pm.pdt_name,
-            COUNT(pm.pdt_name) as stock,
-            pm.pdt_price,
-            oop.option_id,
-            pm.category_id
+        pm.pdt_name,
+        COUNT(od.pdt_id) as stock,
+        pm.pdt_price,
+        pm.category_id
         FROM
-            order_dtl od
-            LEFT OUTER JOIN pdt_mst pm ON(od.pdt_id = pm.id)
-            LEFT OUTER JOIN order_option oop ON(od.id = oop.order_dtl_id)
+        order_dtl od
+        LEFT OUTER JOIN pdt_mst pm ON(od.pdt_id = pm.id)
         GROUP BY od.pdt_id
     </select>
 
