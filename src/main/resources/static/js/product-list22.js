@@ -83,7 +83,6 @@ class Cart {
         if((this.cartList[i].productId == product.productId) && (this.cartList[i].productName == product.productName) && (this.cartList[i].productPrice == product.productPrice)) {
           this.stockList[i] += 1;
           this.cartList[i].stockValue++;
-          console.log(this.cartList);
           return;
         }
       }
@@ -94,25 +93,15 @@ class Cart {
                 && this.cartList[i].productOptionList[2].optionId == product.productOptionList[2].optionId){
                   this.stockList[i] += 1;
                   this.cartList[i].stockValue++;
-                  
-                  console.log(this.cartList);
+
                   return;
             }
           }
         }
-       // this.stockList[i] += 1;
-       // this.cartList[i].stockValue++;
-        console.log(this.cartList);
-        console.log(this.stockList);
-       //return;
-     // }
     }
-    
+
     this.cartList.push(product);
     this.stockList.push(1);
-
-    console.log(this.cartList);
-    console.log(this.stockList);
   }
 
   createCartList() {
@@ -178,7 +167,6 @@ class Cart {
       this.cartList[0].amount = resultsum.value;
     }
 
-    console.log(this.cartList);
   }
 
   miusProduct() {
@@ -308,7 +296,6 @@ class TableSelectApi {
       contentType : "json",
       success: (response) => {
         responseData = response.data
-        console.log(responseData)
       },
       error: (error) => {
         console.log(error);
@@ -414,7 +401,6 @@ class TableService {
         cart['tableId'] = tableNumber;
         collectionProducts[index].classList.remove("goCart");
         modalProduct.classList.remove("hidden");
-        console.log(response.data);
         if((entity.page + 1) == 2){
           modalProduct.innerHTML = `
             <div class="bg"></div>
@@ -544,7 +530,6 @@ class TableService {
                 if(data.optionId == option) {
                   let productOption = new ProductOption(data.optionId, data.optionName, data.optionPrice);
                   product.productOptionList.push(productOption);
-                  console.log(product.productOptionList);
                 }
               })
             });
