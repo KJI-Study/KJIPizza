@@ -106,7 +106,7 @@
     <select id="getSalesItems" resultMap="salesMap">
         SELECT
         pm.pdt_name,
-        COUNT(od.pdt_id) as stock,
+        sum(od.stock) as stock,
         pm.pdt_price,
         pm.category_id
         FROM
