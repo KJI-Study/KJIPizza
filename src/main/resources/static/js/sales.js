@@ -1,5 +1,6 @@
 const create = document.querySelectorAll(".create-sale");
 const totSales = document.querySelector(".total-sales");
+const optionSales = document.querySelector(".additional-option");
 
 class Sales {
     static #instance = null;
@@ -38,16 +39,17 @@ class Sales {
             url: "/api/admin/totalSales",
             dataType: "json",
             success: (response) => {
-                console.log(response.data);
                 responseData = response.data;
-                totSales.innerHTML = `₩${responseData.totalSales}`;
+                totSales.innerHTML = `₩${Number(responseData.totalSales).toLocaleString()}`;
             },
             error : (error) => {
                 console.log(error);
             }
         });
         return responseData;
+
     }
+    
 }
 
 class SalesService{
@@ -68,26 +70,24 @@ class SalesService{
         var result4sum = 0;
         var result5sum = 0;
 
-        const indexPrice = document.querySelectorAll(".price");
-
         responseData.forEach(item => {
             if(item.cartegoryId == 2){
-            create[0].innerHTML += `
-                <tr>
-                <td>${item.pdtName}</td>
-                <td>${item.stock}</td>
-                <td class="price">${item.pdtPrice * item.stock}</td>
-                </tr>
-         `;
+                create[0].innerHTML += `
+                    <tr>
+                        <td>${item.pdtName}</td>
+                        <td>${item.stock}</td>
+                        <td class="price">${Number(item.pdtPrice * item.stock).toLocaleString()}</td>
+                    </tr>
+                `;
             }
             else{
                 create[1].innerHTML += `
-                <tr>
-                <td>${item.pdtName}</td>
-                <td>${item.stock}</td>
-                <td>${item.pdtPrice * item.stock}</td>
-                </tr>
-            `;
+                    <tr>
+                        <td>${item.pdtName}</td>
+                        <td>${item.stock}</td>
+                        <td class="price">${Number(item.pdtPrice * item.stock).toLocaleString()}</td>
+                    </tr>
+                `;
             }
 
         });
@@ -110,24 +110,17 @@ class SalesService{
         const totalAmount = Sales.getInstance().getTotalSales();
         const optionsPrice = document.querySelector(".additional-option");
         const optionsAmount = totalAmount.totalSales - result2sum - (resultsum + result3sum + result4sum + result5sum);
-        console.log("---여기---");
-        console.log(optionsAmount);
 
-        allresult[0].innerHTML = `${result2sum}`;
+        allresult[0].innerHTML = `${Number(result2sum).toLocaleString()}`;
 
-        allresult[1].innerHTML = `${resultsum + optionsAmount + result3sum + result4sum + result5sum}`;
+        allresult[1].innerHTML = `${Number(resultsum + optionsAmount + result3sum + result4sum + result5sum).toLocaleString()}`;
 
-        optionsPrice.innerHTML = `${optionsAmount}`;
+        optionsPrice.innerHTML = `${Number(optionsAmount).toLocaleString()}`;
         
-        console.log(resultsum);
-        console.log(result2sum);
-        console.log(result3sum);
-        console.log(result4sum);
-        console.log(result5sum);
         let pieChartData = {
             labels: ['피자', '샐러드', '스파게티', '파스타/라이스', '음료', '기타'],
             datasets: [{
-            data: [result2sum, resultsum, result3sum, result4sum, result5sum, 6000],
+            data: [result2sum, resultsum, result3sum, result4sum, result5sum, optionsAmount],
             backgroundColor: ['rgb(255, 99, 132)', 'rgb(255, 159, 64)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)']
             }],
             PointStyle: 'circle',
@@ -164,5 +157,5 @@ class SalesService{
 window.onload = () => {
     Sales.getInstance().getSale();
     Sales.getInstance().getTotalSales();
-    
+
 }

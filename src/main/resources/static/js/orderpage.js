@@ -40,6 +40,7 @@ class ImportApi {
                         console.log(error);
                     }
                 });
+                location.href("/order/" + tableNumber);
             } else {
                 console.log("결제 실패")
             }

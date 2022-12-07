@@ -11,14 +11,13 @@
 
     width: 50%;
 }
-
-.total-sales-container h2 {
-    font-size: 25px;
-}
-
 .total-sales-container h2:nth-child(1) {
     font-size: 30px;
     border-bottom: 2px solid rgb(0, 0, 0)
+}
+
+.total-sales {
+    font-size: 40px;
 }
 
 .sales-ratio-container {
@@ -49,4 +48,21 @@
     width:100%;
     height:100%;
     text-align:center;
+}
+
+.admin-table td:nth-child(1) {
+    width: 615px;
+}
+
+.price, .additional-option {
+    padding-right: 4px;
+    text-align: right;
+}
+
+.Allresult {
+    padding-right: 4px;
+    height: 45px;
+
+    text-align: right;
+    font-size: 25px;
 }
