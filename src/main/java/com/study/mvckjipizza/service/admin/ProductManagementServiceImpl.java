@@ -76,7 +76,7 @@ public class ProductManagementServiceImpl implements ProductManagementService {
             }
 
             targetFilePath = resource.getURI().toString().substring(resource.getURI().toString().indexOf("/") + 1);
-            srcFilePath = resource.getURI().toString().substring(resource.getURI().toString().indexOf("/") + 1, resource.getURI().toString().indexOf("target")) + "/src/main/resources/static/upload/product";
+            srcFilePath = resource.getURI().toString().substring(resource.getURI().toString().indexOf("/") + 1, resource.getURI().toString().indexOf("target")) + "/src/main/resources/image/upload/product";
             System.out.println(targetFilePath);
             System.out.println(srcFilePath);
 
@@ -150,7 +150,7 @@ public class ProductManagementServiceImpl implements ProductManagementService {
                 }
 
                 targetFilePath = resource.getURI().toString().substring(resource.getURI().toString().indexOf("/") + 1);
-                srcFilePath = resource.getURI().toString().substring(resource.getURI().toString().indexOf("/") + 1, resource.getURI().toString().indexOf("target")) + "/src/main/resources/static/upload/product";
+                srcFilePath = resource.getURI().toString().substring(resource.getURI().toString().indexOf("/") + 1, resource.getURI().toString().indexOf("target")) + "/src/main/resources/image/upload/product";
                 System.out.println(targetFilePath);
                 System.out.println(srcFilePath);
 

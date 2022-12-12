@@ -57,7 +57,7 @@ class PayItemsApi{
             centerBox.innerHTML += `
             <div class="mini-box">
                 <div class="product-images">
-                    <img src="/static/upload/product/${product.save_name}">
+                    <img src="/image/upload/product/${product.save_name}">
                     <div class="product-detail">
                         <div class="product-name"><strong>${product.pdtName}</strong></div>
                         <div class="product-size">${product.pdtOptions[0].optionName} ${product.pdtOptions[1].optionName} ${product.pdtOptions[2].optionName}</div>
@@ -71,7 +71,7 @@ class PayItemsApi{
                 centerBox.innerHTML += `
             <div class="mini-box">
                 <div class="product-images">
-                    <img src="/static/upload/product/${product.save_name}">
+                    <img src="/image/upload/product/${product.save_name}">
                     <div class="product-detail">
                         <div class="product-name"><strong>${product.pdtName}</strong></div>
                         <button type="button" class="cooking">조리중</button>
