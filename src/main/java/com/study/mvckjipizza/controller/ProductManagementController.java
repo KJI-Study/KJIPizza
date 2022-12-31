@@ -11,11 +11,11 @@ public class ProductManagementController {
     @GetMapping("/register")
     public String loadRegister(){
 
-        return "/admin/register";
+        return "admin/register";
     }
 
     @GetMapping("/sales")
-    public String loadLsales() {
-        return "/admin/sales";
+    public String loadsales() {
+        return "admin/sales";
     }
 }
