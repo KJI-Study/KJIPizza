@@ -116,10 +116,7 @@ joinReqDto는 유효성 검사를 하는 클래스입니다.
     public class OrderOptionReqDto {
 
         private int orderMstId;
-         // dtl 의 order_id가 될 것. (dtl테이블의 order_id가 돼야함)
         private int tableNumber;
-
-         // option의 dtl_id가 될 것.  (option테이블의  order_dtl_id가 돼야함)
         private int productId;
         private int stockValue;
         private int optionId;
@@ -161,4 +158,10 @@ joinReqDto는 유효성 검사를 하는 클래스입니다.
 <img src="readme/image/장바구니구현.gif">
 
  
- 
+#### 3. 관리자 페이지
+ 제품을 효율적으로 관리하기 위해 관리자 페이지를 구현하였습니다.
+스프링 시큐리티를 활용하여 관리자만 관리자페이지에 접근할 수 있도록 구현하였습니다.
+api통신을 활용하여 자바스크립트로 페이징 처리를 하였으며 get method를 활용하여 필요한 데이터만 리로딩하여서 한정된 자원 내에서 최대한 자원을 효율적으로 사용하고자 하였습니다.
+
+
+
