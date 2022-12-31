@@ -116,10 +116,7 @@ joinReqDto는 유효성 검사를 하는 클래스입니다.
     public class OrderOptionReqDto {
 
         private int orderMstId;
-         // dtl 의 order_id가 될 것. (dtl테이블의 order_id가 돼야함)
         private int tableNumber;
-
-         // option의 dtl_id가 될 것.  (option테이블의  order_dtl_id가 돼야함)
         private int productId;
         private int stockValue;
         private int optionId;
