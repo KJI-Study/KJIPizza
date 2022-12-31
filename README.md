@@ -160,8 +160,22 @@ joinReqDto는 유효성 검사를 하는 클래스입니다.
  
 #### 3. 관리자 페이지
  제품을 효율적으로 관리하기 위해 관리자 페이지를 구현하였습니다.
+ 
+<img src="readme/image/카테고리조회.gif">
+ 
 스프링 시큐리티를 활용하여 관리자만 관리자페이지에 접근할 수 있도록 구현하였습니다.
 api통신을 활용하여 자바스크립트로 페이징 처리를 하였으며 get method를 활용하여 필요한 데이터만 리로딩하여서 한정된 자원 내에서 최대한 자원을 효율적으로 사용하고자 하였습니다.
 
+제품 삭제기능
+```
+    @Override
+    public void productDelete(ProductListSelectRespDto productListSelectRespDto) throws Exception {
 
+        Product product = productListSelectRespDto.toEntity();
 
+        productManagementRepository.deleteProduct(product);
+
+    }
+
+```
+ 해당 제품의 id 정보를 가져와서 데이터베이스에서 id정보와 일치하는 제품의 정보를 Delete문이 처리되도록 구현하였습니다.
