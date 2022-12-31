@@ -18,7 +18,6 @@ public interface ProductManagementService {
 
     public void productDelete(ProductListSelectRespDto productListSelectRespDto) throws Exception;
 
-    //재률이가 한거
     public List<ProductListSelectRespDto> getProductListSelect(int categoryName) throws Exception;
 
     public List<PaymentItemsRespDto> getAllSales () throws Exception;

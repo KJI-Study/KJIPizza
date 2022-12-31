@@ -1,6 +1,5 @@
 package com.study.mvckjipizza.service;
 
-import com.study.mvckjipizza.domain.OrderDtl;
 import com.study.mvckjipizza.dto.*;
 
 import java.util.List;

@@ -1,7 +1,6 @@
 package com.study.mvckjipizza.service.admin;
 
 import com.study.mvckjipizza.domain.PaymentItems;
-import com.study.mvckjipizza.domain.SalesItems;
 import com.study.mvckjipizza.domain.amdin.Product;
 import com.study.mvckjipizza.dto.CategoryResponseDto;
 import com.study.mvckjipizza.dto.PaymentItemsRespDto;
@@ -114,13 +113,6 @@ public class ProductManagementServiceImpl implements ProductManagementService {
 
         System.out.println(productRegisterRespDto);
 
-
-//        if(productRegisterRespDto.getFile() == null) {
-//            Map<String, String> errorMap = new HashMap<String, String>();
-//            errorMap.put("error", "이미지를 선택하지 않았습니다.");
-//            throw new CustomValidationException("Img Error", errorMap);
-//        }
-
         Resource resource = resourceLoader.getResource("classpath:static/upload/product");
         String targetFilePath  = null;
         String srcFilePath = null;
@@ -195,7 +187,6 @@ public class ProductManagementServiceImpl implements ProductManagementService {
     }
 
 
-    //재률이가한거
     @Override
     public List<ProductListSelectRespDto> getProductListSelect(int categoryName) throws Exception {
         List<ProductListSelectRespDto> list = new ArrayList<ProductListSelectRespDto>();

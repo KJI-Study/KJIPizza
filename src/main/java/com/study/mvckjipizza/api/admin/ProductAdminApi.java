@@ -1,16 +1,14 @@
 package com.study.mvckjipizza.api.admin;
 
-import com.study.mvckjipizza.dto.CMRespDto;
+import
+        com.study.mvckjipizza.dto.CMRespDto;
 import com.study.mvckjipizza.dto.admin.ProductListSelectRespDto;
 import com.study.mvckjipizza.dto.admin.ProductRegisterRespDto;
 import com.study.mvckjipizza.service.admin.ProductManagementService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -55,7 +53,6 @@ public class ProductAdminApi {
         return ResponseEntity.ok().body(new CMRespDto<> ("Get Successfully", productManagementService.getCategoryList()));
     }
 
-    //재률이가 만든거
     @GetMapping("/productlist/{categoryName}")
     public ResponseEntity<?> getProductList(@PathVariable int categoryName) throws Exception {
         return ResponseEntity.ok().body(new CMRespDto<>("Get successfully", productManagementService.getProductListSelect(categoryName)));

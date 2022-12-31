@@ -1,13 +1,11 @@
 package com.study.mvckjipizza.dto.admin;
 
-import com.study.mvckjipizza.domain.amdin.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
 
 @Data
 @Builder
