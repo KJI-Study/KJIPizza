@@ -168,6 +168,16 @@ api통신을 활용하여 자바스크립트로 페이징 처리를 하였으며
 
 제품 삭제기능
 ```
+    //Delete API
+    @DeleteMapping("/product/delete")
+    public ResponseEntity<?> deleteProduct (@RequestBody ProductListSelectRespDto productListSelectRespDto) throws Exception {
+
+        productManagementService.productDelete(productListSelectRespDto);
+
+        return ResponseEntity.ok().body(new CMRespDto<> ("Delete Successfully", true));
+    }
+    -----------------------------------------------------
+    //Delete Service
     @Override
     public void productDelete(ProductListSelectRespDto productListSelectRespDto) throws Exception {
 
