@@ -14,7 +14,6 @@
 <img src="https://img.shields.io/badge/SPRINGBOOT-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"> <img src="https://img.shields.io/badge/MARIA DB-003545?style=for-the-badge&logo=mariadb&logoColor=white"> <img src="https://img.shields.io/badge/INTELLJI IDEA-000000?style=for-the-badge&logo=intellji&logoColor=white"> <img src="https://img.shields.io/badge/APACHE TOMCAT-F8DC75?style=for-the-badge&logo=tomcat&logoColor=white"> 
 
 
-
 * 기능 소개
 
 <a href = "https://github.com/syw1114"><img alt="GitHub" src ="https://img.shields.io/badge/GitHub-181717.svg?&style=for-the-badge&logo=GitHub&logoColor=white"/> 서 영우 (메인페이지, 장바구니, 매출관리 View 및 백엔드)) </a>
@@ -174,6 +173,81 @@ joinReqDto는 유효성 검사를 하는 클래스입니다. 컨트롤러에서 
 스프링 시큐리티를 활용하여 관리자만 관리자페이지에 접근할 수 있도록 구현하였습니다.
 api통신을 활용하여 자바스크립트로 페이징 처리를 하였으며 get method를 활용하여 필요한 데이터만 리로딩하여서 한정된 자원 내에서 최대한 자원을 효율적으로 사용하고자 하였습니다.
 
+* 제품 등록 기능
+```
+
+@Override
+    public void registerProduct(ProductRegisterRespDto productRegisterRespDto)throws Exception {
+
+        if(productRegisterRespDto.getFile() == null) {
+            Map<String, String> errorMap = new HashMap<String, String>();
+            errorMap.put("error", "이미지를 선택하지 않았습니다.");
+            throw new CustomValidationException("Img Error", errorMap);
+        }
+
+
+        Resource resource = resourceLoader.getResource("classpath:static/upload/product");
+        String targetFilePath  = null;
+        String srcFilePath = null;
+
+        MultipartFile file = productRegisterRespDto.getFile();
+
+        try{
+            //해당경로에 이폴더가 존재하냐
+            if(!resource.exists()) {
+                String targetTempPath = resourceLoader.getResource("classpath:static").getURI().toString();
+                String srcTempPath = resourceLoader.getResource("classpath:static").getURI().toString();
+                targetTempPath = targetTempPath.substring(targetTempPath.indexOf("/") + 1);
+                srcTempPath = srcTempPath.substring(srcTempPath.indexOf("/") + 1, srcTempPath.indexOf("target")) + "/src/main/resources/static";
+
+                System.out.println(targetTempPath);
+                System.out.println(srcTempPath);
+                File f = new File(targetTempPath + "/upload/product");
+                f.mkdirs();
+                f = new File(srcTempPath + "/upload/product");
+                f.mkdirs();
+            }
+
+            targetFilePath = resource.getURI().toString().substring(resource.getURI().toString().indexOf("/") + 1);
+            srcFilePath = resource.getURI().toString().substring(resource.getURI().toString().indexOf("/") + 1, resource.getURI().toString().indexOf("target")) + "/src/main/resources/image/product";
+            System.out.println(targetFilePath);
+            System.out.println(srcFilePath);
+
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
+
+        String originName = file.getOriginalFilename();
+        String extension = originName.substring(originName.lastIndexOf("."));
+        String saveName = UUID.randomUUID().toString().replace("-","") + extension;
+        Path targetPath = Paths.get(targetFilePath + "/" + saveName);
+        Path srcPath = Paths.get(srcFilePath + "/" + saveName);
+
+        try {
+            Files.write(targetPath, file.getBytes());
+            Files.write(srcPath, file.getBytes());
+
+        } catch (IOException e) {
+            throw new CustomInternalServerErrorException(e.getMessage());
+        }
+
+        Product product = Product.builder()
+                .category_id(productRegisterRespDto.getCategory())
+                .pdt_name(productRegisterRespDto.getName())
+                .pdt_price(productRegisterRespDto.getPrice())
+                .origin_name(originName)
+                .save_name(saveName)
+                .build();
+
+
+        productManagementRepository.saveProduct(product);
+    }
+
+```
+카테고리별로 제품 조회를 한 후 제품명, 가격, 사진까지 입력후 제품 등록이 가능합니다.
+사진이 등록이 되야 제품등록이 되게끔 MAP을 사용하여 REGISTER가 되도록 구현하였습니다.
+
+    
 * 제품 삭제기능
 ```
     //Delete API
