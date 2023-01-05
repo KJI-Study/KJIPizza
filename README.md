@@ -8,10 +8,11 @@
 ### 목차
 
 * 기술 스텍
-<img src="https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=java&logoColor=white">
-<img src="https://img.shields.io/badge/JAVASCRIPT-F7DF1E?style=for-the-badge&logo=javascript&logoColor=yellow">
-<img src="https://img.shields.io/badge/SPRINGBOOT-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
 
+<img src="https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html&logoColor=white"> <img src="https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css&logoColor=white"> <img src="https://img.shields.io/badge/JAVASCRIPT-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white"> <img src="https://img.shields.io/badge/VISUAL STUDIO CODE-007ACC?style=for-the-badge&logo=visual studio code&logoColor=white">
+<img src="https://img.shields.io/badge/SPRINGBOOT-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"> <img src="https://img.shields.io/badge/MARIA DB-003545?style=for-the-badge&logo=mariadb&logoColor=white"> <img src="https://img.shields.io/badge/INTELLJI IDEA-000000?style=for-the-badge&logo=intellji&logoColor=white"> <img src="https://img.shields.io/badge/APACHE TOMCAT-F8DC75?style=for-the-badge&logo=tomcat&logoColor=white"> 
+
+#000000
 
 * 기능 소개
 
@@ -172,7 +173,7 @@ joinReqDto는 유효성 검사를 하는 클래스입니다. 컨트롤러에서 
 스프링 시큐리티를 활용하여 관리자만 관리자페이지에 접근할 수 있도록 구현하였습니다.
 api통신을 활용하여 자바스크립트로 페이징 처리를 하였으며 get method를 활용하여 필요한 데이터만 리로딩하여서 한정된 자원 내에서 최대한 자원을 효율적으로 사용하고자 하였습니다.
 
-제품 삭제기능
+* 제품 삭제기능
 ```
     //Delete API
     @DeleteMapping("/product/delete")
