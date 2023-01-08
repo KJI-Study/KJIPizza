@@ -61,10 +61,10 @@ public class ProductManagementServiceImpl implements ProductManagementService {
         try{
             //해당경로에 이폴더가 존재하냐
             if(!resource.exists()) {
-                String targetTempPath = resourceLoader.getResource("classpath:image").getInputStream().toString();
-                String srcTempPath = resourceLoader.getResource("classpath:image").getInputStream().toString();
+                String targetTempPath = resourceLoader.getResource("classpath:image").getURI().toString();
+                String srcTempPath = resourceLoader.getResource("classpath:image").getURI().toString();
                 targetTempPath = targetTempPath.substring(targetTempPath.indexOf("/") + 1);
-                srcTempPath = srcTempPath.substring(srcTempPath.indexOf("/") + 1, srcTempPath.indexOf("target")) + "/src/main/resources/static";
+                srcTempPath = srcTempPath.substring(srcTempPath.indexOf("/") + 1, srcTempPath.indexOf("target")) + "/src/main/resources/image";
 
                 System.out.println(targetTempPath);
                 System.out.println(srcTempPath);
@@ -74,8 +74,8 @@ public class ProductManagementServiceImpl implements ProductManagementService {
                 f.mkdirs();
             }
 
-            targetFilePath = resource.getInputStream().toString().substring(resource.getURI().toString().indexOf("/") + 1);
-            srcFilePath = resource.getInputStream().toString().substring(resource.getURI().toString().indexOf("/") + 1, resource.getURI().toString().indexOf("target")) + "/src/main/resources/image/product";
+            targetFilePath = resource.getURI().toString().substring(resource.getURI().toString().indexOf("/") + 1);
+            srcFilePath = resource.getURI().toString().substring(resource.getURI().toString().indexOf("/") + 1, resource.getURI().toString().indexOf("target")) + "/src/main/resources/image/product";
             System.out.println(targetFilePath);
             System.out.println(srcFilePath);
 
