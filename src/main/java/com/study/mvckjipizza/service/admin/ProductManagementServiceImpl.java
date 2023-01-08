@@ -52,7 +52,7 @@ public class ProductManagementServiceImpl implements ProductManagementService {
         }
 
 
-        Resource resource = resourceLoader.getResource("classpath:home/ubuntu/springboot/project/upload/product");
+        Resource resource = resourceLoader.getResource("classpath:static/upload/product");
         String targetFilePath  = null;
         String srcFilePath = null;
 
@@ -61,8 +61,8 @@ public class ProductManagementServiceImpl implements ProductManagementService {
         try{
             //해당경로에 이폴더가 존재하냐
             if(!resource.exists()) {
-                String targetTempPath = resourceLoader.getResource("classpath:home/ubuntu/springboot/project").getURI().toString();
-                String srcTempPath = resourceLoader.getResource("classpath:home/ubuntu/springboot/project").getURI().toString();
+                String targetTempPath = resourceLoader.getResource("classpath:static").getInputStream().toString();
+                String srcTempPath = resourceLoader.getResource("classpath:static").getInputStream().toString();
                 targetTempPath = targetTempPath.substring(targetTempPath.indexOf("/") + 1);
                 srcTempPath = srcTempPath.substring(srcTempPath.indexOf("/") + 1, srcTempPath.indexOf("target")) + "/src/main/resources/static";
 
@@ -74,8 +74,8 @@ public class ProductManagementServiceImpl implements ProductManagementService {
                 f.mkdirs();
             }
 
-            targetFilePath = resource.getURI().toString().substring(resource.getURI().toString().indexOf("/") + 1);
-            srcFilePath = resource.getURI().toString().substring(resource.getURI().toString().indexOf("/") + 1, resource.getURI().toString().indexOf("target")) + "/src/main/resources/image/product";
+            targetFilePath = resource.getInputStream().toString().substring(resource.getInputStream().toString().indexOf("/") + 1);
+            srcFilePath = resource.getInputStream().toString().substring(resource.getInputStream().toString().indexOf("/") + 1, resource.getInputStream().toString().indexOf("target")) + "/src/main/resources/image/product";
             System.out.println(targetFilePath);
             System.out.println(srcFilePath);
 
