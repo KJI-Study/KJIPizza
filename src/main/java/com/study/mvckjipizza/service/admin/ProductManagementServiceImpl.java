@@ -52,7 +52,7 @@ public class ProductManagementServiceImpl implements ProductManagementService {
         }
 
 
-        Resource resource = resourceLoader.getResource("classpath:image/upload/product");
+        Resource resource = resourceLoader.getResource("classpath:image/product");
         String targetFilePath  = null;
         String srcFilePath = null;
 
@@ -61,8 +61,8 @@ public class ProductManagementServiceImpl implements ProductManagementService {
         try{
             //해당경로에 이폴더가 존재하냐
             if(!resource.exists()) {
-                String targetTempPath = resourceLoader.getResource("classpath:image").getURI().toString();
-                String srcTempPath = resourceLoader.getResource("classpath:image").getURI().toString();
+                String targetTempPath = resourceLoader.getResource("classpath:static").getURI().toString();
+                String srcTempPath = resourceLoader.getResource("classpath:static").getURI().toString();
                 targetTempPath = targetTempPath.substring(targetTempPath.indexOf("/") + 1);
                 srcTempPath = srcTempPath.substring(srcTempPath.indexOf("/") + 1, srcTempPath.indexOf("target")) + "/src/main/resources/image";
 
