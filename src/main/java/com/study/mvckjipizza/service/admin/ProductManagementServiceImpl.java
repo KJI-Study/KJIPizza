@@ -74,8 +74,8 @@ public class ProductManagementServiceImpl implements ProductManagementService {
                 f.mkdirs();
             }
 
-            targetFilePath = resource.getInputStream().toString().substring(resource.getInputStream().toString().indexOf("/") + 1);
-            srcFilePath = resource.getInputStream().toString().substring(resource.getInputStream().toString().indexOf("/") + 1, resource.getInputStream().toString().indexOf("target")) + "/src/main/resources/image/product";
+            targetFilePath = resource.getInputStream().toString().substring(resource.getURI().toString().indexOf("/") + 1);
+            srcFilePath = resource.getInputStream().toString().substring(resource.getURI().toString().indexOf("/") + 1, resource.getURI().toString().indexOf("target")) + "/src/main/resources/image/product";
             System.out.println(targetFilePath);
             System.out.println(srcFilePath);
 
