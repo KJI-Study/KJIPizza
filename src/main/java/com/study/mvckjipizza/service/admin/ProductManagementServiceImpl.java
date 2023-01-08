@@ -52,7 +52,7 @@ public class ProductManagementServiceImpl implements ProductManagementService {
         }
 
 
-        Resource resource = resourceLoader.getResource("classpath:image/product");
+        Resource resource = resourceLoader.getResource("classpath:static/upload/product");
         String targetFilePath  = null;
         String srcFilePath = null;
 
