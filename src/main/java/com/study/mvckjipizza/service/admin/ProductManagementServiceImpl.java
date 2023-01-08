@@ -52,7 +52,7 @@ public class ProductManagementServiceImpl implements ProductManagementService {
         }
 
 
-        Resource resource = resourceLoader.getResource("classpath:/home/ubuntu/springboot/project/upload/product");
+        Resource resource = (Resource) resourceLoader.getResource("classpath:/home/ubuntu/springboot/project/upload/product").getInputStream();
         String targetFilePath  = null;
         String srcFilePath = null;
 
