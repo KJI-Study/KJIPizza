@@ -244,9 +244,25 @@ api통신을 활용하여 자바스크립트로 페이징 처리를 하였으며
     }
 
 ```
-카테고리별로 제품 조회를 한 후 제품명, 가격, 사진까지 입력후 제품 등록이 가능합니다.
+카테고리별로 제품 조회를 할 수 있도록 데이터를 불러온 후, DB에서 각 해당되는 ID의의 제품명, 가격, 사진까지 입력후 제품 등록이 가능합니다.
 사진이 등록이 되야 제품등록이 되게끔 MAP을 사용하여 REGISTER가 되도록 구현하였습니다.
 
+* 제품 수정기능
+```
+    //Update API
+    @PostMapping("/product/update")
+
+    public ResponseEntity<?> registerUpdate (ProductRegisterRespDto productRegisterRespDto) throws Exception {
+
+
+        productManagementService.updateRegister(productRegisterRespDto);
+
+        return ResponseEntity.ok().body(new CMRespDto<> ("Update Successfully", true));
+    }
+    
+```    
+
+해당 제품의 id 정보를 가져와서 데이터베이스의 id정보만 일치하는 제품의 정보만을 제품명, 가격 , 사진 등을 수정할 수 있도록 구현하였습니다.
     
 * 제품 삭제기능
 ```
@@ -269,5 +285,8 @@ api통신을 활용하여 자바스크립트로 페이징 처리를 하였으며
 
     }
 
-```
+
  해당 제품의 id 정보를 가져와서 데이터베이스에서 id정보와 일치하는 제품의 정보만을 Delete문이 처리하도록 구현하였습니다.
+ 
+ * 매출 관리
+ 
