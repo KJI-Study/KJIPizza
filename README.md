@@ -260,6 +260,7 @@ api통신을 활용하여 자바스크립트로 페이징 처리를 하였으며
         return ResponseEntity.ok().body(new CMRespDto<> ("Update Successfully", true));
     }
     
+```    
 
 해당 제품의 id 정보를 가져와서 데이터베이스의 id정보만 일치하는 제품의 정보만을 제품명, 가격 , 사진 등을 수정할 수 있도록 구현하였습니다.
     
