@@ -13,6 +13,9 @@
 
 <img src="https://img.shields.io/badge/SPRINGBOOT-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"> <img src="https://img.shields.io/badge/MARIA DB-003545?style=for-the-badge&logo=mariadb&logoColor=white"> <img src="https://img.shields.io/badge/INTELLJI IDEA-000000?style=for-the-badge&logo=intellji&logoColor=white"> <img src="https://img.shields.io/badge/APACHE TOMCAT-F8DC75?style=for-the-badge&logo=tomcat&logoColor=white"> 
 
+* ERD
+
+<img src="readme/image/kjipizza_erd.png">
 
 * 기능 소개
 
